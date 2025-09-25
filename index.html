@@ -9,14 +9,65 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h3>Scutum Caeli</h3>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#demo" class="nav-link">Visual Demo</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="home">
         <div class="hero-overlay"></div>
         <div class="container">
             <div class="hero-content">
                 <h1 class="hero-headline">Mobile drone perimeter overwatch for high-profile events</h1>
                 <p class="hero-subhead">30-min setup • &lt;30s time-to-eyes • ≤120s intercept • Next-day Safety Receipt</p>
                 <button class="cta-button primary" onclick="openBooking()">Schedule Free Site Walk</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Demo Section -->
+    <section class="demo" id="demo">
+        <div class="container">
+            <h2 class="section-title">Visual Demo</h2>
+            <div class="demo-content">
+                <div class="video-container">
+                    <video controls poster="https://images.unsplash.com/photo-1473968512647-3e447244af8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80">
+                        <source src="demo.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="demo-description">
+                    <h3>See Our Drones in Action</h3>
+                    <p>Watch our autonomous drone fleet in operation, demonstrating seamless battery rotation, AI-powered threat detection, and real-time perimeter surveillance capabilities.</p>
+                    <div class="demo-features">
+                        <div class="demo-feature">
+                            <i class="fas fa-robot"></i>
+                            <span>Autonomous Operations</span>
+                        </div>
+                        <div class="demo-feature">
+                            <i class="fas fa-battery-full"></i>
+                            <span>Seamless Battery Rotation</span>
+                        </div>
+                        <div class="demo-feature">
+                            <i class="fas fa-eye"></i>
+                            <span>Real-time Monitoring</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

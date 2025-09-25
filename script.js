@@ -2,6 +2,28 @@
 
 // Smooth scrolling for anchor links
 document.addEventListener('DOMContentLoaded', function() {
+    // Hamburger menu functionality
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking on a link
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            
+            // Update active link
+            navLinks.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
     // Add smooth scrolling to all anchor links
     const anchorLinks = document.querySelectorAll('a[href^="#"]');
     anchorLinks.forEach(link => {
@@ -25,6 +47,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add scroll effect to hero section
     window.addEventListener('scroll', handleScroll);
+    
+    // Update active navigation link on scroll
+    window.addEventListener('scroll', updateActiveNavLink);
 });
 
 // Handle form submission
@@ -117,6 +142,28 @@ function handleScroll() {
         
         if (scrolled > sectionTop - windowHeight + sectionHeight / 2) {
             section.classList.add('fade-in');
+        }
+    });
+}
+
+// Update active navigation link on scroll
+function updateActiveNavLink() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    let current = '';
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.offsetHeight;
+        if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+            current = section.getAttribute('id');
+        }
+    });
+    
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
         }
     });
 }
