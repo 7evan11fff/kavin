@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scutum Caeli - Security Drone Services for Events</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-headline">Mobile drone perimeter overwatch for high-profile events</h1>
+                <p class="hero-subhead">30-min setup • &lt;30s time-to-eyes • ≤120s intercept • Next-day Safety Receipt</p>
+                <button class="cta-button primary" onclick="openBooking()">Schedule Free Site Walk</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem">
+        <div class="container">
+            <div class="problem-content">
+                <div class="problem-text">
+                    <h2>Most issues start outside the gates—arrivals, rooftops, parking.</h2>
+                </div>
+                <div class="problem-image">
+                    <div class="image-overlay"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How it works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Pre-event AI scan</h3>
+                    <p>SLAM mapping creates 3D venue models. AI identifies vulnerabilities and optimizes patrol routes for maximum coverage with minimal overlap.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Autonomous fleet patrols</h3>
+                    <p>Multiple drones per zone with seamless battery rotation. When one needs charging, another takes its place—no coverage gaps. Real-time person detection and intrusion alerts.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>Safety Receipt</h3>
+                    <p>Comprehensive post-event report delivered within 24 hours, documenting all activities, incidents, and security recommendations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section class="technology">
+        <div class="container">
+            <h2 class="section-title">Advanced Technology</h2>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI Fleet Management</h3>
+                    <p>Central AI assigns routes, monitors battery levels, and handles seamless handoffs between drones. Predictive maintenance alerts ensure optimal performance.</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>Mobile Command Center</h3>
+                    <p>5G/Starlink connectivity with edge computing for real-time video streaming. Fast battery swap systems and on-site maintenance capabilities.</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>Smart Detection</h3>
+                    <p>Thermal cameras for night events, dynamic geofencing, and automatic collision avoidance. BVLOS operations with redundant communication links.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KPIs Section -->
+    <section class="kpis">
+        <div class="container">
+            <h2 class="section-title">Performance Metrics</h2>
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-number">&lt;30s</div>
+                    <div class="kpi-label">Eyes-on target</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-number">≤120s</div>
+                    <div class="kpi-label">Intercept time</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-number">≥90%</div>
+                    <div class="kpi-label">Clean handoffs</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison">
+        <div class="container">
+            <h2 class="section-title">Why choose mobile drones over tethered systems?</h2>
+            <div class="comparison-table">
+                <div class="comparison-header">
+                    <div class="feature-column">Feature</div>
+                    <div class="our-service">Scutum Caeli</div>
+                    <div class="competitor">Tethered Systems (Elistair)</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="feature-column">Setup time</div>
+                    <div class="our-service"><i class="fas fa-check"></i> 30 minutes</div>
+                    <div class="competitor"><i class="fas fa-times"></i> 4-6 hours</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="feature-column">Mobility</div>
+                    <div class="our-service"><i class="fas fa-check"></i> Full perimeter coverage</div>
+                    <div class="competitor"><i class="fas fa-times"></i> Fixed position only</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="feature-column">Response time</div>
+                    <div class="our-service"><i class="fas fa-check"></i> &lt;30s to any location</div>
+                    <div class="competitor"><i class="fas fa-times"></i> Limited to tether range</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="feature-column">Weather resistance</div>
+                    <div class="our-service"><i class="fas fa-check"></i> Advanced weather monitoring</div>
+                    <div class="competitor"><i class="fas fa-times"></i> Grounded in high winds</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="feature-column">Cost efficiency</div>
+                    <div class="our-service"><i class="fas fa-check"></i> No infrastructure needed</div>
+                    <div class="competitor"><i class="fas fa-times"></i> Requires permanent installation</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="feature-column">AI & Autonomy</div>
+                    <div class="our-service"><i class="fas fa-check"></i> Full autonomous fleet management</div>
+                    <div class="competitor"><i class="fas fa-times"></i> Manual operation required</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="feature-column">Coverage continuity</div>
+                    <div class="our-service"><i class="fas fa-check"></i> Seamless battery rotation</div>
+                    <div class="competitor"><i class="fas fa-times"></i> Downtime during battery changes</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing">
+        <div class="container">
+            <h2 class="section-title">Pricing Packages</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Essential</h3>
+                    <div class="price">$3,500<span>/event</span></div>
+                    <p class="package-desc">Perfect for smaller events and venues</p>
+                    <ul class="pricing-features">
+                        <li>2-3 drones in rotation</li>
+                        <li>8-hour coverage</li>
+                        <li>Basic AI monitoring</li>
+                        <li>Safety Receipt</li>
+                        <li>1 security supervisor</li>
+                    </ul>
+                    <button class="cta-button secondary" onclick="requestQuote()">Get Quote</button>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="popular-badge">Most Popular</div>
+                    <h3>Professional</h3>
+                    <div class="price">$5,000<span>/event</span></div>
+                    <p class="package-desc">Comprehensive coverage for major events</p>
+                    <ul class="pricing-features">
+                        <li>4-6 drones in rotation</li>
+                        <li>12-hour coverage</li>
+                        <li>Advanced AI + thermal</li>
+                        <li>Real-time alerts</li>
+                        <li>2 security supervisors</li>
+                        <li>Mobile command center</li>
+                    </ul>
+                    <button class="cta-button primary" onclick="requestQuote()">Get Quote</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="price">$8,500<span>/event</span></div>
+                    <p class="package-desc">Full-scale protection for high-profile events</p>
+                    <ul class="pricing-features">
+                        <li>8+ drones in rotation</li>
+                        <li>24/7 coverage</li>
+                        <li>Full AI fleet management</li>
+                        <li>Custom integration</li>
+                        <li>Dedicated team</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <div class="extra-drone-note">
+                        <small>$250 per extra drone</small>
+                    </div>
+                    <button class="cta-button secondary" onclick="requestQuote()">Get Quote</button>
+                </div>
+            </div>
+            <div class="pricing-note">
+                <p><strong>All packages include:</strong> FAA Part 107 certified pilots, insurance coverage, setup/teardown, and next-day Safety Receipt. Custom packages available for multi-day events.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team">
+        <div class="container">
+            <h2 class="section-title">Leadership Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-photo">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Kavin Lingham</h3>
+                    <p class="member-title">Founder & Chief Pilot</p>
+                    <div class="member-credentials">
+                        <span class="credential">FAA Part 107 Certified</span>
+                        <span class="credential">500+ Flight Hours</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Credibility Section -->
+    <section class="credibility">
+        <div class="container">
+            <h2 class="section-title">Certified & Insured</h2>
+            <div class="credibility-list">
+                <div class="credibility-item">
+                    <i class="fas fa-certificate"></i>
+                    <span>FAA Part 107 Certified Pilots</span>
+                </div>
+                <div class="credibility-item">
+                    <i class="fas fa-eye"></i>
+                    <span>Visual Observers on-site</span>
+                </div>
+                <div class="credibility-item">
+                    <i class="fas fa-satellite"></i>
+                    <span>Remote ID Compliant</span>
+                </div>
+                <div class="credibility-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Fully Insured Operations</span>
+                </div>
+                <div class="credibility-item">
+                    <i class="fas fa-lock"></i>
+                    <span>End-to-End Encryption</span>
+                </div>
+                <div class="credibility-item">
+                    <i class="fas fa-backup"></i>
+                    <span>Redundant Communication Links</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="container">
+            <h2 class="section-title">Get Started</h2>
+            <form class="contact-form" id="contactForm" action="https://formspree.io/f/xpwnqkqr" method="POST">
+                <input type="hidden" name="_to" value="kavin.lingham@alpha.school">
+                <input type="hidden" name="_subject" value="Security Drone Service Request">
+                <input type="hidden" name="_replyto" value="">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="eventDate">Event Date *</label>
+                        <input type="date" id="eventDate" name="eventDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="guestCount">Guest Count</label>
+                        <input type="number" id="guestCount" name="guestCount" placeholder="e.g., 500">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="venueCity">Venue City *</label>
+                        <input type="text" id="venueCity" name="venueCity" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="securityLead">Security Lead</label>
+                        <input type="text" id="securityLead" name="securityLead" placeholder="Contact person">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="notes">Additional Notes</label>
+                    <textarea id="notes" name="notes" rows="4" placeholder="Tell us about your event security needs..."></textarea>
+                </div>
+                <button type="submit" class="cta-button primary">Get Your Custom Quote</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>Scutum Caeli LLC • Austin, TX • Not for emergency response. Operations comply with FAA Part 107.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
