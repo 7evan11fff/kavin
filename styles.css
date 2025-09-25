@@ -546,10 +546,12 @@ h1, h2, h3 {
     margin-bottom: 0.5rem;
 }
 
-.price span {
+.price-note {
     font-size: 1rem;
     color: #666;
     font-weight: 400;
+    margin-bottom: 1rem;
+    font-style: italic;
 }
 
 .package-desc {
