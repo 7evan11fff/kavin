@@ -450,9 +450,10 @@ h1, h2, h3 {
 .comparison-header {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
-    background: #667eea;
-    color: white;
+    background: #f8f9fa;
+    color: #333;
     font-weight: 600;
+    border-bottom: 2px solid #e9ecef;
 }
 
 .comparison-row {
@@ -470,7 +471,7 @@ h1, h2, h3 {
 
 .feature-column {
     font-weight: 500;
-    background: #f8f9fa;
+    background: white;
 }
 
 .our-service {
