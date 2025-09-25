@@ -188,6 +188,8 @@ h1, h2, h3 {
     width: 100%;
     height: auto;
     display: block;
+    max-width: 100%;
+    object-fit: contain;
 }
 
 .demo-description h3 {
