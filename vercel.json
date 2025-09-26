@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/info/technology",
+      "destination": "/info/technology.html"
+    }
+  ]
+}
