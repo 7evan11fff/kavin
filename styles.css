@@ -1281,6 +1281,238 @@ h1, h2, h3 {
     font-size: 0.8rem;
 }
 
+/* Fleet Page Styles */
+.fleet-hero {
+    padding: 150px 0 100px;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+    color: white;
+    text-align: center;
+}
+
+.fleet-hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.fleet-hero p {
+    font-size: 1.3rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.fleet-overview {
+    padding: 100px 0;
+    background: white;
+}
+
+.fleet-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.drone-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.drone-card:hover {
+    transform: translateY(-5px);
+}
+
+.drone-image {
+    height: 300px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.drone-placeholder {
+    color: white;
+    font-size: 4rem;
+    opacity: 0.8;
+}
+
+.drone-info {
+    padding: 2.5rem;
+}
+
+.drone-info h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #1a1a1a;
+}
+
+.drone-description {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.drone-features {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.feature-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: #f8f9fa;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #667eea;
+    font-weight: 500;
+}
+
+.feature-tag i {
+    font-size: 1rem;
+}
+
+.specs-toggle {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    transition: background 0.3s ease;
+}
+
+.specs-toggle:hover {
+    background: #5a6fd8;
+}
+
+.specs-toggle i {
+    transition: transform 0.3s ease;
+}
+
+.detailed-specs {
+    display: none;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 2px solid #e9ecef;
+}
+
+.specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.spec-category h4 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #1a1a1a;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.spec-category h4 i {
+    color: #667eea;
+    font-size: 1.1rem;
+}
+
+.spec-category ul {
+    list-style: none;
+    padding: 0;
+}
+
+.spec-category li {
+    padding: 0.5rem 0;
+    color: #666;
+    border-bottom: 1px solid #f0f0f0;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.spec-category li:before {
+    content: "•";
+    color: #667eea;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.drone-actions {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.drone-actions .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.fleet-capabilities {
+    padding: 100px 0;
+    background: #f8f9fa;
+}
+
+.capabilities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.capability-card {
+    background: white;
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.capability-card:hover {
+    transform: translateY(-5px);
+}
+
+.capability-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: white;
+    font-size: 2rem;
+}
+
+.capability-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: #1a1a1a;
+}
+
+.capability-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
 /* Footer */
 .footer {
     background: #1a1a1a;
