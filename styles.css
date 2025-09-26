@@ -1329,12 +1329,16 @@ h1, h2, h3 {
 
 .drone-image {
     height: 300px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #f8f9fa;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     position: relative;
+}
+
+.drone-image:has(.drone-photo) {
+    background: none;
 }
 
 .drone-photo {
