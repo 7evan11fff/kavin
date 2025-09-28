@@ -2945,6 +2945,18 @@ h1, h2, h3 {
     background: radial-gradient(circle, rgba(40, 167, 69, 0.8) 0%, rgba(40, 167, 69, 0.2) 70%, transparent 100%);
 }
 
+.heat-zone.high-density {
+    background: radial-gradient(circle, rgba(0, 123, 255, 0.8) 0%, rgba(0, 123, 255, 0.2) 70%, transparent 100%);
+}
+
+.heat-zone.medium-density {
+    background: radial-gradient(circle, rgba(108, 117, 125, 0.8) 0%, rgba(108, 117, 125, 0.2) 70%, transparent 100%);
+}
+
+.heat-zone.low-density {
+    background: radial-gradient(circle, rgba(23, 162, 184, 0.8) 0%, rgba(23, 162, 184, 0.2) 70%, transparent 100%);
+}
+
 .heatmap-legend {
     display: flex;
     flex-direction: column;
@@ -2986,6 +2998,45 @@ h1, h2, h3 {
 
 .legend-color.low {
     background: #28a745;
+}
+
+/* Crowd density legend colors */
+.legend-item:nth-child(1) .legend-color {
+    background: #dc3545; /* High threat/density - red */
+}
+
+.legend-item:nth-child(2) .legend-color {
+    background: #ffc107; /* Medium threat - yellow */
+}
+
+.legend-item:nth-child(3) .legend-color {
+    background: #28a745; /* Low threat - green */
+}
+
+/* Crowd density specific colors */
+.crowd-view .legend-item:nth-child(1) .legend-color {
+    background: #007bff; /* High density - blue */
+}
+
+.crowd-view .legend-item:nth-child(2) .legend-color {
+    background: #6c757d; /* Medium density - gray */
+}
+
+.crowd-view .legend-item:nth-child(3) .legend-color {
+    background: #17a2b8; /* Low density - teal */
+}
+
+/* Drone paths specific colors */
+.paths-view .legend-item:nth-child(1) .legend-color {
+    background: #667eea; /* Drone 1 - blue */
+}
+
+.paths-view .legend-item:nth-child(2) .legend-color {
+    background: #667eea; /* Drone 2 - blue */
+}
+
+.paths-view .legend-item:nth-child(3) .legend-color {
+    background: #667eea; /* Drone 3 - blue */
 }
 
 .status-grid {

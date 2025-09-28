@@ -410,6 +410,12 @@
             const heatmapBtns = document.querySelectorAll('.heatmap-controls .control-btn');
             const heatmapOverlay = document.querySelector('.heatmap-overlay');
             const dronePaths = document.querySelector('.drone-paths');
+            const eventAreas = document.querySelector('.event-areas');
+            const heatZones = document.querySelectorAll('.heat-zone');
+            const threatIndicators = document.querySelectorAll('.threat-indicator');
+            const legendTitle = document.querySelector('.heatmap-legend h4');
+            const legendItems = document.querySelectorAll('.legend-item');
+            const heatmapLegend = document.querySelector('.heatmap-legend');
             
             heatmapBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -417,15 +423,68 @@
                     this.classList.add('active');
                     
                     const view = this.dataset.view;
+                    
+                    // Reset all elements
+                    heatmapOverlay.style.display = 'none';
+                    dronePaths.style.display = 'none';
+                    eventAreas.style.display = 'none';
+                    
+                    // Remove all heat zone classes
+                    heatZones.forEach(zone => {
+                        zone.classList.remove('high-threat', 'medium-threat', 'low-threat', 'high-density', 'medium-density', 'low-density');
+                    });
+                    
+                    // Remove legend view classes
+                    heatmapLegend.classList.remove('crowd-view', 'paths-view');
+                    
                     if (view === 'threats') {
+                        // Show threat heatmap
                         heatmapOverlay.style.display = 'block';
-                        dronePaths.style.display = 'none';
+                        eventAreas.style.display = 'block';
+                        
+                        // Set threat colors
+                        heatZones.forEach((zone, index) => {
+                            if (index === 0) zone.classList.add('high-threat');
+                            else if (index === 1) zone.classList.add('medium-threat');
+                            else zone.classList.add('low-threat');
+                        });
+                        
+                        // Update legend for threats
+                        legendTitle.textContent = 'Threat Level Legend';
+                        legendItems[0].querySelector('span').textContent = 'High Threat';
+                        legendItems[1].querySelector('span').textContent = 'Medium Threat';
+                        legendItems[2].querySelector('span').textContent = 'Low Threat';
+                        
+                    } else if (view === 'crowd') {
+                        // Show crowd density heatmap
+                        heatmapOverlay.style.display = 'block';
+                        eventAreas.style.display = 'block';
+                        
+                        // Set crowd density colors
+                        heatZones.forEach((zone, index) => {
+                            if (index === 0) zone.classList.add('high-density');
+                            else if (index === 1) zone.classList.add('medium-density');
+                            else zone.classList.add('low-density');
+                        });
+                        
+                        // Update legend for crowd density
+                        legendTitle.textContent = 'Crowd Density Legend';
+                        legendItems[0].querySelector('span').textContent = 'High Density';
+                        legendItems[1].querySelector('span').textContent = 'Medium Density';
+                        legendItems[2].querySelector('span').textContent = 'Low Density';
+                        heatmapLegend.classList.add('crowd-view');
+                        
                     } else if (view === 'paths') {
-                        heatmapOverlay.style.display = 'none';
+                        // Show drone paths
                         dronePaths.style.display = 'block';
-                    } else {
-                        heatmapOverlay.style.display = 'block';
-                        dronePaths.style.display = 'block';
+                        eventAreas.style.display = 'block';
+                        
+                        // Update legend for drone paths
+                        legendTitle.textContent = 'Drone Status';
+                        legendItems[0].querySelector('span').textContent = 'Drone 1 - North';
+                        legendItems[1].querySelector('span').textContent = 'Drone 2 - East';
+                        legendItems[2].querySelector('span').textContent = 'Drone 3 - South';
+                        heatmapLegend.classList.add('paths-view');
                     }
                 });
             });
