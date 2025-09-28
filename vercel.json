@@ -15,6 +15,10 @@
     {
       "source": "/info/pilot-application",
       "destination": "/info/pilot-application.html"
+    },
+    {
+      "source": "/info/dashboard",
+      "destination": "/info/dashboard.html"
     }
   ]
 }

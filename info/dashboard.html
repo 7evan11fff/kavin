@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Dashboard - Sky Shield</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚁</text></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../index.html">Sky Shield</a>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="technology.html" class="nav-link">Technology</a>
+                <a href="live-demo.html" class="nav-link">Live Demo</a>
+                <a href="our-fleet.html" class="nav-link">Our Fleet</a>
+                <a href="pilot-application.html" class="nav-link">Join Our Team</a>
+                <a href="dashboard.html" class="nav-link active">Live Dashboard</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Header -->
+    <section class="dashboard-header">
+        <div class="container">
+            <div class="dashboard-title">
+                <h1><i class="fas fa-tachometer-alt"></i> Live Security Dashboard</h1>
+                <p>Real-time monitoring of your event security operations</p>
+            </div>
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-drone"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">Drones Active</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-eye"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-number">12</span>
+                        <span class="stat-label">Threats Detected</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-number">2,847</span>
+                        <span class="stat-label">People Monitored</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-number">2.3s</span>
+                        <span class="stat-label">Avg Response Time</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Dashboard Content -->
+    <section class="dashboard-content">
+        <div class="container">
+            <div class="dashboard-grid">
+                <!-- Camera Feeds Section -->
+                <div class="camera-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-video"></i> Live Drone Feeds</h3>
+                        <div class="camera-controls">
+                            <button class="control-btn active" data-camera="all">All</button>
+                            <button class="control-btn" data-camera="drone1">Drone 1</button>
+                            <button class="control-btn" data-camera="drone2">Drone 2</button>
+                            <button class="control-btn" data-camera="drone3">Drone 3</button>
+                        </div>
+                    </div>
+                    <div class="camera-grid">
+                        <div class="camera-feed" id="camera1">
+                            <div class="camera-overlay">
+                                <div class="camera-label">Drone 1 - North Perimeter</div>
+                                <div class="camera-status">
+                                    <span class="status-dot active"></span>
+                                    <span>LIVE</span>
+                                </div>
+                            </div>
+                            <div class="camera-placeholder">
+                                <i class="fas fa-video"></i>
+                                <p>Live Feed from Drone 1</p>
+                            </div>
+                            <div class="ai-highlight crowd-cheer">
+                                <i class="fas fa-volume-up"></i>
+                                <span>Crowd Cheer Detected</span>
+                            </div>
+                        </div>
+                        <div class="camera-feed" id="camera2">
+                            <div class="camera-overlay">
+                                <div class="camera-label">Drone 2 - East Perimeter</div>
+                                <div class="camera-status">
+                                    <span class="status-dot active"></span>
+                                    <span>LIVE</span>
+                                </div>
+                            </div>
+                            <div class="camera-placeholder">
+                                <i class="fas fa-video"></i>
+                                <p>Live Feed from Drone 2</p>
+                            </div>
+                            <div class="ai-highlight movement">
+                                <i class="fas fa-running"></i>
+                                <span>Unusual Movement</span>
+                            </div>
+                        </div>
+                        <div class="camera-feed" id="camera3">
+                            <div class="camera-overlay">
+                                <div class="camera-label">Drone 3 - South Perimeter</div>
+                                <div class="camera-status">
+                                    <span class="status-dot active"></span>
+                                    <span>LIVE</span>
+                                </div>
+                            </div>
+                            <div class="camera-placeholder">
+                                <i class="fas fa-video"></i>
+                                <p>Live Feed from Drone 3</p>
+                            </div>
+                        </div>
+                        <div class="camera-feed" id="camera4">
+                            <div class="camera-overlay">
+                                <div class="camera-label">Drone 4 - West Perimeter</div>
+                                <div class="camera-status">
+                                    <span class="status-dot warning"></span>
+                                    <span>BATTERY LOW</span>
+                                </div>
+                            </div>
+                            <div class="camera-placeholder">
+                                <i class="fas fa-video"></i>
+                                <p>Live Feed from Drone 4</p>
+                            </div>
+                            <div class="ai-highlight vehicle">
+                                <i class="fas fa-car"></i>
+                                <span>Vehicle Approach</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Highlights Panel -->
+                <div class="highlights-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-brain"></i> AI-Powered Highlights</h3>
+                        <div class="highlight-filter">
+                            <button class="filter-btn active" data-filter="all">All</button>
+                            <button class="filter-btn" data-filter="audio">Audio</button>
+                            <button class="filter-btn" data-filter="movement">Movement</button>
+                            <button class="filter-btn" data-filter="threat">Threats</button>
+                        </div>
+                    </div>
+                    <div class="highlights-list">
+                        <div class="highlight-item audio" data-timestamp="14:32:15">
+                            <div class="highlight-icon">
+                                <i class="fas fa-volume-up"></i>
+                            </div>
+                            <div class="highlight-content">
+                                <div class="highlight-title">Crowd Cheer Detected</div>
+                                <div class="highlight-details">Main stage area - 85dB spike</div>
+                                <div class="highlight-time">2 minutes ago</div>
+                            </div>
+                            <div class="highlight-severity low">Low</div>
+                        </div>
+                        <div class="highlight-item movement" data-timestamp="14:30:42">
+                            <div class="highlight-icon">
+                                <i class="fas fa-running"></i>
+                            </div>
+                            <div class="highlight-content">
+                                <div class="highlight-title">Unusual Movement Pattern</div>
+                                <div class="highlight-details">East parking lot - Person running</div>
+                                <div class="highlight-time">4 minutes ago</div>
+                            </div>
+                            <div class="highlight-severity medium">Medium</div>
+                        </div>
+                        <div class="highlight-item vehicle" data-timestamp="14:28:33">
+                            <div class="highlight-icon">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <div class="highlight-content">
+                                <div class="highlight-title">Vehicle Approach</div>
+                                <div class="highlight-details">West entrance - Unauthorized vehicle</div>
+                                <div class="highlight-time">6 minutes ago</div>
+                            </div>
+                            <div class="highlight-severity high">High</div>
+                        </div>
+                        <div class="highlight-item audio" data-timestamp="14:25:18">
+                            <div class="highlight-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="highlight-content">
+                                <div class="highlight-title">Loud Noise Detected</div>
+                                <div class="highlight-details">North perimeter - 92dB</div>
+                                <div class="highlight-time">9 minutes ago</div>
+                            </div>
+                            <div class="highlight-severity medium">Medium</div>
+                        </div>
+                        <div class="highlight-item crowd" data-timestamp="14:22:55">
+                            <div class="highlight-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="highlight-content">
+                                <div class="highlight-title">Crowd Density Increase</div>
+                                <div class="highlight-details">Main entrance - 150+ people</div>
+                                <div class="highlight-time">12 minutes ago</div>
+                            </div>
+                            <div class="highlight-severity low">Low</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Heatmap Section -->
+                <div class="heatmap-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-map"></i> Event Heatmap & Drone Paths</h3>
+                        <div class="heatmap-controls">
+                            <button class="control-btn active" data-view="threats">Threats</button>
+                            <button class="control-btn" data-view="crowd">Crowd Density</button>
+                            <button class="control-btn" data-view="paths">Drone Paths</button>
+                        </div>
+                    </div>
+                    <div class="heatmap-container">
+                        <div class="event-map">
+                            <!-- Event Layout -->
+                            <div class="event-areas">
+                                <div class="area main-stage" data-density="high">
+                                    <div class="area-label">Main Stage</div>
+                                    <div class="threat-indicator high"></div>
+                                </div>
+                                <div class="area food-court" data-density="medium">
+                                    <div class="area-label">Food Court</div>
+                                    <div class="threat-indicator low"></div>
+                                </div>
+                                <div class="area parking-north" data-density="low">
+                                    <div class="area-label">North Parking</div>
+                                    <div class="threat-indicator medium"></div>
+                                </div>
+                                <div class="area parking-south" data-density="low">
+                                    <div class="area-label">South Parking</div>
+                                    <div class="threat-indicator low"></div>
+                                </div>
+                                <div class="area entrance" data-density="high">
+                                    <div class="area-label">Main Entrance</div>
+                                    <div class="threat-indicator low"></div>
+                                </div>
+                            </div>
+                            
+                            <!-- Drone Paths -->
+                            <div class="drone-paths">
+                                <div class="drone-path path-1">
+                                    <div class="drone-marker drone-1">
+                                        <i class="fas fa-drone"></i>
+                                    </div>
+                                </div>
+                                <div class="drone-path path-2">
+                                    <div class="drone-marker drone-2">
+                                        <i class="fas fa-drone"></i>
+                                    </div>
+                                </div>
+                                <div class="drone-path path-3">
+                                    <div class="drone-marker drone-3">
+                                        <i class="fas fa-drone"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Heatmap Overlay -->
+                            <div class="heatmap-overlay">
+                                <div class="heat-zone high-threat" style="top: 20%; left: 30%; width: 25%; height: 20%;"></div>
+                                <div class="heat-zone medium-threat" style="top: 60%; left: 10%; width: 20%; height: 15%;"></div>
+                                <div class="heat-zone low-threat" style="top: 40%; left: 70%; width: 15%; height: 25%;"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Legend -->
+                        <div class="heatmap-legend">
+                            <h4>Threat Level Legend</h4>
+                            <div class="legend-items">
+                                <div class="legend-item">
+                                    <div class="legend-color high"></div>
+                                    <span>High Threat</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color medium"></div>
+                                    <span>Medium Threat</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color low"></div>
+                                    <span>Low Threat</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Status Panel -->
+                <div class="status-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-cogs"></i> System Status</h3>
+                    </div>
+                    <div class="status-grid">
+                        <div class="status-item">
+                            <div class="status-icon">
+                                <i class="fas fa-wifi"></i>
+                            </div>
+                            <div class="status-info">
+                                <div class="status-label">Network</div>
+                                <div class="status-value online">Online</div>
+                            </div>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-icon">
+                                <i class="fas fa-battery-full"></i>
+                            </div>
+                            <div class="status-info">
+                                <div class="status-label">Battery Levels</div>
+                                <div class="status-value warning">2 Low</div>
+                            </div>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-icon">
+                                <i class="fas fa-cloud"></i>
+                            </div>
+                            <div class="status-info">
+                                <div class="status-label">Cloud Storage</div>
+                                <div class="status-value online">78% Used</div>
+                            </div>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="status-info">
+                                <div class="status-label">AI Processing</div>
+                                <div class="status-value online">Active</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>Sky Shield LLC • Austin, TX • Not for emergency response. Operations comply with FAA Part 107.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script>
+        // Dashboard JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Camera feed controls
+            const cameraBtns = document.querySelectorAll('.camera-controls .control-btn');
+            const cameraFeeds = document.querySelectorAll('.camera-feed');
+            
+            cameraBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    cameraBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const camera = this.dataset.camera;
+                    if (camera === 'all') {
+                        cameraFeeds.forEach(feed => feed.style.display = 'block');
+                    } else {
+                        cameraFeeds.forEach(feed => feed.style.display = 'none');
+                        document.getElementById(camera.replace('drone', 'camera')).style.display = 'block';
+                    }
+                });
+            });
+            
+            // Highlight filters
+            const filterBtns = document.querySelectorAll('.highlight-filter .filter-btn');
+            const highlightItems = document.querySelectorAll('.highlight-item');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filter = this.dataset.filter;
+                    highlightItems.forEach(item => {
+                        if (filter === 'all' || item.classList.contains(filter)) {
+                            item.style.display = 'flex';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Heatmap controls
+            const heatmapBtns = document.querySelectorAll('.heatmap-controls .control-btn');
+            const heatmapOverlay = document.querySelector('.heatmap-overlay');
+            const dronePaths = document.querySelector('.drone-paths');
+            
+            heatmapBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    heatmapBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const view = this.dataset.view;
+                    if (view === 'threats') {
+                        heatmapOverlay.style.display = 'block';
+                        dronePaths.style.display = 'none';
+                    } else if (view === 'paths') {
+                        heatmapOverlay.style.display = 'none';
+                        dronePaths.style.display = 'block';
+                    } else {
+                        heatmapOverlay.style.display = 'block';
+                        dronePaths.style.display = 'block';
+                    }
+                });
+            });
+            
+            // Simulate real-time updates
+            setInterval(() => {
+                // Update timestamps
+                const timeElements = document.querySelectorAll('.highlight-time');
+                timeElements.forEach(el => {
+                    const currentTime = new Date();
+                    const minutes = Math.floor(Math.random() * 10) + 1;
+                    el.textContent = `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+                });
+                
+                // Animate drone markers
+                const droneMarkers = document.querySelectorAll('.drone-marker');
+                droneMarkers.forEach(marker => {
+                    marker.style.animation = 'none';
+                    setTimeout(() => {
+                        marker.style.animation = 'droneFloat 3s ease-in-out infinite';
+                    }, 100);
+                });
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
