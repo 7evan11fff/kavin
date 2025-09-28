@@ -472,6 +472,7 @@
                 drone.style.transition = '';
                 drone.style.opacity = '1';
                 drone.style.transform = 'translate(0, 0)';
+                drone.style.filter = '';
                 drone.classList.remove('responding', 'landing', 'taking-off');
             });
             
@@ -482,6 +483,7 @@
             document.querySelectorAll('.guard').forEach(guard => {
                 guard.style.transform = 'translate(0, 0)';
                 guard.style.transition = '';
+                guard.style.filter = '';
                 guard.classList.remove('moving');
             });
 
@@ -511,7 +513,12 @@
                     // Every 2 laps (30 seconds at 15s per lap), do battery swap
                     if (lapCounters[index] >= 2) {
                         lapCounters[index] = 0;
-                        performBatterySwap(drone, vans[index], index);
+                        // Only swap one drone at a time to avoid all flashing
+                        setTimeout(() => {
+                            if (!threatActive) { // Double check threat status
+                                performBatterySwap(drone, vans[index], index);
+                            }
+                        }, index * 2000); // Stagger swaps by 2 seconds
                     }
                 });
             }, 100); // Check every 100ms
@@ -548,13 +555,16 @@
             const threatX = threatRect.left - eventSiteRect.left + threatRect.width/2;
             const threatY = threatRect.top - eventSiteRect.top + threatRect.height/2;
             
-            // Calculate movement toward threat
-            const deltaX = (threatX - droneX) * 0.6; // Move 60% of the way toward threat
-            const deltaY = (threatY - droneY) * 0.6;
+            // Calculate movement toward threat (smaller movement to avoid snapping)
+            const deltaX = (threatX - droneX) * 0.3; // Move 30% of the way toward threat
+            const deltaY = (threatY - droneY) * 0.3;
             
-            // Move toward threat
-            drone.style.transition = 'transform 2s ease-in-out';
+            // Move toward threat smoothly
+            drone.style.transition = 'transform 3s ease-in-out';
             drone.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+            
+            // Add visual effect
+            drone.style.filter = 'brightness(1.2) drop-shadow(0 0 10px #ff0000)';
         }
 
         // Move guard to threat location
@@ -570,21 +580,25 @@
             const threatY = threatRect.top - eventSiteRect.top + threatRect.height/2;
             
             // Calculate movement toward threat (but limit distance to stay in frame)
-            const deltaX = (threatX - guardX) * 0.4; // Move 40% of the way toward threat
-            const deltaY = (threatY - guardY) * 0.4;
+            const deltaX = (threatX - guardX) * 0.5; // Move 50% of the way toward threat
+            const deltaY = (threatY - guardY) * 0.5;
             
             // Move toward threat
-            guard.style.transition = 'transform 1.5s ease-in-out';
+            guard.style.transition = 'transform 2s ease-in-out';
             guard.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
             guard.classList.add('moving');
+            
+            // Add visual effect
+            guard.style.filter = 'brightness(1.1) drop-shadow(0 0 5px #ffc107)';
             
             // Return to original position
             setTimeout(() => {
                 guard.style.transform = 'translate(0, 0)';
+                guard.style.filter = '';
                 setTimeout(() => {
                     guard.classList.remove('moving');
-                }, 1500);
-            }, 1500);
+                }, 2000);
+            }, 2000);
         }
 
 
