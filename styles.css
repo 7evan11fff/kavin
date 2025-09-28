@@ -1582,10 +1582,10 @@ h1, h2, h3 {
     transition: all 0.5s ease;
 }
 
-.guard-1 { top: 40px; left: 40px; }
-.guard-2 { top: 40px; right: 40px; }
-.guard-3 { bottom: 40px; left: 40px; }
-.guard-4 { bottom: 40px; right: 40px; }
+.guard-1 { top: 80px; left: 80px; }
+.guard-2 { top: 80px; right: 80px; }
+.guard-3 { bottom: 80px; left: 80px; }
+.guard-4 { bottom: 80px; right: 80px; }
 
 .guard-body {
     width: 30px;

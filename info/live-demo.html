@@ -400,35 +400,13 @@
                     drawCommunicationLines();
                 }, 500);
 
-                // Drones respond to threat - pause patrol and converge
+                // Drones respond to threat - converge on threat location
                 document.querySelectorAll('.drone').forEach((drone, index) => {
                     setTimeout(() => {
-                        // Pause the patrol animation
-                        drone.style.animationPlayState = 'paused';
                         drone.classList.add('responding');
-                        
-                        // Move drone toward threat
-                        const threatDot = document.getElementById('threatDot');
-                        const eventSiteRect = document.querySelector('.event-site').getBoundingClientRect();
-                        const droneRect = drone.getBoundingClientRect();
-                        const threatRect = threatDot.getBoundingClientRect();
-                        
-                        const droneX = droneRect.left - eventSiteRect.left + droneRect.width/2;
-                        const droneY = droneRect.top - eventSiteRect.top + droneRect.height/2;
-                        const threatX = threatRect.left - eventSiteRect.left + threatRect.width/2;
-                        const threatY = threatRect.top - eventSiteRect.top + threatRect.height/2;
-                        
-                        const deltaX = threatX - droneX;
-                        const deltaY = threatY - droneY;
-                        
-                        drone.style.transition = 'transform 1.5s ease-in-out';
-                        drone.style.transform = `translate(-50%, -50%) translate(${deltaX}px, ${deltaY}px)`;
-                        
+                        // Just add visual effect, keep patrol running
                         setTimeout(() => {
                             drone.classList.remove('responding');
-                            // Return to patrol
-                            drone.style.animationPlayState = 'running';
-                            drone.style.transform = 'translate(-50%, -50%)';
                         }, 2000);
                     }, index * 300);
                 });
@@ -483,7 +461,6 @@
             // Stop drone animations and reset positions
             document.querySelectorAll('.drone').forEach(drone => {
                 drone.style.animationPlayState = 'paused';
-                drone.style.transform = 'translate(-50%, -50%)';
                 drone.style.transition = '';
                 drone.classList.remove('responding', 'landing', 'taking-off');
             });
@@ -493,7 +470,6 @@
                 guard.style.transform = 'translate(0, 0)';
                 guard.style.transition = '';
                 guard.classList.remove('moving');
-                delete guard.dataset.originalTransform;
             });
 
             // Reset buttons
@@ -533,11 +509,6 @@
 
         // Move guard to threat location
         function moveGuardToThreat(guard) {
-            // Store original position
-            if (!guard.dataset.originalTransform) {
-                guard.dataset.originalTransform = guard.style.transform || 'translate(0, 0)';
-            }
-            
             const threatDot = document.getElementById('threatDot');
             const eventSiteRect = document.querySelector('.event-site').getBoundingClientRect();
             const guardRect = guard.getBoundingClientRect();
@@ -548,21 +519,22 @@
             const threatX = threatRect.left - eventSiteRect.left + threatRect.width/2;
             const threatY = threatRect.top - eventSiteRect.top + threatRect.height/2;
             
-            const deltaX = threatX - guardX;
-            const deltaY = threatY - guardY;
+            // Calculate movement toward threat (but limit distance to stay in frame)
+            const deltaX = (threatX - guardX) * 0.3; // Move 30% of the way
+            const deltaY = (threatY - guardY) * 0.3;
             
-            // Move to threat
-            guard.style.transition = 'transform 2s ease-in-out';
+            // Move toward threat
+            guard.style.transition = 'transform 1.5s ease-in-out';
             guard.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
             guard.classList.add('moving');
             
             // Return to original position
             setTimeout(() => {
-                guard.style.transform = guard.dataset.originalTransform;
+                guard.style.transform = 'translate(0, 0)';
                 setTimeout(() => {
                     guard.classList.remove('moving');
-                }, 2000);
-            }, 2000);
+                }, 1500);
+            }, 1500);
         }
 
         // Draw communication lines from drones to guards
