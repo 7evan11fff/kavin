@@ -3051,17 +3051,17 @@ h1, h2, h3 {
 
 .drone-marker.drone-1 {
     animation: dronePatrol1 12s linear infinite;
-    offset-path: path("M20,20 Q50,10 80,20 Q90,50 80,80 Q50,90 20,80 Q10,50 20,20 Z");
+    transform-origin: 50% 50%;
 }
 
 .drone-marker.drone-2 {
     animation: dronePatrol2 15s linear infinite;
-    offset-path: path("M30,15 Q70,25 85,45 Q75,75 55,85 Q25,75 15,55 Q25,35 30,15 Z");
+    transform-origin: 50% 50%;
 }
 
 .drone-marker.drone-3 {
     animation: dronePatrol3 18s linear infinite;
-    offset-path: path("M15,30 Q25,70 45,85 Q75,75 85,55 Q75,25 55,15 Q35,25 15,30 Z");
+    transform-origin: 50% 50%;
 }
 
 .heatmap-overlay {
@@ -3271,18 +3271,30 @@ h1, h2, h3 {
 }
 
 @keyframes dronePatrol1 {
-    0% { offset-distance: 0%; }
-    100% { offset-distance: 100%; }
+    0% { 
+        transform: translate(50%, 50%) rotate(0deg) translateY(-35%) translateX(-50%) translateY(50%);
+    }
+    100% { 
+        transform: translate(50%, 50%) rotate(360deg) translateY(-35%) translateX(-50%) translateY(50%);
+    }
 }
 
 @keyframes dronePatrol2 {
-    0% { offset-distance: 0%; }
-    100% { offset-distance: 100%; }
+    0% { 
+        transform: translate(50%, 50%) rotate(0deg) translateY(-25%) translateX(-50%) translateY(50%);
+    }
+    100% { 
+        transform: translate(50%, 50%) rotate(360deg) translateY(-25%) translateX(-50%) translateY(50%);
+    }
 }
 
 @keyframes dronePatrol3 {
-    0% { offset-distance: 0%; }
-    100% { offset-distance: 100%; }
+    0% { 
+        transform: translate(50%, 50%) rotate(0deg) translateY(-40%) translateX(-50%) translateY(50%);
+    }
+    100% { 
+        transform: translate(50%, 50%) rotate(360deg) translateY(-40%) translateX(-50%) translateY(50%);
+    }
 }
 
 /* Dashboard Responsive */
