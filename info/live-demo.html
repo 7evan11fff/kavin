@@ -495,7 +495,7 @@
             batterySwap.style.top = (vanRect.top - eventSiteRect.top + vanRect.height/2 - 15) + 'px';
             batterySwap.style.display = 'flex';
             
-            // Drone lands at van
+            // Just show visual effects without changing drone position
             randomDrone.classList.add('landing');
             setTimeout(() => {
                 randomDrone.classList.remove('landing');
@@ -503,8 +503,8 @@
                 batterySwap.style.display = 'none';
                 setTimeout(() => {
                     randomDrone.classList.remove('taking-off');
-                }, 2000);
-            }, 2000);
+                }, 1000);
+            }, 1000);
         }
 
         // Move guard to threat location
