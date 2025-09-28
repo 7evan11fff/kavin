@@ -3071,33 +3071,21 @@ h1, h2, h3 {
 
 .drone-marker.drone-1 {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     animation: dronePatrol1 8s ease-in-out infinite;
 }
 
 .drone-marker.drone-2 {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     animation: dronePatrol2 10s ease-in-out infinite;
 }
 
 .drone-marker.drone-3 {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     animation: dronePatrol3 12s ease-in-out infinite;
 }
 
 .drone-marker.drone-4 {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     animation: dronePatrol4 14s ease-in-out infinite;
 }
 
@@ -3308,35 +3296,35 @@ h1, h2, h3 {
 }
 
 @keyframes dronePatrol1 {
-    0% { transform: translate(-50%, -50%) translateY(-40%) translateX(-40%); }
-    25% { transform: translate(-50%, -50%) translateY(-40%) translateX(40%); }
-    50% { transform: translate(-50%, -50%) translateY(40%) translateX(40%); }
-    75% { transform: translate(-50%, -50%) translateY(40%) translateX(-40%); }
-    100% { transform: translate(-50%, -50%) translateY(-40%) translateX(-40%); }
+    0% { top: 10%; left: 10%; }
+    25% { top: 10%; left: 40%; }
+    50% { top: 40%; left: 40%; }
+    75% { top: 40%; left: 10%; }
+    100% { top: 10%; left: 10%; }
 }
 
 @keyframes dronePatrol2 {
-    0% { transform: translate(-50%, -50%) translateY(-40%) translateX(40%); }
-    25% { transform: translate(-50%, -50%) translateY(40%) translateX(40%); }
-    50% { transform: translate(-50%, -50%) translateY(40%) translateX(-40%); }
-    75% { transform: translate(-50%, -50%) translateY(-40%) translateX(-40%); }
-    100% { transform: translate(-50%, -50%) translateY(-40%) translateX(40%); }
+    0% { top: 10%; left: 60%; }
+    25% { top: 10%; left: 90%; }
+    50% { top: 40%; left: 90%; }
+    75% { top: 40%; left: 60%; }
+    100% { top: 10%; left: 60%; }
 }
 
 @keyframes dronePatrol3 {
-    0% { transform: translate(-50%, -50%) translateY(40%) translateX(-40%); }
-    25% { transform: translate(-50%, -50%) translateY(-40%) translateX(-40%); }
-    50% { transform: translate(-50%, -50%) translateY(-40%) translateX(40%); }
-    75% { transform: translate(-50%, -50%) translateY(40%) translateX(40%); }
-    100% { transform: translate(-50%, -50%) translateY(40%) translateX(-40%); }
+    0% { top: 60%; left: 10%; }
+    25% { top: 60%; left: 40%; }
+    50% { top: 90%; left: 40%; }
+    75% { top: 90%; left: 10%; }
+    100% { top: 60%; left: 10%; }
 }
 
 @keyframes dronePatrol4 {
-    0% { transform: translate(-50%, -50%) translateY(40%) translateX(40%); }
-    25% { transform: translate(-50%, -50%) translateY(40%) translateX(-40%); }
-    50% { transform: translate(-50%, -50%) translateY(-40%) translateX(-40%); }
-    75% { transform: translate(-50%, -50%) translateY(-40%) translateX(40%); }
-    100% { transform: translate(-50%, -50%) translateY(40%) translateX(40%); }
+    0% { top: 60%; left: 60%; }
+    25% { top: 60%; left: 90%; }
+    50% { top: 90%; left: 90%; }
+    75% { top: 90%; left: 60%; }
+    100% { top: 60%; left: 60%; }
 }
 
 
