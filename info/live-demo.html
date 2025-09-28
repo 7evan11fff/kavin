@@ -69,10 +69,18 @@
                             <div class="guard-label">Guard 4</div>
                         </div>
                         
-                        <!-- Drone Van -->
-                        <div class="drone-van">
+                        <!-- Drone Vans -->
+                        <div class="drone-van van-1">
                             <div class="van-icon">🚐</div>
-                            <div class="van-label">Drone Van</div>
+                            <div class="van-label">Van 1</div>
+                        </div>
+                        <div class="drone-van van-2">
+                            <div class="van-icon">🚐</div>
+                            <div class="van-label">Van 2</div>
+                        </div>
+                        <div class="drone-van van-3">
+                            <div class="van-icon">🚐</div>
+                            <div class="van-label">Van 3</div>
                         </div>
                         
                         <!-- Drones -->
@@ -90,6 +98,26 @@
                         <div class="threat-dot" id="threatDot">
                             <div class="threat-pulse"></div>
                             <div class="threat-label">THREAT DETECTED</div>
+                        </div>
+                        
+                        <!-- Communication Lines -->
+                        <svg class="communication-lines" id="commLines">
+                            <defs>
+                                <pattern id="dashPattern" patternUnits="userSpaceOnUse" width="10" height="2">
+                                    <rect width="10" height="2" fill="yellow" />
+                                </pattern>
+                            </defs>
+                        </svg>
+                        
+                        <!-- Camera Indicators -->
+                        <div class="camera-indicator" id="cameraIndicator">
+                            <div class="camera-icon">📹</div>
+                            <div class="camera-label">LIVE FEED</div>
+                        </div>
+                        
+                        <!-- Battery Swap Indicators -->
+                        <div class="battery-swap" id="batterySwap">
+                            <div class="lightning-icon">⚡</div>
                         </div>
                         
                         <!-- Status Display -->
@@ -308,6 +336,9 @@
         const systemStatus = document.getElementById('systemStatus');
         const responseTime = document.getElementById('responseTime');
         const activeDrones = document.getElementById('activeDrones');
+        const commLines = document.getElementById('commLines');
+        const cameraIndicator = document.getElementById('cameraIndicator');
+        const batterySwap = document.getElementById('batterySwap');
 
         // Start Demo
         startDemoBtn.addEventListener('click', () => {
@@ -321,12 +352,12 @@
                     drone.style.animationPlayState = 'running';
                 });
 
-                // Simulate battery rotation every 30 seconds
+                // Simulate battery rotation every 6 seconds
                 setInterval(() => {
                     if (animationRunning && !threatActive) {
                         simulateBatteryRotation();
                     }
-                }, 30000);
+                }, 6000);
 
                 startDemoBtn.textContent = 'Demo Running';
                 startDemoBtn.style.background = '#28a745';
@@ -346,6 +377,11 @@
                 systemStatus.textContent = 'THREAT DETECTED';
                 systemStatus.style.color = '#dc3545';
                 
+                // Show communication lines from drones to guards
+                setTimeout(() => {
+                    drawCommunicationLines();
+                }, 500);
+
                 // Drones respond to threat
                 document.querySelectorAll('.drone').forEach((drone, index) => {
                     setTimeout(() => {
@@ -355,6 +391,11 @@
                         }, 1000);
                     }, index * 500);
                 });
+
+                // Show camera indicator
+                setTimeout(() => {
+                    cameraIndicator.style.display = 'flex';
+                }, 1500);
 
                 // Guards move to threat location
                 setTimeout(() => {
@@ -387,8 +428,13 @@
             threatActive = false;
             responseStartTime = null;
 
-            // Hide threat dot
+            // Hide threat dot and indicators
             threatDot.style.display = 'none';
+            cameraIndicator.style.display = 'none';
+            batterySwap.style.display = 'none';
+            
+            // Clear communication lines
+            commLines.innerHTML = '<defs><pattern id="dashPattern" patternUnits="userSpaceOnUse" width="10" height="2"><rect width="10" height="2" fill="yellow" /></pattern></defs>';
 
             // Reset status
             systemStatus.textContent = 'STANDBY';
@@ -418,17 +464,64 @@
         // Simulate battery rotation
         function simulateBatteryRotation() {
             const drones = document.querySelectorAll('.drone');
-            const randomDrone = drones[Math.floor(Math.random() * drones.length)];
+            const vans = document.querySelectorAll('.drone-van');
+            const randomIndex = Math.floor(Math.random() * drones.length);
+            const randomDrone = drones[randomIndex];
+            const correspondingVan = vans[randomIndex];
+            
+            // Show lightning bolt at van
+            const vanRect = correspondingVan.getBoundingClientRect();
+            const eventSiteRect = document.querySelector('.event-site').getBoundingClientRect();
+            batterySwap.style.left = (vanRect.left - eventSiteRect.left + vanRect.width/2 - 15) + 'px';
+            batterySwap.style.top = (vanRect.top - eventSiteRect.top + vanRect.height/2 - 15) + 'px';
+            batterySwap.style.display = 'flex';
             
             // Drone lands at van
             randomDrone.classList.add('landing');
             setTimeout(() => {
                 randomDrone.classList.remove('landing');
                 randomDrone.classList.add('taking-off');
+                batterySwap.style.display = 'none';
                 setTimeout(() => {
                     randomDrone.classList.remove('taking-off');
                 }, 2000);
             }, 2000);
+        }
+
+        // Draw communication lines from drones to guards
+        function drawCommunicationLines() {
+            const drones = document.querySelectorAll('.drone');
+            const guards = document.querySelectorAll('.guard');
+            const threatDot = document.getElementById('threatDot');
+            
+            // Clear existing lines
+            commLines.innerHTML = '<defs><pattern id="dashPattern" patternUnits="userSpaceOnUse" width="10" height="2"><rect width="10" height="2" fill="yellow" /></pattern></defs>';
+            
+            // Draw lines from drones to guards
+            drones.forEach((drone, droneIndex) => {
+                guards.forEach((guard, guardIndex) => {
+                    const droneRect = drone.getBoundingClientRect();
+                    const guardRect = guard.getBoundingClientRect();
+                    const eventSiteRect = document.querySelector('.event-site').getBoundingClientRect();
+                    
+                    const droneX = droneRect.left - eventSiteRect.left + droneRect.width/2;
+                    const droneY = droneRect.top - eventSiteRect.top + droneRect.height/2;
+                    const guardX = guardRect.left - eventSiteRect.left + guardRect.width/2;
+                    const guardY = guardRect.top - eventSiteRect.top + guardRect.height/2;
+                    
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', droneX);
+                    line.setAttribute('y1', droneY);
+                    line.setAttribute('x2', guardX);
+                    line.setAttribute('y2', guardY);
+                    line.setAttribute('stroke', 'yellow');
+                    line.setAttribute('stroke-width', '2');
+                    line.setAttribute('stroke-dasharray', '5,5');
+                    line.style.animation = 'dashMove 1s linear infinite';
+                    
+                    commLines.appendChild(line);
+                });
+            });
         }
 
         // Auto-start demo on page load
