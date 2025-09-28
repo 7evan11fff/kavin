@@ -354,6 +354,7 @@
         let threatActive = false;
         let responseStartTime = null;
         let lapCounters = [0, 0, 0]; // Track laps for each drone
+        let batterySwapCooldowns = [false, false, false]; // Prevent multiple swaps
 
         const startDemoBtn = document.getElementById('startDemo');
         const triggerThreatBtn = document.getElementById('triggerThreat');
@@ -426,6 +427,29 @@
                     });
                 }, 2000);
 
+                // Threat disappears after guards surround it
+                setTimeout(() => {
+                    threatDot.style.display = 'none';
+                    // Hide alarm indicators
+                    document.querySelectorAll('.drone-alarm').forEach(alarm => {
+                        alarm.style.display = 'none';
+                    });
+                    document.querySelectorAll('.guard-alert').forEach(alert => {
+                        alert.style.display = 'none';
+                    });
+                    // Reset drone visual effects
+                    document.querySelectorAll('.drone').forEach(drone => {
+                        drone.style.filter = '';
+                    });
+                    // Reset threat status
+                    systemStatus.textContent = 'ACTIVE';
+                    systemStatus.style.color = '#28a745';
+                    threatActive = false;
+                    triggerThreatBtn.textContent = 'Trigger Threat';
+                    triggerThreatBtn.style.background = '#667eea';
+                    triggerThreatBtn.disabled = false;
+                }, 6000); // 6 seconds after threat starts
+
                 // Update response time
                 setTimeout(() => {
                     const responseTimeMs = Date.now() - responseStartTime;
@@ -474,8 +498,9 @@
                 drone.classList.remove('responding', 'landing', 'taking-off');
             });
             
-            // Reset lap counters
+            // Reset lap counters and cooldowns
             lapCounters = [0, 0, 0];
+            batterySwapCooldowns = [false, false, false];
 
             // Reset guards
             document.querySelectorAll('.guard').forEach(guard => {
@@ -494,29 +519,46 @@
             triggerThreatBtn.disabled = false;
         });
 
-        // Start simple battery swap system
+        // Start position-based battery swap system
         function startLapTracking() {
             const drones = document.querySelectorAll('.drone');
             const vans = document.querySelectorAll('.drone-van');
             
-            // Reset lap counters
-            lapCounters = [0, 0, 0];
-            
-            // Simple timer-based battery swaps every 30 seconds
+            // Check drone positions every 100ms
             setInterval(() => {
                 if (!animationRunning || threatActive) return;
                 
-                // Pick a random drone for battery swap
-                const randomIndex = Math.floor(Math.random() * drones.length);
-                const randomDrone = drones[randomIndex];
-                const correspondingVan = vans[randomIndex];
-                
-                performBatterySwap(randomDrone, correspondingVan, randomIndex);
-            }, 30000); // Every 30 seconds
+                drones.forEach((drone, index) => {
+                    const van = vans[index];
+                    if (isDroneOverVan(drone, van) && !batterySwapCooldowns[index]) {
+                        performBatterySwap(drone, van, index);
+                    }
+                });
+            }, 100);
+        }
+
+        // Check if drone is over its van
+        function isDroneOverVan(drone, van) {
+            const droneRect = drone.getBoundingClientRect();
+            const vanRect = van.getBoundingClientRect();
+            const eventSiteRect = document.querySelector('.event-site').getBoundingClientRect();
+            
+            // Convert to relative coordinates
+            const droneX = droneRect.left - eventSiteRect.left + droneRect.width/2;
+            const droneY = droneRect.top - eventSiteRect.top + droneRect.height/2;
+            const vanX = vanRect.left - eventSiteRect.left + vanRect.width/2;
+            const vanY = vanRect.top - eventSiteRect.top + vanRect.height/2;
+            
+            // Check if drone is within 30px of van center
+            const distance = Math.sqrt(Math.pow(droneX - vanX, 2) + Math.pow(droneY - vanY, 2));
+            return distance < 30;
         }
 
         // Perform battery swap when drone is over its van
         function performBatterySwap(drone, van, droneIndex) {
+            // Set cooldown to prevent multiple swaps
+            batterySwapCooldowns[droneIndex] = true;
+            
             // Hide drone quickly
             drone.style.opacity = '0';
             
@@ -531,36 +573,50 @@
             setTimeout(() => {
                 drone.style.opacity = '1';
                 batterySwap.style.display = 'none';
+                // Reset cooldown after 5 seconds
+                setTimeout(() => {
+                    batterySwapCooldowns[droneIndex] = false;
+                }, 5000);
             }, 500);
         }
 
         // Move drone to threat location
         function moveDroneToThreat(drone) {
-            // Just add visual effects, don't change position
+            // Just add visual effects, don't change position or animation
             drone.style.filter = 'brightness(1.3) drop-shadow(0 0 15px #ff0000)';
-            drone.style.transform = 'scale(1.1)';
-            
-            // Add pulsing effect
-            drone.style.animation = 'droneRespond 1s ease-in-out infinite';
+            // Don't change transform or animation - keep patrol running
         }
 
         // Move guard to threat location
         function moveGuardToThreat(guard) {
-            // Just add visual effects, don't change position
+            // Calculate movement to surround threat
+            let deltaX, deltaY;
+            if (guard.classList.contains('guard-1')) {
+                // Top-left guard moves right and down
+                deltaX = 60; deltaY = 60;
+            } else if (guard.classList.contains('guard-2')) {
+                // Top-right guard moves left and down
+                deltaX = -60; deltaY = 60;
+            } else if (guard.classList.contains('guard-3')) {
+                // Bottom-left guard moves right and up
+                deltaX = 60; deltaY = -60;
+            } else if (guard.classList.contains('guard-4')) {
+                // Bottom-right guard moves left and up
+                deltaX = -60; deltaY = -60;
+            }
+            
+            // Move to surround threat
+            guard.style.transition = 'transform 2s ease-in-out';
+            guard.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
             guard.style.filter = 'brightness(1.2) drop-shadow(0 0 8px #ffc107)';
-            guard.style.transform = 'scale(1.05)';
             guard.classList.add('moving');
             
-            // Add pulsing effect
-            guard.style.animation = 'guardMoveToThreat 1.5s ease-in-out infinite';
-            
-            // Return to normal after 3 seconds
+            // Return to original position after 4 seconds
             setTimeout(() => {
+                guard.style.transform = 'translate(0, 0)';
                 guard.style.filter = '';
-                guard.style.transform = 'scale(1)';
-                guard.style.animation = '';
                 guard.classList.remove('moving');
-            }, 3000);
+            }, 4000);
         }
 
 
