@@ -708,10 +708,10 @@
                 }, 30000);
             }
             
-            // Drone circular motion - strategic patrol positions
+            // Drone circular motion - small circles within map bounds
             let droneAngles = [0, 0, 0]; // Starting angles for each drone
             const droneSpeeds = [0.02, 0.015, 0.012]; // Radians per frame
-            const droneRadii = [15, 12, 18]; // Smaller radii for better coverage
+            const droneRadii = [8, 6, 10]; // Much smaller radii to stay on screen
             const droneCenters = [
                 { x: 30, y: 30 }, // Drone 1 - North-West patrol
                 { x: 70, y: 30 }, // Drone 2 - North-East patrol  
