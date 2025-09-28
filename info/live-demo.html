@@ -118,19 +118,29 @@
                             <div class="threat-label">THREAT DETECTED</div>
                         </div>
                         
-                        <!-- Communication Lines -->
-                        <svg class="communication-lines" id="commLines">
-                            <defs>
-                                <pattern id="dashPattern" patternUnits="userSpaceOnUse" width="10" height="2">
-                                    <rect width="10" height="2" fill="yellow" />
-                                </pattern>
-                            </defs>
-                        </svg>
+                        <!-- Drone Alarm Indicators -->
+                        <div class="drone-alarm" id="droneAlarm1">
+                            <div class="alarm-icon">🚨</div>
+                        </div>
+                        <div class="drone-alarm" id="droneAlarm2">
+                            <div class="alarm-icon">🚨</div>
+                        </div>
+                        <div class="drone-alarm" id="droneAlarm3">
+                            <div class="alarm-icon">🚨</div>
+                        </div>
                         
-                        <!-- Camera Indicators -->
-                        <div class="camera-indicator" id="cameraIndicator">
-                            <div class="camera-icon">📹</div>
-                            <div class="camera-label">LIVE FEED</div>
+                        <!-- Guard Alert Indicators -->
+                        <div class="guard-alert" id="guardAlert1">
+                            <div class="alert-icon">!</div>
+                        </div>
+                        <div class="guard-alert" id="guardAlert2">
+                            <div class="alert-icon">!</div>
+                        </div>
+                        <div class="guard-alert" id="guardAlert3">
+                            <div class="alert-icon">!</div>
+                        </div>
+                        <div class="guard-alert" id="guardAlert4">
+                            <div class="alert-icon">!</div>
                         </div>
                         
                         <!-- Battery Swap Indicators -->
@@ -392,26 +402,23 @@
                 systemStatus.textContent = 'THREAT DETECTED';
                 systemStatus.style.color = '#dc3545';
                 
-                // Show communication lines from drones to guards
+                // Show alarm indicators
                 setTimeout(() => {
-                    drawCommunicationLines();
+                    document.querySelectorAll('.drone-alarm').forEach(alarm => {
+                        alarm.style.display = 'flex';
+                    });
+                    document.querySelectorAll('.guard-alert').forEach(alert => {
+                        alert.style.display = 'flex';
+                    });
                 }, 500);
 
-                // Drones respond to threat - converge on threat location
+                // Drones respond to threat - go toward threat location
                 document.querySelectorAll('.drone').forEach((drone, index) => {
                     setTimeout(() => {
                         drone.classList.add('responding');
-                        // Just add visual effect, keep patrol running
-                        setTimeout(() => {
-                            drone.classList.remove('responding');
-                        }, 2000);
+                        moveDroneToThreat(drone);
                     }, index * 300);
                 });
-
-                // Show camera indicator
-                setTimeout(() => {
-                    cameraIndicator.style.display = 'flex';
-                }, 1500);
 
                 // Guards move to threat location
                 setTimeout(() => {
@@ -443,11 +450,15 @@
 
             // Hide threat dot and indicators
             threatDot.style.display = 'none';
-            cameraIndicator.style.display = 'none';
             batterySwap.style.display = 'none';
             
-            // Clear communication lines
-            commLines.innerHTML = '<defs><pattern id="dashPattern" patternUnits="userSpaceOnUse" width="10" height="2"><rect width="10" height="2" fill="yellow" /></pattern></defs>';
+            // Hide alarm indicators
+            document.querySelectorAll('.drone-alarm').forEach(alarm => {
+                alarm.style.display = 'none';
+            });
+            document.querySelectorAll('.guard-alert').forEach(alert => {
+                alert.style.display = 'none';
+            });
 
             // Reset status
             systemStatus.textContent = 'STANDBY';
@@ -460,6 +471,7 @@
                 drone.style.animationPlayState = 'paused';
                 drone.style.transition = '';
                 drone.style.opacity = '1';
+                drone.style.transform = 'translate(0, 0)';
                 drone.classList.remove('responding', 'landing', 'taking-off');
             });
             
@@ -491,7 +503,7 @@
             
             // Track when drones are near their vans (every 2 laps)
             setInterval(() => {
-                if (!animationRunning || threatActive) return;
+                if (!animationRunning || threatActive) return; // Stop battery swaps during threat
                 
                 drones.forEach((drone, index) => {
                     lapCounters[index]++;
@@ -524,6 +536,27 @@
             }, 500);
         }
 
+        // Move drone to threat location
+        function moveDroneToThreat(drone) {
+            const threatDot = document.getElementById('threatDot');
+            const eventSiteRect = document.querySelector('.event-site').getBoundingClientRect();
+            const droneRect = drone.getBoundingClientRect();
+            const threatRect = threatDot.getBoundingClientRect();
+            
+            const droneX = droneRect.left - eventSiteRect.left + droneRect.width/2;
+            const droneY = droneRect.top - eventSiteRect.top + droneRect.height/2;
+            const threatX = threatRect.left - eventSiteRect.left + threatRect.width/2;
+            const threatY = threatRect.top - eventSiteRect.top + threatRect.height/2;
+            
+            // Calculate movement toward threat
+            const deltaX = (threatX - droneX) * 0.6; // Move 60% of the way toward threat
+            const deltaY = (threatY - droneY) * 0.6;
+            
+            // Move toward threat
+            drone.style.transition = 'transform 2s ease-in-out';
+            drone.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+        }
+
         // Move guard to threat location
         function moveGuardToThreat(guard) {
             const threatDot = document.getElementById('threatDot');
@@ -554,41 +587,6 @@
             }, 1500);
         }
 
-        // Draw communication lines from drones to guards
-        function drawCommunicationLines() {
-            const drones = document.querySelectorAll('.drone');
-            const guards = document.querySelectorAll('.guard');
-            const threatDot = document.getElementById('threatDot');
-            
-            // Clear existing lines
-            commLines.innerHTML = '<defs><pattern id="dashPattern" patternUnits="userSpaceOnUse" width="10" height="2"><rect width="10" height="2" fill="yellow" /></pattern></defs>';
-            
-            // Draw lines from drones to guards
-            drones.forEach((drone, droneIndex) => {
-                guards.forEach((guard, guardIndex) => {
-                    const droneRect = drone.getBoundingClientRect();
-                    const guardRect = guard.getBoundingClientRect();
-                    const eventSiteRect = document.querySelector('.event-site').getBoundingClientRect();
-                    
-                    const droneX = droneRect.left - eventSiteRect.left + droneRect.width/2;
-                    const droneY = droneRect.top - eventSiteRect.top + droneRect.height/2;
-                    const guardX = guardRect.left - eventSiteRect.left + guardRect.width/2;
-                    const guardY = guardRect.top - eventSiteRect.top + guardRect.height/2;
-                    
-                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                    line.setAttribute('x1', droneX);
-                    line.setAttribute('y1', droneY);
-                    line.setAttribute('x2', guardX);
-                    line.setAttribute('y2', guardY);
-                    line.setAttribute('stroke', 'yellow');
-                    line.setAttribute('stroke-width', '2');
-                    line.setAttribute('stroke-dasharray', '5,5');
-                    line.style.animation = 'dashMove 1s linear infinite';
-                    
-                    commLines.appendChild(line);
-                });
-            });
-        }
 
         // Auto-start demo on page load
         window.addEventListener('load', () => {

@@ -1870,31 +1870,91 @@ h1, h2, h3 {
     100% { stroke-dashoffset: 15; }
 }
 
-.camera-indicator {
+@keyframes alarmPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+}
+
+@keyframes alertPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.9; }
+}
+
+/* Drone Alarm Indicators */
+.drone-alarm {
     position: absolute;
-    top: 120px;
-    left: 220px;
-    width: 60px;
-    height: 40px;
-    background: rgba(0, 0, 0, 0.8);
-    border-radius: 8px;
     display: none;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    z-index: 15;
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 0, 0, 0.9);
+    border-radius: 50%;
+    border: 2px solid #ff0000;
+    z-index: 10;
+    animation: alarmPulse 0.5s infinite;
 }
 
-.camera-icon {
-    font-size: 1.2rem;
-    color: #28a745;
+.drone-alarm:nth-child(1) {
+    top: 20px;
+    left: 20px;
 }
 
-.camera-label {
-    font-size: 0.6rem;
-    color: #28a745;
-    font-weight: 600;
-    text-align: center;
+.drone-alarm:nth-child(2) {
+    top: 20px;
+    right: 20px;
+}
+
+.drone-alarm:nth-child(3) {
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.alarm-icon {
+    font-size: 16px;
+    color: white;
+}
+
+/* Guard Alert Indicators */
+.guard-alert {
+    position: absolute;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    background: #ffc107;
+    border-radius: 50%;
+    border: 2px solid #ff8c00;
+    z-index: 10;
+    animation: alertPulse 0.8s infinite;
+}
+
+.guard-alert:nth-child(1) {
+    top: 60px;
+    left: 60px;
+}
+
+.guard-alert:nth-child(2) {
+    top: 60px;
+    right: 60px;
+}
+
+.guard-alert:nth-child(3) {
+    bottom: 60px;
+    left: 60px;
+}
+
+.guard-alert:nth-child(4) {
+    bottom: 60px;
+    right: 60px;
+}
+
+.alert-icon {
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
 }
 
 .battery-swap {
