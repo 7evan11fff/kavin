@@ -232,6 +232,7 @@
                             <button class="control-btn active" data-view="threats">Threats</button>
                             <button class="control-btn" data-view="crowd">Crowd Density</button>
                             <button class="control-btn" data-view="paths">Drone Paths</button>
+                            <button class="control-btn simulation-btn" id="simulationBtn">Start Simulation</button>
                         </div>
                     </div>
                     <div class="heatmap-container">
@@ -331,9 +332,7 @@
                             
                             <!-- Heatmap Overlay -->
                             <div class="heatmap-overlay">
-                                <div class="heat-zone high-threat" style="top: 20%; left: 30%; width: 25%; height: 20%;"></div>
-                                <div class="heat-zone medium-threat" style="top: 60%; left: 10%; width: 20%; height: 15%;"></div>
-                                <div class="heat-zone low-threat" style="top: 40%; left: 70%; width: 15%; height: 25%;"></div>
+                                <!-- Dynamic heat zones will be added here by JavaScript -->
                             </div>
                         </div>
                         
@@ -461,83 +460,152 @@
             const heatmapOverlay = document.querySelector('.heatmap-overlay');
             const dronePaths = document.querySelector('.drone-paths');
             const eventAreas = document.querySelector('.event-areas');
-            const heatZones = document.querySelectorAll('.heat-zone');
-            const threatIndicators = document.querySelectorAll('.threat-indicator');
             const legendTitle = document.querySelector('.heatmap-legend h4');
             const legendItems = document.querySelectorAll('.legend-item');
             const heatmapLegend = document.querySelector('.heatmap-legend');
+            const simulationBtn = document.getElementById('simulationBtn');
+            
+            let currentView = 'threats';
+            let simulationActive = false;
+            let simulationInterval;
+            
+            // Initialize with threats view
+            updateHeatmapView('threats');
             
             heatmapBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
+                    if (this.id === 'simulationBtn') {
+                        toggleSimulation();
+                        return;
+                    }
+                    
                     heatmapBtns.forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
                     
-                    const view = this.dataset.view;
-                    
-                    // Reset all elements
-                    heatmapOverlay.style.display = 'none';
-                    dronePaths.style.display = 'none';
-                    eventAreas.style.display = 'none';
-                    
-                    // Remove all heat zone classes
-                    heatZones.forEach(zone => {
-                        zone.classList.remove('high-threat', 'medium-threat', 'low-threat', 'high-density', 'medium-density', 'low-density');
-                    });
-                    
-                    // Remove legend view classes
-                    heatmapLegend.classList.remove('crowd-view', 'paths-view');
-                    
-                    if (view === 'threats') {
-                        // Show threat heatmap
-                        heatmapOverlay.style.display = 'block';
-                        eventAreas.style.display = 'block';
-                        
-                        // Set threat colors
-                        heatZones.forEach((zone, index) => {
-                            if (index === 0) zone.classList.add('high-threat');
-                            else if (index === 1) zone.classList.add('medium-threat');
-                            else zone.classList.add('low-threat');
-                        });
-                        
-                        // Update legend for threats
-                        legendTitle.textContent = 'Threat Level Legend';
-                        legendItems[0].querySelector('span').textContent = 'High Threat';
-                        legendItems[1].querySelector('span').textContent = 'Medium Threat';
-                        legendItems[2].querySelector('span').textContent = 'Low Threat';
-                        
-                    } else if (view === 'crowd') {
-                        // Show crowd density heatmap
-                        heatmapOverlay.style.display = 'block';
-                        eventAreas.style.display = 'block';
-                        
-                        // Set crowd density colors
-                        heatZones.forEach((zone, index) => {
-                            if (index === 0) zone.classList.add('high-density');
-                            else if (index === 1) zone.classList.add('medium-density');
-                            else zone.classList.add('low-density');
-                        });
-                        
-                        // Update legend for crowd density
-                        legendTitle.textContent = 'Crowd Density Legend';
-                        legendItems[0].querySelector('span').textContent = 'High Density';
-                        legendItems[1].querySelector('span').textContent = 'Medium Density';
-                        legendItems[2].querySelector('span').textContent = 'Low Density';
-                        heatmapLegend.classList.add('crowd-view');
-                        
-                    } else if (view === 'paths') {
-                        // Show drone paths
-                        dronePaths.style.display = 'block';
-                        eventAreas.style.display = 'block';
-                        
-                        // Update legend for drone paths
-                        legendTitle.textContent = 'Drone Status';
-                        legendItems[0].querySelector('span').textContent = 'Drone 1 - North';
-                        legendItems[1].querySelector('span').textContent = 'Drone 2 - East';
-                        legendItems[2].querySelector('span').textContent = 'Drone 3 - South';
-                        heatmapLegend.classList.add('paths-view');
-                    }
+                    currentView = this.dataset.view;
+                    updateHeatmapView(currentView);
                 });
             });
+            
+            function updateHeatmapView(view) {
+                // Reset all elements
+                heatmapOverlay.style.display = 'none';
+                dronePaths.style.display = 'none';
+                eventAreas.style.display = 'block';
+                
+                // Clear existing heat zones
+                heatmapOverlay.innerHTML = '';
+                
+                // Remove legend view classes
+                heatmapLegend.classList.remove('crowd-view', 'paths-view');
+                
+                if (view === 'threats') {
+                    // Show threat heatmap
+                    heatmapOverlay.style.display = 'block';
+                    updateAreaColors('threat');
+                    
+                    // Update legend for threats
+                    legendTitle.textContent = 'Threat Level Legend';
+                    legendItems[0].querySelector('span').textContent = 'High Threat';
+                    legendItems[1].querySelector('span').textContent = 'Medium Threat';
+                    legendItems[2].querySelector('span').textContent = 'Low Threat';
+                    
+                } else if (view === 'crowd') {
+                    // Show crowd density heatmap
+                    heatmapOverlay.style.display = 'block';
+                    updateAreaColors('density');
+                    
+                    // Update legend for crowd density
+                    legendTitle.textContent = 'Crowd Density Legend';
+                    legendItems[0].querySelector('span').textContent = 'High Density';
+                    legendItems[1].querySelector('span').textContent = 'Medium Density';
+                    legendItems[2].querySelector('span').textContent = 'Low Density';
+                    heatmapLegend.classList.add('crowd-view');
+                    
+                } else if (view === 'paths') {
+                    // Show drone paths
+                    dronePaths.style.display = 'block';
+                    
+                    // Update legend for drone paths
+                    legendTitle.textContent = 'Drone Status';
+                    legendItems[0].querySelector('span').textContent = 'Drone 1 - North';
+                    legendItems[1].querySelector('span').textContent = 'Drone 2 - East';
+                    legendItems[2].querySelector('span').textContent = 'Drone 3 - South';
+                    heatmapLegend.classList.add('paths-view');
+                }
+            }
+            
+            function updateAreaColors(type) {
+                const areas = document.querySelectorAll('.area');
+                areas.forEach(area => {
+                    // Remove existing color classes
+                    area.classList.remove('threat-high', 'threat-medium', 'threat-low', 'density-high', 'density-medium', 'density-low');
+                    
+                    if (type === 'threat') {
+                        const threatLevel = area.querySelector('.threat-indicator').classList[1];
+                        if (threatLevel === 'high') area.classList.add('threat-high');
+                        else if (threatLevel === 'medium') area.classList.add('threat-medium');
+                        else area.classList.add('threat-low');
+                    } else if (type === 'density') {
+                        const density = area.dataset.density;
+                        if (density === 'high') area.classList.add('density-high');
+                        else if (density === 'medium') area.classList.add('density-medium');
+                        else area.classList.add('density-low');
+                    }
+                });
+            }
+            
+            function toggleSimulation() {
+                simulationActive = !simulationActive;
+                simulationBtn.textContent = simulationActive ? 'Stop Simulation' : 'Start Simulation';
+                simulationBtn.classList.toggle('active', simulationActive);
+                
+                if (simulationActive) {
+                    startSimulation();
+                } else {
+                    stopSimulation();
+                }
+            }
+            
+            function startSimulation() {
+                simulationInterval = setInterval(() => {
+                    if (currentView === 'threats' || currentView === 'crowd') {
+                        simulateRandomEvents();
+                    }
+                }, 3000);
+            }
+            
+            function stopSimulation() {
+                if (simulationInterval) {
+                    clearInterval(simulationInterval);
+                }
+                // Reset all areas to default colors
+                updateAreaColors(currentView === 'threats' ? 'threat' : 'density');
+            }
+            
+            function simulateRandomEvents() {
+                const areas = document.querySelectorAll('.area');
+                const randomArea = areas[Math.floor(Math.random() * areas.length)];
+                
+                // 70% chance for low, 25% chance for medium, 5% chance for high
+                const rand = Math.random();
+                let newLevel;
+                
+                if (rand < 0.7) {
+                    newLevel = 'low';
+                } else if (rand < 0.95) {
+                    newLevel = 'medium';
+                } else {
+                    newLevel = 'high';
+                }
+                
+                // Update the threat indicator
+                const threatIndicator = randomArea.querySelector('.threat-indicator');
+                threatIndicator.className = `threat-indicator ${newLevel}`;
+                
+                // Update area colors
+                updateAreaColors(currentView === 'threats' ? 'threat' : 'density');
+            }
             
             // Simulate real-time updates
             setInterval(() => {
