@@ -55,18 +55,30 @@
                         <div class="guard guard-1" id="guard1">
                             <div class="guard-body"></div>
                             <div class="guard-label">Guard 1</div>
+                            <div class="guard-alert" id="guardAlert1">
+                                <div class="alert-icon">!</div>
+                            </div>
                         </div>
                         <div class="guard guard-2" id="guard2">
                             <div class="guard-body"></div>
                             <div class="guard-label">Guard 2</div>
+                            <div class="guard-alert" id="guardAlert2">
+                                <div class="alert-icon">!</div>
+                            </div>
                         </div>
                         <div class="guard guard-3" id="guard3">
                             <div class="guard-body"></div>
                             <div class="guard-label">Guard 3</div>
+                            <div class="guard-alert" id="guardAlert3">
+                                <div class="alert-icon">!</div>
+                            </div>
                         </div>
                         <div class="guard guard-4" id="guard4">
                             <div class="guard-body"></div>
                             <div class="guard-label">Guard 4</div>
+                            <div class="guard-alert" id="guardAlert4">
+                                <div class="alert-icon">!</div>
+                            </div>
                         </div>
                         
                         <!-- Drone Vans -->
@@ -92,6 +104,9 @@
                                 <div class="drone-propeller prop-4"></div>
                                 <div class="drone-center"></div>
                             </div>
+                            <div class="drone-alarm" id="droneAlarm1">
+                                <div class="alarm-icon">🚨</div>
+                            </div>
                         </div>
                         <div class="drone drone-2" id="drone2">
                             <div class="drone-body">
@@ -100,6 +115,9 @@
                                 <div class="drone-propeller prop-3"></div>
                                 <div class="drone-propeller prop-4"></div>
                                 <div class="drone-center"></div>
+                            </div>
+                            <div class="drone-alarm" id="droneAlarm2">
+                                <div class="alarm-icon">🚨</div>
                             </div>
                         </div>
                         <div class="drone drone-3" id="drone3">
@@ -110,6 +128,9 @@
                                 <div class="drone-propeller prop-4"></div>
                                 <div class="drone-center"></div>
                             </div>
+                            <div class="drone-alarm" id="droneAlarm3">
+                                <div class="alarm-icon">🚨</div>
+                            </div>
                         </div>
                         
                         <!-- Threat Indicator -->
@@ -118,30 +139,6 @@
                             <div class="threat-label">THREAT DETECTED</div>
                         </div>
                         
-                        <!-- Drone Alarm Indicators -->
-                        <div class="drone-alarm" id="droneAlarm1">
-                            <div class="alarm-icon">🚨</div>
-                        </div>
-                        <div class="drone-alarm" id="droneAlarm2">
-                            <div class="alarm-icon">🚨</div>
-                        </div>
-                        <div class="drone-alarm" id="droneAlarm3">
-                            <div class="alarm-icon">🚨</div>
-                        </div>
-                        
-                        <!-- Guard Alert Indicators -->
-                        <div class="guard-alert" id="guardAlert1">
-                            <div class="alert-icon">!</div>
-                        </div>
-                        <div class="guard-alert" id="guardAlert2">
-                            <div class="alert-icon">!</div>
-                        </div>
-                        <div class="guard-alert" id="guardAlert3">
-                            <div class="alert-icon">!</div>
-                        </div>
-                        <div class="guard-alert" id="guardAlert4">
-                            <div class="alert-icon">!</div>
-                        </div>
                         
                         <!-- Battery Swap Indicators -->
                         <div class="battery-swap" id="batterySwap">
@@ -471,8 +468,9 @@
                 drone.style.animationPlayState = 'paused';
                 drone.style.transition = '';
                 drone.style.opacity = '1';
-                drone.style.transform = 'translate(0, 0)';
+                drone.style.transform = '';
                 drone.style.filter = '';
+                drone.style.animation = '';
                 drone.classList.remove('responding', 'landing', 'taking-off');
             });
             
@@ -481,9 +479,10 @@
 
             // Reset guards
             document.querySelectorAll('.guard').forEach(guard => {
-                guard.style.transform = 'translate(0, 0)';
+                guard.style.transform = '';
                 guard.style.transition = '';
                 guard.style.filter = '';
+                guard.style.animation = '';
                 guard.classList.remove('moving');
             });
 
@@ -537,72 +536,31 @@
 
         // Move drone to threat location
         function moveDroneToThreat(drone) {
-            // Get drone position from CSS classes
-            let droneX, droneY;
-            if (drone.classList.contains('drone-1')) {
-                droneX = 200; droneY = 50; // Top center
-            } else if (drone.classList.contains('drone-2')) {
-                droneX = 100; droneY = 200; // Left center
-            } else if (drone.classList.contains('drone-3')) {
-                droneX = 300; droneY = 200; // Right center
-            }
+            // Just add visual effects, don't change position
+            drone.style.filter = 'brightness(1.3) drop-shadow(0 0 15px #ff0000)';
+            drone.style.transform = 'scale(1.1)';
             
-            // Threat is at center (200, 200)
-            const threatX = 200;
-            const threatY = 200;
-            
-            // Calculate movement toward threat
-            const deltaX = (threatX - droneX) * 0.4; // Move 40% toward threat
-            const deltaY = (threatY - droneY) * 0.4;
-            
-            // Move toward threat smoothly
-            drone.style.transition = 'transform 3s ease-in-out';
-            drone.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
-            
-            // Add visual effect
-            drone.style.filter = 'brightness(1.2) drop-shadow(0 0 10px #ff0000)';
+            // Add pulsing effect
+            drone.style.animation = 'droneRespond 1s ease-in-out infinite';
         }
 
         // Move guard to threat location
         function moveGuardToThreat(guard) {
-            const threatDot = document.getElementById('threatDot');
-            
-            // Get guard position from CSS classes
-            let guardX, guardY;
-            if (guard.classList.contains('guard-1')) {
-                guardX = 80; guardY = 80; // Top-left
-            } else if (guard.classList.contains('guard-2')) {
-                guardX = 320; guardY = 80; // Top-right
-            } else if (guard.classList.contains('guard-3')) {
-                guardX = 80; guardY = 320; // Bottom-left
-            } else if (guard.classList.contains('guard-4')) {
-                guardX = 320; guardY = 320; // Bottom-right
-            }
-            
-            // Threat is at center (200, 200)
-            const threatX = 200;
-            const threatY = 200;
-            
-            // Calculate movement toward threat
-            const deltaX = (threatX - guardX) * 0.3; // Move 30% toward threat
-            const deltaY = (threatY - guardY) * 0.3;
-            
-            // Move toward threat
-            guard.style.transition = 'transform 2s ease-in-out';
-            guard.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+            // Just add visual effects, don't change position
+            guard.style.filter = 'brightness(1.2) drop-shadow(0 0 8px #ffc107)';
+            guard.style.transform = 'scale(1.05)';
             guard.classList.add('moving');
             
-            // Add visual effect
-            guard.style.filter = 'brightness(1.1) drop-shadow(0 0 5px #ffc107)';
+            // Add pulsing effect
+            guard.style.animation = 'guardMoveToThreat 1.5s ease-in-out infinite';
             
-            // Return to original position
+            // Return to normal after 3 seconds
             setTimeout(() => {
-                guard.style.transform = 'translate(0, 0)';
                 guard.style.filter = '';
-                setTimeout(() => {
-                    guard.classList.remove('moving');
-                }, 2000);
-            }, 2000);
+                guard.style.transform = 'scale(1)';
+                guard.style.animation = '';
+                guard.classList.remove('moving');
+            }, 3000);
         }
 
 

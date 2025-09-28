@@ -1886,29 +1886,15 @@ h1, h2, h3 {
     display: none;
     align-items: center;
     justify-content: center;
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     background: rgba(255, 0, 0, 0.9);
     border-radius: 50%;
     border: 2px solid #ff0000;
-    z-index: 10;
+    z-index: 15;
     animation: alarmPulse 0.5s infinite;
-}
-
-#droneAlarm1 {
-    top: 20px;
-    left: 20px;
-}
-
-#droneAlarm2 {
-    top: 20px;
-    right: 20px;
-}
-
-#droneAlarm3 {
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    top: -15px;
+    right: -15px;
 }
 
 .alarm-icon {
@@ -1922,33 +1908,15 @@ h1, h2, h3 {
     display: none;
     align-items: center;
     justify-content: center;
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     background: #ffc107;
     border-radius: 50%;
     border: 2px solid #ff8c00;
-    z-index: 10;
+    z-index: 15;
     animation: alertPulse 0.8s infinite;
-}
-
-#guardAlert1 {
-    top: 60px;
-    left: 60px;
-}
-
-#guardAlert2 {
-    top: 60px;
-    right: 60px;
-}
-
-#guardAlert3 {
-    bottom: 60px;
-    left: 60px;
-}
-
-#guardAlert4 {
-    bottom: 60px;
-    right: 60px;
+    top: -10px;
+    right: -10px;
 }
 
 .alert-icon {
