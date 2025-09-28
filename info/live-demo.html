@@ -53,19 +53,19 @@
                         
                         <!-- Security Guards -->
                         <div class="guard guard-1" id="guard1">
-                            <div class="guard-icon">🛡️</div>
+                            <div class="guard-body"></div>
                             <div class="guard-label">Guard 1</div>
                         </div>
                         <div class="guard guard-2" id="guard2">
-                            <div class="guard-icon">🛡️</div>
+                            <div class="guard-body"></div>
                             <div class="guard-label">Guard 2</div>
                         </div>
                         <div class="guard guard-3" id="guard3">
-                            <div class="guard-icon">🛡️</div>
+                            <div class="guard-body"></div>
                             <div class="guard-label">Guard 3</div>
                         </div>
                         <div class="guard guard-4" id="guard4">
-                            <div class="guard-icon">🛡️</div>
+                            <div class="guard-body"></div>
                             <div class="guard-label">Guard 4</div>
                         </div>
                         
@@ -85,13 +85,31 @@
                         
                         <!-- Drones -->
                         <div class="drone drone-1" id="drone1">
-                            <div class="drone-icon">🚁</div>
+                            <div class="drone-body">
+                                <div class="drone-propeller prop-1"></div>
+                                <div class="drone-propeller prop-2"></div>
+                                <div class="drone-propeller prop-3"></div>
+                                <div class="drone-propeller prop-4"></div>
+                                <div class="drone-center"></div>
+                            </div>
                         </div>
                         <div class="drone drone-2" id="drone2">
-                            <div class="drone-icon">🚁</div>
+                            <div class="drone-body">
+                                <div class="drone-propeller prop-1"></div>
+                                <div class="drone-propeller prop-2"></div>
+                                <div class="drone-propeller prop-3"></div>
+                                <div class="drone-propeller prop-4"></div>
+                                <div class="drone-center"></div>
+                            </div>
                         </div>
                         <div class="drone drone-3" id="drone3">
-                            <div class="drone-icon">🚁</div>
+                            <div class="drone-body">
+                                <div class="drone-propeller prop-1"></div>
+                                <div class="drone-propeller prop-2"></div>
+                                <div class="drone-propeller prop-3"></div>
+                                <div class="drone-propeller prop-4"></div>
+                                <div class="drone-center"></div>
+                            </div>
                         </div>
                         
                         <!-- Threat Indicator -->
@@ -401,10 +419,7 @@
                 setTimeout(() => {
                     document.querySelectorAll('.guard').forEach((guard, index) => {
                         setTimeout(() => {
-                            guard.classList.add('moving');
-                            setTimeout(() => {
-                                guard.classList.remove('moving');
-                            }, 3000);
+                            moveGuardToThreat(guard);
                         }, index * 200);
                     });
                 }, 2000);
@@ -486,6 +501,30 @@
                     randomDrone.classList.remove('taking-off');
                 }, 2000);
             }, 2000);
+        }
+
+        // Move guard to threat location
+        function moveGuardToThreat(guard) {
+            const threatDot = document.getElementById('threatDot');
+            const eventSiteRect = document.querySelector('.event-site').getBoundingClientRect();
+            const guardRect = guard.getBoundingClientRect();
+            const threatRect = threatDot.getBoundingClientRect();
+            
+            const guardX = guardRect.left - eventSiteRect.left + guardRect.width/2;
+            const guardY = guardRect.top - eventSiteRect.top + guardRect.height/2;
+            const threatX = threatRect.left - eventSiteRect.left + threatRect.width/2;
+            const threatY = threatRect.top - eventSiteRect.top + threatRect.height/2;
+            
+            const deltaX = threatX - guardX;
+            const deltaY = threatY - guardY;
+            
+            guard.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+            guard.classList.add('moving');
+            
+            setTimeout(() => {
+                guard.style.transform = 'translate(0, 0)';
+                guard.classList.remove('moving');
+            }, 3000);
         }
 
         // Draw communication lines from drones to guards
