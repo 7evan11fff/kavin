@@ -3275,25 +3275,61 @@ h1, h2, h3 {
 
 @keyframes dronePatrol1 {
     0% { top: 15%; left: 50%; }
-    25% { top: 15%; left: 85%; }
-    50% { top: 85%; left: 85%; }
-    75% { top: 85%; left: 15%; }
+    6.25% { top: 8%; left: 65%; }
+    12.5% { top: 8%; left: 85%; }
+    18.75% { top: 15%; left: 92%; }
+    25% { top: 35%; left: 92%; }
+    31.25% { top: 50%; left: 85%; }
+    37.5% { top: 65%; left: 85%; }
+    43.75% { top: 85%; left: 92%; }
+    50% { top: 92%; left: 85%; }
+    56.25% { top: 92%; left: 65%; }
+    62.5% { top: 85%; left: 50%; }
+    68.75% { top: 85%; left: 35%; }
+    75% { top: 92%; left: 15%; }
+    81.25% { top: 85%; left: 8%; }
+    87.5% { top: 65%; left: 8%; }
+    93.75% { top: 50%; left: 15%; }
     100% { top: 15%; left: 50%; }
 }
 
 @keyframes dronePatrol2 {
     0% { top: 25%; left: 75%; }
-    25% { top: 75%; left: 75%; }
-    50% { top: 75%; left: 25%; }
-    75% { top: 25%; left: 25%; }
+    6.25% { top: 15%; left: 80%; }
+    12.5% { top: 15%; left: 90%; }
+    18.75% { top: 25%; left: 95%; }
+    25% { top: 40%; left: 95%; }
+    31.25% { top: 50%; left: 90%; }
+    37.5% { top: 60%; left: 90%; }
+    43.75% { top: 75%; left: 95%; }
+    50% { top: 85%; left: 90%; }
+    56.25% { top: 85%; left: 80%; }
+    62.5% { top: 75%; left: 75%; }
+    68.75% { top: 75%; left: 60%; }
+    75% { top: 85%; left: 25%; }
+    81.25% { top: 75%; left: 10%; }
+    87.5% { top: 60%; left: 10%; }
+    93.75% { top: 50%; left: 15%; }
     100% { top: 25%; left: 75%; }
 }
 
 @keyframes dronePatrol3 {
     0% { top: 10%; left: 60%; }
-    25% { top: 60%; left: 90%; }
-    50% { top: 90%; left: 40%; }
-    75% { top: 40%; left: 10%; }
+    6.25% { top: 5%; left: 70%; }
+    12.5% { top: 5%; left: 85%; }
+    18.75% { top: 10%; left: 95%; }
+    25% { top: 25%; left: 95%; }
+    31.25% { top: 40%; left: 90%; }
+    37.5% { top: 55%; left: 90%; }
+    43.75% { top: 70%; left: 95%; }
+    50% { top: 85%; left: 90%; }
+    56.25% { top: 95%; left: 75%; }
+    62.5% { top: 90%; left: 60%; }
+    68.75% { top: 90%; left: 45%; }
+    75% { top: 95%; left: 25%; }
+    81.25% { top: 90%; left: 10%; }
+    87.5% { top: 75%; left: 5%; }
+    93.75% { top: 60%; left: 5%; }
     100% { top: 10%; left: 60%; }
 }
 
