@@ -230,6 +230,7 @@
                         <h3><i class="fas fa-map"></i> Event Heatmap & Drone Paths</h3>
                         <div class="heatmap-controls">
                             <button class="control-btn active" data-view="threats">Threats</button>
+                            <button class="control-btn" data-view="risks">Risk Assessment</button>
                             <button class="control-btn" data-view="crowd">Crowd Density</button>
                             <button class="control-btn" data-view="paths">Drone Paths</button>
                             <button class="control-btn simulation-btn" id="simulationBtn">Start Simulation</button>
@@ -240,51 +241,62 @@
                             <!-- Event Layout -->
                             <div class="event-areas">
                                 <!-- Main Event Areas -->
-                                <div class="area main-stage" data-density="high">
+                                <div class="area main-stage" data-density="high" data-risk="medium">
                                     <div class="area-label">Main Stage</div>
                                     <div class="threat-indicator high"></div>
+                                    <div class="risk-indicator medium"></div>
                                 </div>
-                                <div class="area food-court" data-density="medium">
+                                <div class="area food-court" data-density="medium" data-risk="low">
                                     <div class="area-label">Food Court</div>
                                     <div class="threat-indicator low"></div>
+                                    <div class="risk-indicator low"></div>
                                 </div>
-                                <div class="area parking-north" data-density="low">
+                                <div class="area parking-north" data-density="low" data-risk="high">
                                     <div class="area-label">North Parking</div>
                                     <div class="threat-indicator medium"></div>
+                                    <div class="risk-indicator high"></div>
                                 </div>
-                                <div class="area parking-south" data-density="low">
+                                <div class="area parking-south" data-density="low" data-risk="medium">
                                     <div class="area-label">South Parking</div>
                                     <div class="threat-indicator low"></div>
+                                    <div class="risk-indicator medium"></div>
                                 </div>
-                                <div class="area entrance" data-density="high">
+                                <div class="area entrance" data-density="high" data-risk="high">
                                     <div class="area-label">Main Entrance</div>
                                     <div class="threat-indicator low"></div>
+                                    <div class="risk-indicator high"></div>
                                 </div>
                                 
                                 <!-- Extended Perimeter Areas -->
-                                <div class="area forest-north" data-density="low">
+                                <div class="area forest-north" data-density="low" data-risk="high">
                                     <div class="area-label">North Forest</div>
                                     <div class="threat-indicator medium"></div>
+                                    <div class="risk-indicator high"></div>
                                 </div>
-                                <div class="area forest-south" data-density="low">
+                                <div class="area forest-south" data-density="low" data-risk="medium">
                                     <div class="area-label">South Forest</div>
                                     <div class="threat-indicator low"></div>
+                                    <div class="risk-indicator medium"></div>
                                 </div>
-                                <div class="area buildings-east" data-density="low">
+                                <div class="area buildings-east" data-density="low" data-risk="high">
                                     <div class="area-label">East Buildings</div>
                                     <div class="threat-indicator high"></div>
+                                    <div class="risk-indicator high"></div>
                                 </div>
-                                <div class="area buildings-west" data-density="low">
+                                <div class="area buildings-west" data-density="low" data-risk="medium">
                                     <div class="area-label">West Buildings</div>
                                     <div class="threat-indicator medium"></div>
+                                    <div class="risk-indicator medium"></div>
                                 </div>
-                                <div class="area road-north" data-density="low">
+                                <div class="area road-north" data-density="low" data-risk="low">
                                     <div class="area-label">North Access Road</div>
                                     <div class="threat-indicator low"></div>
+                                    <div class="risk-indicator low"></div>
                                 </div>
-                                <div class="area road-south" data-density="low">
+                                <div class="area road-south" data-density="low" data-risk="low">
                                     <div class="area-label">South Access Road</div>
                                     <div class="threat-indicator low"></div>
+                                    <div class="risk-indicator low"></div>
                                 </div>
                             </div>
                             
@@ -497,7 +509,7 @@
                 heatmapOverlay.innerHTML = '';
                 
                 // Remove legend view classes
-                heatmapLegend.classList.remove('crowd-view', 'paths-view');
+                heatmapLegend.classList.remove('crowd-view', 'paths-view', 'risk-view');
                 
                 if (view === 'threats') {
                     // Show threat heatmap
@@ -509,6 +521,18 @@
                     legendItems[0].querySelector('span').textContent = 'High Threat';
                     legendItems[1].querySelector('span').textContent = 'Medium Threat';
                     legendItems[2].querySelector('span').textContent = 'Low Threat';
+                    
+                } else if (view === 'risks') {
+                    // Show risk assessment heatmap
+                    heatmapOverlay.style.display = 'block';
+                    updateAreaColors('risk');
+                    
+                    // Update legend for risks
+                    legendTitle.textContent = 'Risk Assessment Legend';
+                    legendItems[0].querySelector('span').textContent = 'High Risk';
+                    legendItems[1].querySelector('span').textContent = 'Medium Risk';
+                    legendItems[2].querySelector('span').textContent = 'Low Risk';
+                    heatmapLegend.classList.add('risk-view');
                     
                 } else if (view === 'crowd') {
                     // Show crowd density heatmap
@@ -539,13 +563,18 @@
                 const areas = document.querySelectorAll('.area');
                 areas.forEach(area => {
                     // Remove existing color classes
-                    area.classList.remove('threat-high', 'threat-medium', 'threat-low', 'density-high', 'density-medium', 'density-low');
+                    area.classList.remove('threat-high', 'threat-medium', 'threat-low', 'risk-high', 'risk-medium', 'risk-low', 'density-high', 'density-medium', 'density-low');
                     
                     if (type === 'threat') {
                         const threatLevel = area.querySelector('.threat-indicator').classList[1];
                         if (threatLevel === 'high') area.classList.add('threat-high');
                         else if (threatLevel === 'medium') area.classList.add('threat-medium');
                         else area.classList.add('threat-low');
+                    } else if (type === 'risk') {
+                        const riskLevel = area.querySelector('.risk-indicator').classList[1];
+                        if (riskLevel === 'high') area.classList.add('risk-high');
+                        else if (riskLevel === 'medium') area.classList.add('risk-medium');
+                        else area.classList.add('risk-low');
                     } else if (type === 'density') {
                         const density = area.dataset.density;
                         if (density === 'high') area.classList.add('density-high');
@@ -569,7 +598,7 @@
             
             function startSimulation() {
                 simulationInterval = setInterval(() => {
-                    if (currentView === 'threats' || currentView === 'crowd') {
+                    if (currentView === 'threats' || currentView === 'risks' || currentView === 'crowd') {
                         simulateRandomEvents();
                     }
                 }, 3000);
@@ -580,7 +609,9 @@
                     clearInterval(simulationInterval);
                 }
                 // Reset all areas to default colors
-                updateAreaColors(currentView === 'threats' ? 'threat' : 'density');
+                if (currentView === 'threats') updateAreaColors('threat');
+                else if (currentView === 'risks') updateAreaColors('risk');
+                else if (currentView === 'crowd') updateAreaColors('density');
             }
             
             function simulateRandomEvents() {
@@ -599,12 +630,22 @@
                     newLevel = 'high';
                 }
                 
-                // Update the threat indicator
-                const threatIndicator = randomArea.querySelector('.threat-indicator');
-                threatIndicator.className = `threat-indicator ${newLevel}`;
+                // Update the appropriate indicator based on current view
+                if (currentView === 'threats') {
+                    const threatIndicator = randomArea.querySelector('.threat-indicator');
+                    threatIndicator.className = `threat-indicator ${newLevel}`;
+                } else if (currentView === 'risks') {
+                    const riskIndicator = randomArea.querySelector('.risk-indicator');
+                    riskIndicator.className = `risk-indicator ${newLevel}`;
+                } else if (currentView === 'crowd') {
+                    // For crowd density, we'll update the data attribute
+                    randomArea.dataset.density = newLevel;
+                }
                 
                 // Update area colors
-                updateAreaColors(currentView === 'threats' ? 'threat' : 'density');
+                if (currentView === 'threats') updateAreaColors('threat');
+                else if (currentView === 'risks') updateAreaColors('risk');
+                else if (currentView === 'crowd') updateAreaColors('density');
             }
             
             // Simulate real-time updates

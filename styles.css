@@ -2866,6 +2866,22 @@ h1, h2, h3 {
     border-color: #17a2b8;
 }
 
+/* Risk level colors */
+.area.risk-high {
+    background: rgba(111, 66, 193, 0.2);
+    border-color: #6f42c1;
+}
+
+.area.risk-medium {
+    background: rgba(253, 126, 20, 0.2);
+    border-color: #fd7e14;
+}
+
+.area.risk-low {
+    background: rgba(32, 201, 151, 0.2);
+    border-color: #20c997;
+}
+
 .area.main-stage {
     top: 10%;
     left: 20%;
@@ -2964,6 +2980,28 @@ h1, h2, h3 {
 
 .threat-indicator.low {
     background: #28a745;
+}
+
+.risk-indicator {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+.risk-indicator.high {
+    background: #6f42c1;
+}
+
+.risk-indicator.medium {
+    background: #fd7e14;
+}
+
+.risk-indicator.low {
+    background: #20c997;
 }
 
 .drone-paths {
@@ -3143,6 +3181,19 @@ h1, h2, h3 {
 
 .paths-view .legend-item:nth-child(3) .legend-color {
     background: #667eea; /* Drone 3 - blue */
+}
+
+/* Risk assessment specific colors */
+.risk-view .legend-item:nth-child(1) .legend-color {
+    background: #6f42c1; /* High risk - purple */
+}
+
+.risk-view .legend-item:nth-child(2) .legend-color {
+    background: #fd7e14; /* Medium risk - orange */
+}
+
+.risk-view .legend-item:nth-child(3) .legend-color {
+    background: #20c997; /* Low risk - teal */
 }
 
 .status-grid {
