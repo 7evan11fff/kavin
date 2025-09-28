@@ -3051,17 +3051,23 @@ h1, h2, h3 {
 
 .drone-marker.drone-1 {
     position: absolute;
-    transition: all 0.1s ease-out;
+    top: 25%;
+    left: 25%;
+    animation: dronePatrol1 8s ease-in-out infinite;
 }
 
 .drone-marker.drone-2 {
     position: absolute;
-    transition: all 0.1s ease-out;
+    top: 25%;
+    left: 75%;
+    animation: dronePatrol2 10s ease-in-out infinite;
 }
 
 .drone-marker.drone-3 {
     position: absolute;
-    transition: all 0.1s ease-out;
+    top: 75%;
+    left: 50%;
+    animation: dronePatrol3 12s ease-in-out infinite;
 }
 
 .heatmap-overlay {
@@ -3268,6 +3274,21 @@ h1, h2, h3 {
 @keyframes heatPulse {
     0%, 100% { opacity: 0.6; transform: scale(1); }
     50% { opacity: 0.8; transform: scale(1.1); }
+}
+
+@keyframes dronePatrol1 {
+    0%, 100% { top: 25%; left: 25%; }
+    50% { top: 35%; left: 35%; }
+}
+
+@keyframes dronePatrol2 {
+    0%, 100% { top: 25%; left: 75%; }
+    50% { top: 35%; left: 65%; }
+}
+
+@keyframes dronePatrol3 {
+    0%, 100% { top: 75%; left: 50%; }
+    50% { top: 65%; left: 40%; }
 }
 
 
