@@ -346,6 +346,7 @@
         let animationRunning = false;
         let threatActive = false;
         let responseStartTime = null;
+        let lapCounters = [0, 0, 0]; // Track laps for each drone
 
         const startDemoBtn = document.getElementById('startDemo');
         const triggerThreatBtn = document.getElementById('triggerThreat');
@@ -370,12 +371,8 @@
                     drone.style.animationPlayState = 'running';
                 });
 
-                // Simulate battery rotation every 6 seconds
-                setInterval(() => {
-                    if (animationRunning && !threatActive) {
-                        simulateBatteryRotation();
-                    }
-                }, 6000);
+                // Start lap tracking for battery swaps
+                startLapTracking();
 
                 startDemoBtn.textContent = 'Demo Running';
                 startDemoBtn.style.background = '#28a745';
@@ -462,8 +459,12 @@
             document.querySelectorAll('.drone').forEach(drone => {
                 drone.style.animationPlayState = 'paused';
                 drone.style.transition = '';
+                drone.style.opacity = '1';
                 drone.classList.remove('responding', 'landing', 'taking-off');
             });
+            
+            // Reset lap counters
+            lapCounters = [0, 0, 0];
 
             // Reset guards
             document.querySelectorAll('.guard').forEach(guard => {
@@ -480,31 +481,47 @@
             triggerThreatBtn.disabled = false;
         });
 
-        // Simulate battery rotation
-        function simulateBatteryRotation() {
+        // Start lap tracking for battery swaps
+        function startLapTracking() {
             const drones = document.querySelectorAll('.drone');
             const vans = document.querySelectorAll('.drone-van');
-            const randomIndex = Math.floor(Math.random() * drones.length);
-            const randomDrone = drones[randomIndex];
-            const correspondingVan = vans[randomIndex];
+            
+            // Reset lap counters
+            lapCounters = [0, 0, 0];
+            
+            // Track when drones are near their vans (every 2 laps)
+            setInterval(() => {
+                if (!animationRunning || threatActive) return;
+                
+                drones.forEach((drone, index) => {
+                    lapCounters[index]++;
+                    
+                    // Every 2 laps (30 seconds at 15s per lap), do battery swap
+                    if (lapCounters[index] >= 2) {
+                        lapCounters[index] = 0;
+                        performBatterySwap(drone, vans[index], index);
+                    }
+                });
+            }, 100); // Check every 100ms
+        }
+
+        // Perform battery swap when drone is over its van
+        function performBatterySwap(drone, van, droneIndex) {
+            // Hide drone quickly
+            drone.style.opacity = '0';
             
             // Show lightning bolt at van
-            const vanRect = correspondingVan.getBoundingClientRect();
+            const vanRect = van.getBoundingClientRect();
             const eventSiteRect = document.querySelector('.event-site').getBoundingClientRect();
             batterySwap.style.left = (vanRect.left - eventSiteRect.left + vanRect.width/2 - 15) + 'px';
             batterySwap.style.top = (vanRect.top - eventSiteRect.top + vanRect.height/2 - 15) + 'px';
             batterySwap.style.display = 'flex';
             
-            // Just show visual effects without changing drone position
-            randomDrone.classList.add('landing');
+            // Show new drone and lightning
             setTimeout(() => {
-                randomDrone.classList.remove('landing');
-                randomDrone.classList.add('taking-off');
+                drone.style.opacity = '1';
                 batterySwap.style.display = 'none';
-                setTimeout(() => {
-                    randomDrone.classList.remove('taking-off');
-                }, 1000);
-            }, 1000);
+            }, 500);
         }
 
         // Move guard to threat location
@@ -520,8 +537,8 @@
             const threatY = threatRect.top - eventSiteRect.top + threatRect.height/2;
             
             // Calculate movement toward threat (but limit distance to stay in frame)
-            const deltaX = (threatX - guardX) * 0.3; // Move 30% of the way
-            const deltaY = (threatY - guardY) * 0.3;
+            const deltaX = (threatX - guardX) * 0.4; // Move 40% of the way toward threat
+            const deltaY = (threatY - guardY) * 0.4;
             
             // Move toward threat
             guard.style.transition = 'transform 1.5s ease-in-out';
