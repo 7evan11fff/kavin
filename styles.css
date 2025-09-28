@@ -3050,18 +3050,18 @@ h1, h2, h3 {
 }
 
 .drone-marker.drone-1 {
-    offset-path: path("M 50,15 A 35,35 0 1,1 49.9,15");
-    animation: dronePatrol1 12s linear infinite;
+    position: absolute;
+    transition: all 0.1s ease-out;
 }
 
 .drone-marker.drone-2 {
-    offset-path: path("M 75,25 A 25,25 0 1,1 74.9,25");
-    animation: dronePatrol2 15s linear infinite;
+    position: absolute;
+    transition: all 0.1s ease-out;
 }
 
 .drone-marker.drone-3 {
-    offset-path: path("M 60,10 A 30,30 0 1,1 59.9,10");
-    animation: dronePatrol3 18s linear infinite;
+    position: absolute;
+    transition: all 0.1s ease-out;
 }
 
 .heatmap-overlay {
@@ -3270,20 +3270,6 @@ h1, h2, h3 {
     50% { opacity: 0.8; transform: scale(1.1); }
 }
 
-@keyframes dronePatrol1 {
-    0% { offset-distance: 0%; }
-    100% { offset-distance: 100%; }
-}
-
-@keyframes dronePatrol2 {
-    0% { offset-distance: 0%; }
-    100% { offset-distance: 100%; }
-}
-
-@keyframes dronePatrol3 {
-    0% { offset-distance: 0%; }
-    100% { offset-distance: 100%; }
-}
 
 /* Dashboard Responsive */
 @media (max-width: 1200px) {
