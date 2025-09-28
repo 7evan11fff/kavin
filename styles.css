@@ -1895,17 +1895,17 @@ h1, h2, h3 {
     animation: alarmPulse 0.5s infinite;
 }
 
-.drone-alarm:nth-child(1) {
+#droneAlarm1 {
     top: 20px;
     left: 20px;
 }
 
-.drone-alarm:nth-child(2) {
+#droneAlarm2 {
     top: 20px;
     right: 20px;
 }
 
-.drone-alarm:nth-child(3) {
+#droneAlarm3 {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
@@ -1931,22 +1931,22 @@ h1, h2, h3 {
     animation: alertPulse 0.8s infinite;
 }
 
-.guard-alert:nth-child(1) {
+#guardAlert1 {
     top: 60px;
     left: 60px;
 }
 
-.guard-alert:nth-child(2) {
+#guardAlert2 {
     top: 60px;
     right: 60px;
 }
 
-.guard-alert:nth-child(3) {
+#guardAlert3 {
     bottom: 60px;
     left: 60px;
 }
 
-.guard-alert:nth-child(4) {
+#guardAlert4 {
     bottom: 60px;
     right: 60px;
 }

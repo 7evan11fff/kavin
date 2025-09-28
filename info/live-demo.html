@@ -495,7 +495,7 @@
             triggerThreatBtn.disabled = false;
         });
 
-        // Start lap tracking for battery swaps
+        // Start simple battery swap system
         function startLapTracking() {
             const drones = document.querySelectorAll('.drone');
             const vans = document.querySelectorAll('.drone-van');
@@ -503,25 +503,17 @@
             // Reset lap counters
             lapCounters = [0, 0, 0];
             
-            // Track when drones are near their vans (every 2 laps)
+            // Simple timer-based battery swaps every 30 seconds
             setInterval(() => {
-                if (!animationRunning || threatActive) return; // Stop battery swaps during threat
+                if (!animationRunning || threatActive) return;
                 
-                drones.forEach((drone, index) => {
-                    lapCounters[index]++;
-                    
-                    // Every 2 laps (30 seconds at 15s per lap), do battery swap
-                    if (lapCounters[index] >= 2) {
-                        lapCounters[index] = 0;
-                        // Only swap one drone at a time to avoid all flashing
-                        setTimeout(() => {
-                            if (!threatActive) { // Double check threat status
-                                performBatterySwap(drone, vans[index], index);
-                            }
-                        }, index * 2000); // Stagger swaps by 2 seconds
-                    }
-                });
-            }, 100); // Check every 100ms
+                // Pick a random drone for battery swap
+                const randomIndex = Math.floor(Math.random() * drones.length);
+                const randomDrone = drones[randomIndex];
+                const correspondingVan = vans[randomIndex];
+                
+                performBatterySwap(randomDrone, correspondingVan, randomIndex);
+            }, 30000); // Every 30 seconds
         }
 
         // Perform battery swap when drone is over its van
@@ -545,19 +537,23 @@
 
         // Move drone to threat location
         function moveDroneToThreat(drone) {
-            const threatDot = document.getElementById('threatDot');
-            const eventSiteRect = document.querySelector('.event-site').getBoundingClientRect();
-            const droneRect = drone.getBoundingClientRect();
-            const threatRect = threatDot.getBoundingClientRect();
+            // Get drone position from CSS classes
+            let droneX, droneY;
+            if (drone.classList.contains('drone-1')) {
+                droneX = 200; droneY = 50; // Top center
+            } else if (drone.classList.contains('drone-2')) {
+                droneX = 100; droneY = 200; // Left center
+            } else if (drone.classList.contains('drone-3')) {
+                droneX = 300; droneY = 200; // Right center
+            }
             
-            const droneX = droneRect.left - eventSiteRect.left + droneRect.width/2;
-            const droneY = droneRect.top - eventSiteRect.top + droneRect.height/2;
-            const threatX = threatRect.left - eventSiteRect.left + threatRect.width/2;
-            const threatY = threatRect.top - eventSiteRect.top + threatRect.height/2;
+            // Threat is at center (200, 200)
+            const threatX = 200;
+            const threatY = 200;
             
-            // Calculate movement toward threat (smaller movement to avoid snapping)
-            const deltaX = (threatX - droneX) * 0.3; // Move 30% of the way toward threat
-            const deltaY = (threatY - droneY) * 0.3;
+            // Calculate movement toward threat
+            const deltaX = (threatX - droneX) * 0.4; // Move 40% toward threat
+            const deltaY = (threatY - droneY) * 0.4;
             
             // Move toward threat smoothly
             drone.style.transition = 'transform 3s ease-in-out';
@@ -570,18 +566,26 @@
         // Move guard to threat location
         function moveGuardToThreat(guard) {
             const threatDot = document.getElementById('threatDot');
-            const eventSiteRect = document.querySelector('.event-site').getBoundingClientRect();
-            const guardRect = guard.getBoundingClientRect();
-            const threatRect = threatDot.getBoundingClientRect();
             
-            const guardX = guardRect.left - eventSiteRect.left + guardRect.width/2;
-            const guardY = guardRect.top - eventSiteRect.top + guardRect.height/2;
-            const threatX = threatRect.left - eventSiteRect.left + threatRect.width/2;
-            const threatY = threatRect.top - eventSiteRect.top + threatRect.height/2;
+            // Get guard position from CSS classes
+            let guardX, guardY;
+            if (guard.classList.contains('guard-1')) {
+                guardX = 80; guardY = 80; // Top-left
+            } else if (guard.classList.contains('guard-2')) {
+                guardX = 320; guardY = 80; // Top-right
+            } else if (guard.classList.contains('guard-3')) {
+                guardX = 80; guardY = 320; // Bottom-left
+            } else if (guard.classList.contains('guard-4')) {
+                guardX = 320; guardY = 320; // Bottom-right
+            }
             
-            // Calculate movement toward threat (but limit distance to stay in frame)
-            const deltaX = (threatX - guardX) * 0.5; // Move 50% of the way toward threat
-            const deltaY = (threatY - guardY) * 0.5;
+            // Threat is at center (200, 200)
+            const threatX = 200;
+            const threatY = 200;
+            
+            // Calculate movement toward threat
+            const deltaX = (threatX - guardX) * 0.3; // Move 30% toward threat
+            const deltaY = (threatY - guardY) * 0.3;
             
             // Move toward threat
             guard.style.transition = 'transform 2s ease-in-out';
