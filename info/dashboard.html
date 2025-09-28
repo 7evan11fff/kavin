@@ -238,6 +238,7 @@
                         <div class="event-map">
                             <!-- Event Layout -->
                             <div class="event-areas">
+                                <!-- Main Event Areas -->
                                 <div class="area main-stage" data-density="high">
                                     <div class="area-label">Main Stage</div>
                                     <div class="threat-indicator high"></div>
@@ -258,21 +259,70 @@
                                     <div class="area-label">Main Entrance</div>
                                     <div class="threat-indicator low"></div>
                                 </div>
+                                
+                                <!-- Extended Perimeter Areas -->
+                                <div class="area forest-north" data-density="low">
+                                    <div class="area-label">North Forest</div>
+                                    <div class="threat-indicator medium"></div>
+                                </div>
+                                <div class="area forest-south" data-density="low">
+                                    <div class="area-label">South Forest</div>
+                                    <div class="threat-indicator low"></div>
+                                </div>
+                                <div class="area buildings-east" data-density="low">
+                                    <div class="area-label">East Buildings</div>
+                                    <div class="threat-indicator high"></div>
+                                </div>
+                                <div class="area buildings-west" data-density="low">
+                                    <div class="area-label">West Buildings</div>
+                                    <div class="threat-indicator medium"></div>
+                                </div>
+                                <div class="area road-north" data-density="low">
+                                    <div class="area-label">North Access Road</div>
+                                    <div class="threat-indicator low"></div>
+                                </div>
+                                <div class="area road-south" data-density="low">
+                                    <div class="area-label">South Access Road</div>
+                                    <div class="threat-indicator low"></div>
+                                </div>
                             </div>
                             
                             <!-- Drone Paths -->
                             <div class="drone-paths">
+                                <!-- Drone 1 - North Perimeter Patrol -->
                                 <div class="drone-path path-1">
+                                    <svg class="path-line" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                        <path d="M20,20 Q50,10 80,20 Q90,50 80,80 Q50,90 20,80 Q10,50 20,20 Z" 
+                                              stroke="#667eea" stroke-width="2" fill="none" stroke-dasharray="5,5">
+                                            <animate attributeName="stroke-dashoffset" values="0;10" dur="2s" repeatCount="indefinite"/>
+                                        </path>
+                                    </svg>
                                     <div class="drone-marker drone-1">
                                         <i class="fas fa-drone"></i>
                                     </div>
                                 </div>
+                                
+                                <!-- Drone 2 - East Perimeter Patrol -->
                                 <div class="drone-path path-2">
+                                    <svg class="path-line" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                        <path d="M30,15 Q70,25 85,45 Q75,75 55,85 Q25,75 15,55 Q25,35 30,15 Z" 
+                                              stroke="#667eea" stroke-width="2" fill="none" stroke-dasharray="5,5">
+                                            <animate attributeName="stroke-dashoffset" values="0;10" dur="2.5s" repeatCount="indefinite"/>
+                                        </path>
+                                    </svg>
                                     <div class="drone-marker drone-2">
                                         <i class="fas fa-drone"></i>
                                     </div>
                                 </div>
+                                
+                                <!-- Drone 3 - South Perimeter Patrol -->
                                 <div class="drone-path path-3">
+                                    <svg class="path-line" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                        <path d="M15,30 Q25,70 45,85 Q75,75 85,55 Q75,25 55,15 Q35,25 15,30 Z" 
+                                              stroke="#667eea" stroke-width="2" fill="none" stroke-dasharray="5,5">
+                                            <animate attributeName="stroke-dashoffset" values="0;10" dur="3s" repeatCount="indefinite"/>
+                                        </path>
+                                    </svg>
                                     <div class="drone-marker drone-3">
                                         <i class="fas fa-drone"></i>
                                     </div>

@@ -2849,6 +2849,49 @@ h1, h2, h3 {
     height: 20%;
 }
 
+/* Extended Perimeter Areas */
+.area.forest-north {
+    top: 0%;
+    left: 20%;
+    width: 60%;
+    height: 10%;
+}
+
+.area.forest-south {
+    top: 90%;
+    left: 20%;
+    width: 60%;
+    height: 10%;
+}
+
+.area.buildings-east {
+    top: 20%;
+    left: 85%;
+    width: 15%;
+    height: 60%;
+}
+
+.area.buildings-west {
+    top: 20%;
+    left: 0%;
+    width: 15%;
+    height: 60%;
+}
+
+.area.road-north {
+    top: 10%;
+    left: 0%;
+    width: 20%;
+    height: 5%;
+}
+
+.area.road-south {
+    top: 85%;
+    left: 0%;
+    width: 20%;
+    height: 5%;
+}
+
 .threat-indicator {
     position: absolute;
     top: -5px;
@@ -2885,6 +2928,15 @@ h1, h2, h3 {
     height: 100%;
 }
 
+.path-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
 .drone-marker {
     position: absolute;
     width: 30px;
@@ -2896,25 +2948,20 @@ h1, h2, h3 {
     justify-content: center;
     color: white;
     font-size: 1rem;
-    animation: droneFloat 3s ease-in-out infinite;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
 }
 
 .drone-marker.drone-1 {
-    top: 20%;
-    left: 30%;
-    animation-delay: 0s;
+    animation: dronePatrol1 8s linear infinite;
 }
 
 .drone-marker.drone-2 {
-    top: 60%;
-    left: 70%;
-    animation-delay: 1s;
+    animation: dronePatrol2 10s linear infinite;
 }
 
 .drone-marker.drone-3 {
-    top: 40%;
-    left: 50%;
-    animation-delay: 2s;
+    animation: dronePatrol3 12s linear infinite;
 }
 
 .heatmap-overlay {
@@ -3108,6 +3155,30 @@ h1, h2, h3 {
 @keyframes heatPulse {
     0%, 100% { opacity: 0.6; transform: scale(1); }
     50% { opacity: 0.8; transform: scale(1.1); }
+}
+
+@keyframes dronePatrol1 {
+    0% { top: 20%; left: 20%; }
+    25% { top: 10%; left: 50%; }
+    50% { top: 20%; left: 80%; }
+    75% { top: 50%; left: 90%; }
+    100% { top: 20%; left: 20%; }
+}
+
+@keyframes dronePatrol2 {
+    0% { top: 30%; left: 85%; }
+    25% { top: 10%; left: 70%; }
+    50% { top: 30%; left: 30%; }
+    75% { top: 70%; left: 15%; }
+    100% { top: 30%; left: 85%; }
+}
+
+@keyframes dronePatrol3 {
+    0% { top: 70%; left: 15%; }
+    25% { top: 90%; left: 50%; }
+    50% { top: 70%; left: 85%; }
+    75% { top: 30%; left: 90%; }
+    100% { top: 70%; left: 15%; }
 }
 
 /* Dashboard Responsive */
