@@ -171,55 +171,33 @@
                                 <i class="fas fa-volume-up"></i>
                             </div>
                             <div class="highlight-content">
-                                <div class="highlight-title">Crowd Cheer Detected</div>
-                                <div class="highlight-details">Main stage area - 85dB spike</div>
-                                <div class="highlight-time">2 minutes ago</div>
+                                <div class="highlight-title">System Online</div>
+                                <div class="highlight-details">All drones active - Monitoring perimeter</div>
+                                <div class="highlight-time">Just now</div>
                             </div>
-                            <div class="highlight-severity low">Low</div>
+                            <div class="highlight-severity low">Info</div>
                         </div>
                         <div class="highlight-item movement" data-timestamp="14:30:42">
                             <div class="highlight-icon">
-                                <i class="fas fa-running"></i>
+                                <i class="fas fa-shield-alt"></i>
                             </div>
                             <div class="highlight-content">
-                                <div class="highlight-title">Unusual Movement Pattern</div>
-                                <div class="highlight-details">East parking lot - Person running</div>
-                                <div class="highlight-time">4 minutes ago</div>
+                                <div class="highlight-title">AI Analysis Active</div>
+                                <div class="highlight-details">Real-time threat detection enabled</div>
+                                <div class="highlight-time">1 minute ago</div>
                             </div>
-                            <div class="highlight-severity medium">Medium</div>
+                            <div class="highlight-severity low">Info</div>
                         </div>
                         <div class="highlight-item vehicle" data-timestamp="14:28:33">
                             <div class="highlight-icon">
-                                <i class="fas fa-car"></i>
+                                <i class="fas fa-eye"></i>
                             </div>
                             <div class="highlight-content">
-                                <div class="highlight-title">Vehicle Approach</div>
-                                <div class="highlight-details">West entrance - Unauthorized vehicle</div>
-                                <div class="highlight-time">6 minutes ago</div>
+                                <div class="highlight-title">Perimeter Clear</div>
+                                <div class="highlight-details">No threats detected - All areas secure</div>
+                                <div class="highlight-time">2 minutes ago</div>
                             </div>
-                            <div class="highlight-severity high">High</div>
-                        </div>
-                        <div class="highlight-item audio" data-timestamp="14:25:18">
-                            <div class="highlight-icon">
-                                <i class="fas fa-exclamation-triangle"></i>
-                            </div>
-                            <div class="highlight-content">
-                                <div class="highlight-title">Loud Noise Detected</div>
-                                <div class="highlight-details">North perimeter - 92dB</div>
-                                <div class="highlight-time">9 minutes ago</div>
-                            </div>
-                            <div class="highlight-severity medium">Medium</div>
-                        </div>
-                        <div class="highlight-item crowd" data-timestamp="14:22:55">
-                            <div class="highlight-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <div class="highlight-content">
-                                <div class="highlight-title">Crowd Density Increase</div>
-                                <div class="highlight-details">Main entrance - 150+ people</div>
-                                <div class="highlight-time">12 minutes ago</div>
-                            </div>
-                            <div class="highlight-severity low">Low</div>
+                            <div class="highlight-severity low">Info</div>
                         </div>
                     </div>
                 </div>
@@ -243,7 +221,7 @@
                                 <!-- Main Event Areas -->
                                 <div class="area main-stage" data-density="high" data-risk="medium">
                                     <div class="area-label">Main Stage</div>
-                                    <div class="threat-indicator high"></div>
+                                    <div class="threat-indicator low"></div>
                                     <div class="risk-indicator medium"></div>
                                 </div>
                                 <div class="area food-court" data-density="medium" data-risk="low">
@@ -253,7 +231,7 @@
                                 </div>
                                 <div class="area parking-north" data-density="low" data-risk="high">
                                     <div class="area-label">North Parking</div>
-                                    <div class="threat-indicator medium"></div>
+                                    <div class="threat-indicator low"></div>
                                     <div class="risk-indicator high"></div>
                                 </div>
                                 <div class="area parking-south" data-density="low" data-risk="medium">
@@ -270,7 +248,7 @@
                                 <!-- Extended Perimeter Areas -->
                                 <div class="area forest-north" data-density="low" data-risk="high">
                                     <div class="area-label">North Forest</div>
-                                    <div class="threat-indicator medium"></div>
+                                    <div class="threat-indicator low"></div>
                                     <div class="risk-indicator high"></div>
                                 </div>
                                 <div class="area forest-south" data-density="low" data-risk="medium">
@@ -280,12 +258,12 @@
                                 </div>
                                 <div class="area buildings-east" data-density="low" data-risk="high">
                                     <div class="area-label">East Buildings</div>
-                                    <div class="threat-indicator high"></div>
+                                    <div class="threat-indicator low"></div>
                                     <div class="risk-indicator high"></div>
                                 </div>
                                 <div class="area buildings-west" data-density="low" data-risk="medium">
                                     <div class="area-label">West Buildings</div>
-                                    <div class="threat-indicator medium"></div>
+                                    <div class="threat-indicator low"></div>
                                     <div class="risk-indicator medium"></div>
                                 </div>
                                 <div class="area road-north" data-density="low" data-risk="low">
@@ -611,35 +589,123 @@
             function simulateRandomEvents() {
                 const areas = document.querySelectorAll('.area');
                 const randomArea = areas[Math.floor(Math.random() * areas.length)];
+                const areaName = randomArea.querySelector('.area-label').textContent;
                 
-                // 70% chance for low, 25% chance for medium, 5% chance for high
-                const rand = Math.random();
+                // Different probabilities for different views
                 let newLevel;
+                const rand = Math.random();
                 
-                if (rand < 0.7) {
-                    newLevel = 'low';
-                } else if (rand < 0.95) {
-                    newLevel = 'medium';
-                } else {
-                    newLevel = 'high';
-                }
-                
-                // Update the appropriate indicator based on current view
                 if (currentView === 'threats') {
+                    // Threats should be rare: 85% low, 12% medium, 3% high
+                    if (rand < 0.85) {
+                        newLevel = 'low';
+                    } else if (rand < 0.97) {
+                        newLevel = 'medium';
+                    } else {
+                        newLevel = 'high';
+                    }
                     const threatIndicator = randomArea.querySelector('.threat-indicator');
                     threatIndicator.className = `threat-indicator ${newLevel}`;
+                    
+                    // Add AI highlight for medium/high threats
+                    if (newLevel !== 'low') {
+                        addAIHighlight('threat', areaName, newLevel);
+                    }
+                    
                 } else if (currentView === 'risks') {
+                    // Risk changes more frequently: 60% low, 30% medium, 10% high
+                    if (rand < 0.6) {
+                        newLevel = 'low';
+                    } else if (rand < 0.9) {
+                        newLevel = 'medium';
+                    } else {
+                        newLevel = 'high';
+                    }
                     const riskIndicator = randomArea.querySelector('.risk-indicator');
                     riskIndicator.className = `risk-indicator ${newLevel}`;
+                    
+                    // Add AI highlight for medium/high risks
+                    if (newLevel !== 'low') {
+                        addAIHighlight('risk', areaName, newLevel);
+                    }
+                    
                 } else if (currentView === 'crowd') {
-                    // For crowd density, we'll update the data attribute
+                    // Crowd density changes frequently: 50% low, 35% medium, 15% high
+                    if (rand < 0.5) {
+                        newLevel = 'low';
+                    } else if (rand < 0.85) {
+                        newLevel = 'medium';
+                    } else {
+                        newLevel = 'high';
+                    }
                     randomArea.dataset.density = newLevel;
+                    
+                    // Add AI highlight for high density
+                    if (newLevel === 'high') {
+                        addAIHighlight('crowd', areaName, newLevel);
+                    }
                 }
                 
                 // Update area colors
                 if (currentView === 'threats') updateAreaColors('threat');
                 else if (currentView === 'risks') updateAreaColors('risk');
                 else if (currentView === 'crowd') updateAreaColors('density');
+            }
+            
+            function addAIHighlight(type, location, level) {
+                const highlightsList = document.querySelector('.highlights-list');
+                const highlightItem = document.createElement('div');
+                highlightItem.className = `highlight-item ${type}`;
+                
+                const timestamp = new Date().toLocaleTimeString();
+                const timeAgo = 'Just now';
+                
+                let icon, title, details, severity;
+                
+                if (type === 'threat') {
+                    icon = 'fas fa-exclamation-triangle';
+                    title = `${level.charAt(0).toUpperCase() + level.slice(1)} Threat Detected`;
+                    details = `${location} - Security incident detected`;
+                    severity = level;
+                } else if (type === 'risk') {
+                    icon = 'fas fa-shield-alt';
+                    title = `Risk Level Changed`;
+                    details = `${location} - Risk assessment updated`;
+                    severity = level;
+                } else if (type === 'crowd') {
+                    icon = 'fas fa-users';
+                    title = `Crowd Density Spike`;
+                    details = `${location} - High concentration detected`;
+                    severity = 'medium';
+                }
+                
+                highlightItem.innerHTML = `
+                    <div class="highlight-icon">
+                        <i class="${icon}"></i>
+                    </div>
+                    <div class="highlight-content">
+                        <div class="highlight-title">${title}</div>
+                        <div class="highlight-details">${details}</div>
+                        <div class="highlight-time">${timeAgo}</div>
+                    </div>
+                    <div class="highlight-severity ${severity}">${severity.charAt(0).toUpperCase() + severity.slice(1)}</div>
+                `;
+                
+                // Add to top of list
+                highlightsList.insertBefore(highlightItem, highlightsList.firstChild);
+                
+                // Remove oldest items if more than 10
+                const items = highlightsList.querySelectorAll('.highlight-item');
+                if (items.length > 10) {
+                    items[items.length - 1].remove();
+                }
+                
+                // Auto-remove after 30 seconds
+                setTimeout(() => {
+                    if (highlightItem.parentNode) {
+                        highlightItem.remove();
+                    }
+                }, 30000);
             }
             
             // Simulate real-time updates
