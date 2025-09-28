@@ -1755,28 +1755,28 @@ h1, h2, h3 {
 
 @keyframes droneCircularPatrol1 {
     0% { 
-        transform: translate(-50%, -50%) rotate(0deg) translateX(120px) rotate(-0deg);
+        transform: translate(-50%, -50%) rotate(0deg) translateX(180px) rotate(-0deg);
     }
     100% { 
-        transform: translate(-50%, -50%) rotate(360deg) translateX(120px) rotate(-360deg);
+        transform: translate(-50%, -50%) rotate(360deg) translateX(180px) rotate(-360deg);
     }
 }
 
 @keyframes droneCircularPatrol2 {
     0% { 
-        transform: translate(-50%, -50%) rotate(120deg) translateX(120px) rotate(-120deg);
+        transform: translate(-50%, -50%) rotate(120deg) translateX(180px) rotate(-120deg);
     }
     100% { 
-        transform: translate(-50%, -50%) rotate(480deg) translateX(120px) rotate(-480deg);
+        transform: translate(-50%, -50%) rotate(480deg) translateX(180px) rotate(-480deg);
     }
 }
 
 @keyframes droneCircularPatrol3 {
     0% { 
-        transform: translate(-50%, -50%) rotate(240deg) translateX(120px) rotate(-240deg);
+        transform: translate(-50%, -50%) rotate(240deg) translateX(180px) rotate(-240deg);
     }
     100% { 
-        transform: translate(-50%, -50%) rotate(600deg) translateX(120px) rotate(-600deg);
+        transform: translate(-50%, -50%) rotate(600deg) translateX(180px) rotate(-600deg);
     }
 }
 
