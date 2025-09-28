@@ -4,13 +4,17 @@
       "source": "/info/technology",
       "destination": "/info/technology.html"
     },
-            {
-              "source": "/info/live-demo",
-              "destination": "/info/live-demo.html"
-            },
-            {
-              "source": "/info/our-fleet",
-              "destination": "/info/our-fleet.html"
-            }
+    {
+      "source": "/info/live-demo",
+      "destination": "/info/live-demo.html"
+    },
+    {
+      "source": "/info/our-fleet",
+      "destination": "/info/our-fleet.html"
+    },
+    {
+      "source": "/info/pilot-application",
+      "destination": "/info/pilot-application.html"
+    }
   ]
 }
