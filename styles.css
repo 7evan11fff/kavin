@@ -3071,22 +3071,22 @@ h1, h2, h3 {
 
 .drone-marker.drone-1 {
     position: absolute;
-    animation: dronePatrol1 8s ease-in-out infinite;
+    animation: dronePatrol1 4s ease-in-out infinite;
 }
 
 .drone-marker.drone-2 {
     position: absolute;
-    animation: dronePatrol2 10s ease-in-out infinite;
+    animation: dronePatrol2 5s ease-in-out infinite;
 }
 
 .drone-marker.drone-3 {
     position: absolute;
-    animation: dronePatrol3 12s ease-in-out infinite;
+    animation: dronePatrol3 6s ease-in-out infinite;
 }
 
 .drone-marker.drone-4 {
     position: absolute;
-    animation: dronePatrol4 14s ease-in-out infinite;
+    animation: dronePatrol4 7s ease-in-out infinite;
 }
 
 .heatmap-overlay {
