@@ -2556,6 +2556,20 @@ h1, h2, h3 {
     color: #667eea;
 }
 
+.demo-notice {
+    margin: 0 0 1rem 0;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
 .control-btn, .filter-btn {
     background: #f8f9fa;
     border: 1px solid #dee2e6;
