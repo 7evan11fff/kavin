@@ -3296,35 +3296,39 @@ h1, h2, h3 {
 }
 
 @keyframes dronePatrol1 {
-    0% { top: 10%; left: 10%; }
-    25% { top: 10%; left: 40%; }
-    50% { top: 40%; left: 40%; }
-    75% { top: 40%; left: 10%; }
-    100% { top: 10%; left: 10%; }
+    0% { top: 5%; left: 5%; }
+    20% { top: 25%; left: 35%; }
+    40% { top: 45%; left: 15%; }
+    60% { top: 15%; left: 45%; }
+    80% { top: 35%; left: 25%; }
+    100% { top: 5%; left: 5%; }
 }
 
 @keyframes dronePatrol2 {
-    0% { top: 10%; left: 60%; }
-    25% { top: 10%; left: 90%; }
-    50% { top: 40%; left: 90%; }
-    75% { top: 40%; left: 60%; }
-    100% { top: 10%; left: 60%; }
+    0% { top: 5%; left: 55%; }
+    20% { top: 35%; left: 75%; }
+    40% { top: 45%; left: 65%; }
+    60% { top: 25%; left: 85%; }
+    80% { top: 15%; left: 55%; }
+    100% { top: 5%; left: 55%; }
 }
 
 @keyframes dronePatrol3 {
-    0% { top: 60%; left: 10%; }
-    25% { top: 60%; left: 40%; }
-    50% { top: 90%; left: 40%; }
-    75% { top: 90%; left: 10%; }
-    100% { top: 60%; left: 10%; }
+    0% { top: 55%; left: 5%; }
+    20% { top: 75%; left: 25%; }
+    40% { top: 65%; left: 45%; }
+    60% { top: 85%; left: 15%; }
+    80% { top: 55%; left: 35%; }
+    100% { top: 55%; left: 5%; }
 }
 
 @keyframes dronePatrol4 {
-    0% { top: 60%; left: 60%; }
-    25% { top: 60%; left: 90%; }
-    50% { top: 90%; left: 90%; }
-    75% { top: 90%; left: 60%; }
-    100% { top: 60%; left: 60%; }
+    0% { top: 55%; left: 55%; }
+    20% { top: 75%; left: 75%; }
+    40% { top: 65%; left: 85%; }
+    60% { top: 85%; left: 65%; }
+    80% { top: 55%; left: 75%; }
+    100% { top: 55%; left: 55%; }
 }
 
 
