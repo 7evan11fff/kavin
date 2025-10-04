@@ -1204,43 +1204,6 @@ h1, h2, h3 {
     background: #000;
 }
 
-.video-controls-info {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-    margin-top: 2rem;
-}
-
-.control-feature {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.8rem 1.2rem;
-    background: #f8f9fa;
-    border-radius: 25px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    font-weight: 500;
-    color: #667eea;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-}
-
-.control-feature:hover {
-    transform: translateY(-3px);
-    background: #667eea;
-    color: white;
-    border-color: #5a6fd8;
-}
-
-.control-feature i {
-    font-size: 1.2rem;
-}
-
-.control-feature span {
-    font-size: 0.9rem;
-}
-
 /* Responsive Design for Demo Video */
 @media (max-width: 768px) {
     .demo-video-content .section-title {
@@ -1250,24 +1213,6 @@ h1, h2, h3 {
     .demo-video-content p {
         font-size: 1rem;
         margin-bottom: 2rem;
-    }
-    
-    .video-controls-info {
-        gap: 1rem;
-        margin-top: 1.5rem;
-    }
-    
-    .control-feature {
-        padding: 0.6rem 1rem;
-        font-size: 0.8rem;
-    }
-    
-    .control-feature i {
-        font-size: 1rem;
-    }
-    
-    .control-feature span {
-        font-size: 0.8rem;
     }
 }
 
