@@ -1,3 +1,4 @@
+
 /* Reset and Base Styles */
 * {
     margin: 0;
@@ -31,6 +32,23 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.nav-logo-img {
+    height: 40px;
+    width: auto;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    transition: transform 0.3s ease;
+}
+
+.nav-logo-img:hover {
+    transform: scale(1.05);
 }
 
 .nav-logo h3 {
@@ -152,7 +170,7 @@ h1, h2, h3 {
 .hero {
     height: 100vh;
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-                url('https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+                url('festival-background.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -251,6 +269,21 @@ h1, h2, h3 {
     color: white;
     max-width: 800px;
     margin: 0 auto;
+}
+
+.hero-logo-container {
+    margin-bottom: 2rem;
+}
+
+.hero-logo {
+    max-width: 300px;
+    height: auto;
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+    transition: transform 0.3s ease;
+}
+
+.hero-logo:hover {
+    transform: scale(1.05);
 }
 
 .hero-headline {
@@ -2143,12 +2176,20 @@ h1, h2, h3 {
         display: block;
     }
     
+    .hero-logo {
+        max-width: 250px;
+    }
+    
     .hero-headline {
         font-size: 2.5rem;
     }
     
     .hero-subhead {
         font-size: 1.1rem;
+    }
+    
+    .nav-logo-img {
+        height: 35px;
     }
     
     .section-title {
@@ -2200,12 +2241,20 @@ h1, h2, h3 {
         padding: 0 15px;
     }
     
+    .hero-logo {
+        max-width: 200px;
+    }
+    
     .hero-headline {
         font-size: 2rem;
     }
     
     .hero-subhead {
         font-size: 1rem;
+    }
+    
+    .nav-logo-img {
+        height: 30px;
     }
     
     .cta-button {
