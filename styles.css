@@ -169,8 +169,8 @@ h1, h2, h3 {
 /* Hero Section */
 .hero {
     height: 100vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
-                url('skyshield-logo-new.png');
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                url('festival-event.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
