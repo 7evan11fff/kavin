@@ -90,3 +90,6 @@ The website is configured for deployment on Vercel with custom routing for clean
 ## 📝 License
 
 © 2024 SkyShield LLC. All rights reserved.
+
+---
+*Last updated: $(date)*
