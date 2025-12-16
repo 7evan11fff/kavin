@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilot Application - Sky Shield</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="icon" type="image/png" href="../skyshield-logo-clean.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="../skyshield-logo-clean.png" alt="SkyShield Logo" class="nav-logo-img">
+                <a href="../index.html">Sky Shield</a>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="../index.html#how-it-works" class="nav-link">How It Works</a>
+                <a href="technology.html" class="nav-link">Technology</a>
+                <a href="live-demo.html" class="nav-link">Live Demo</a>
+                <a href="our-fleet.html" class="nav-link">Our Fleet</a>
+                <a href="../index.html#contact" class="nav-link">Request Site Walk</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pilot-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Join Our Elite Drone Pilot Team</h1>
+                <p>Be part of the future of security operations. We're looking for skilled, certified pilots to join our growing fleet operations.</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">$75k+</span>
+                        <span class="stat-label">Starting Salary</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">Full Benefits</span>
+                        <span class="stat-label">Health & Retirement</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">Flexible</span>
+                        <span class="stat-label">Schedule Options</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Form -->
+    <section class="pilot-application">
+        <div class="container">
+            <div class="application-content">
+                <div class="application-header">
+                    <h2>Pilot Application Form</h2>
+                    <p>Complete the form below to apply for a drone pilot position with Sky Shield. We'll review your application and contact qualified candidates within 5 business days.</p>
+                </div>
+
+                <form class="pilot-form" id="pilotForm">
+                    <!-- Personal Information -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-user"></i> Personal Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address *</label>
+                            <input type="text" id="address" name="address" placeholder="Street Address, City, State, ZIP" required>
+                        </div>
+                    </div>
+
+                    <!-- Aviation Experience -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-plane"></i> Aviation Experience</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="part107">FAA Part 107 Certificate Number *</label>
+                                <input type="text" id="part107" name="part107" placeholder="e.g., 123456789" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="part107Expiry">Part 107 Expiry Date *</label>
+                                <input type="date" id="part107Expiry" name="part107Expiry" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="flightHours">Total Flight Hours *</label>
+                                <input type="number" id="flightHours" name="flightHours" min="0" placeholder="e.g., 150" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="commercialHours">Commercial Flight Hours</label>
+                                <input type="number" id="commercialHours" name="commercialHours" min="0" placeholder="e.g., 50">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="droneTypes">Drone Types Flown</label>
+                            <input type="text" id="droneTypes" name="droneTypes" placeholder="e.g., DJI Phantom, Mavic, Autel, Custom builds">
+                        </div>
+                    </div>
+
+                    <!-- Work Experience -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-briefcase"></i> Work Experience</h3>
+                        <div class="form-group">
+                            <label for="currentJob">Current Position</label>
+                            <input type="text" id="currentJob" name="currentJob" placeholder="Job title and company">
+                        </div>
+                        <div class="form-group">
+                            <label for="relevantExperience">Relevant Drone/AV Experience</label>
+                            <textarea id="relevantExperience" name="relevantExperience" rows="4" placeholder="Describe your relevant experience with drones, aviation, or security operations"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="availability">Availability</label>
+                            <select id="availability" name="availability">
+                                <option value="">Select availability</option>
+                                <option value="full-time">Full-time</option>
+                                <option value="part-time">Part-time</option>
+                                <option value="contract">Contract/Per-event</option>
+                                <option value="weekends">Weekends only</option>
+                                <option value="flexible">Flexible schedule</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Skills & Certifications -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-certificate"></i> Skills & Certifications</h3>
+                        <div class="checkbox-group">
+                            <h4>Additional Certifications (check all that apply):</h4>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="certifications" value="part61">
+                                <span class="checkmark"></span>
+                                FAA Part 61 (Private/Commercial Pilot)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="certifications" value="part135">
+                                <span class="checkmark"></span>
+                                FAA Part 135 (Commercial Operations)
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="certifications" value="sUAS">
+                                <span class="checkmark"></span>
+                                sUAS Rating
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="certifications" value="firstAid">
+                                <span class="checkmark"></span>
+                                First Aid/CPR Certified
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="certifications" value="security">
+                                <span class="checkmark"></span>
+                                Security/Law Enforcement Background
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="additionalSkills">Additional Skills</label>
+                            <textarea id="additionalSkills" name="additionalSkills" rows="3" placeholder="Any other relevant skills (photography, video editing, technical troubleshooting, etc.)"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- References -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-users"></i> References</h3>
+                        <div class="form-group">
+                            <label for="reference1">Reference 1 (Name, Title, Company, Phone)</label>
+                            <input type="text" id="reference1" name="reference1" placeholder="John Smith, Operations Manager, ABC Security, (555) 123-4567">
+                        </div>
+                        <div class="form-group">
+                            <label for="reference2">Reference 2 (Name, Title, Company, Phone)</label>
+                            <input type="text" id="reference2" name="reference2" placeholder="Jane Doe, Flight Instructor, XYZ Aviation, (555) 987-6543">
+                        </div>
+                    </div>
+
+                    <!-- Additional Information -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-comment"></i> Additional Information</h3>
+                        <div class="form-group">
+                            <label for="whySkyShield">Why do you want to work for Sky Shield? *</label>
+                            <textarea id="whySkyShield" name="whySkyShield" rows="4" required placeholder="Tell us what interests you about our company and this position"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="salaryExpectation">Salary Expectation (Annual)</label>
+                            <input type="text" id="salaryExpectation" name="salaryExpectation" placeholder="e.g., $70,000 - $85,000">
+                        </div>
+                        <div class="form-group">
+                            <label for="startDate">Earliest Start Date</label>
+                            <input type="date" id="startDate" name="startDate">
+                        </div>
+                    </div>
+
+                    <!-- Resume Upload -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-file-upload"></i> Resume & Documents</h3>
+                        <div class="form-group">
+                            <label for="resume">Resume/CV (PDF preferred) *</label>
+                            <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="part107Copy">Part 107 Certificate Copy (PDF/Image)</label>
+                            <input type="file" id="part107Copy" name="part107Copy" accept=".pdf,.jpg,.jpeg,.png">
+                        </div>
+                    </div>
+
+                    <!-- Terms & Submit -->
+                    <div class="form-section">
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="terms" value="agree" required>
+                                <span class="checkmark"></span>
+                                I agree to the terms and conditions and consent to background checks as part of the application process. *
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="newsletter" value="subscribe">
+                                <span class="checkmark"></span>
+                                Subscribe to Sky Shield updates and job opportunities
+                            </label>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            Submit Application
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="pilot-benefits">
+        <div class="container">
+            <h2>Why Join Sky Shield?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3>Competitive Compensation</h3>
+                    <p>$75,000+ starting salary with performance bonuses and overtime opportunities</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Full Benefits Package</h3>
+                    <p>Health, dental, vision insurance, 401(k) matching, and paid time off</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Professional Development</h3>
+                    <p>Ongoing training, certification support, and career advancement opportunities</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Flexible Scheduling</h3>
+                    <p>Work-life balance with flexible hours and remote monitoring options</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Cutting-Edge Technology</h3>
+                    <p>Work with the latest drone technology and AI-powered security systems</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Team Environment</h3>
+                    <p>Collaborative culture with experienced pilots and security professionals</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>Sky Shield LLC • Austin, TX • Not for emergency response. Operations comply with FAA Part 107.</p>
+            <p style="margin-top: 0.5rem;"><a href="#" style="color: rgba(255,255,255,0.7);">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script>
+        // Pilot Application Form Handling
+        document.getElementById('pilotForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            
+            // Create email content
+            const emailSubject = 'Pilot Application - ' + data.firstName + ' ' + data.lastName;
+            const emailBody = `
+New Pilot Application Received:
+
+PERSONAL INFORMATION:
+Name: ${data.firstName} ${data.lastName}
+Email: ${data.email}
+Phone: ${data.phone}
+Address: ${data.address}
+
+AVIATION EXPERIENCE:
+Part 107 Certificate: ${data.part107}
+Part 107 Expiry: ${data.part107Expiry}
+Flight Hours: ${data.flightHours}
+Commercial Hours: ${data.commercialHours}
+Drone Types: ${data.droneTypes}
+
+WORK EXPERIENCE:
+Current Position: ${data.currentJob}
+Relevant Experience: ${data.relevantExperience}
+Availability: ${data.availability}
+
+ADDITIONAL INFORMATION:
+Why Sky Shield: ${data.whySkyShield}
+Salary Expectation: ${data.salaryExpectation}
+Start Date: ${data.startDate}
+
+REFERENCES:
+Reference 1: ${data.reference1}
+Reference 2: ${data.reference2}
+
+Please review this application and contact the candidate at ${data.email} or ${data.phone}.
+            `;
+            
+            // Create mailto link
+            const mailtoLink = `mailto:kavin.lingham@alpha.school?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Show success message
+            alert('Thank you for your application! Your email client should open with a pre-filled message. Please send the email to complete your application.');
+        });
+    </script>
+</body>
+</html>

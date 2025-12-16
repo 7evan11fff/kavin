@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Shield - Security Drone Services for Events</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="icon" type="image/png" href="skyshield-logo-clean.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="skyshield-logo-clean.png" alt="SkyShield Logo" class="nav-logo-img">
+                <h3>Sky Shield</h3>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#safety-receipt" class="nav-link">Safety Receipt</a>
+                <a href="info/technology.html" class="nav-link">Technology</a>
+                <a href="info/live-demo.html" class="nav-link">Live Demo</a>
+                <a href="info/our-fleet.html" class="nav-link">Our Fleet</a>
+                <a href="#contact" class="nav-link">Request Site Walk</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-logo-container">
+                    <img src="skyshield-logo-clean.png" alt="SkyShield Logo" class="hero-logo">
+                </div>
+                <h1 class="hero-headline">Perimeter-first drone security for outdoor events</h1>
+                <p class="hero-subhead">We watch parking, rooftops, arrivals, and outer perimeter—then direct your security team in real time.</p>
+                <div class="hero-metrics">
+                    <span class="hero-metric"><strong>&lt;30s</strong> eyes-on = time to verify an alert</span>
+                    <span class="hero-metric"><strong>≤120s</strong> = time to notify and direct on-site security</span>
+                </div>
+                <button class="cta-button primary" onclick="openBooking()">Schedule Free Site Walk</button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Problem Section -->
+    <section class="problem">
+        <div class="container">
+            <div class="problem-content">
+                <div class="problem-text">
+                    <h2>Possible threats start outside the gates—arrivals, rooftops, parking.</h2>
+                </div>
+                <div class="problem-image">
+                    <div class="image-overlay"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- KPIs Section -->
+    <section class="kpis">
+        <div class="container">
+            <h2 class="section-title">Performance Metrics</h2>
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-number">&lt;30s</div>
+                    <div class="kpi-label">Eyes-on target</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-number">≤120s</div>
+                    <div class="kpi-label">Handoff to security lead</div>
+                    <div class="kpi-detail">We detect, verify, and direct your on-site security to the exact location.</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-number">≥90%</div>
+                    <div class="kpi-label">Clean handoffs</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison">
+        <div class="container">
+            <h2 class="section-title">Why choose mobile drones over tethered systems?</h2>
+            <div class="comparison-table">
+                <div class="comparison-header">
+                    <div class="feature-column">Feature</div>
+                    <div class="our-service">SkyShield</div>
+                    <div class="competitor">Tethered Systems (Elistair)</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="feature-column">Setup time</div>
+                    <div class="our-service"><i class="fas fa-check"></i> 30 minutes</div>
+                    <div class="competitor"><i class="fas fa-times"></i> 4-6 hours</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="feature-column">Mobility</div>
+                    <div class="our-service"><i class="fas fa-check"></i> Full perimeter coverage</div>
+                    <div class="competitor"><i class="fas fa-times"></i> Fixed position only</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="feature-column">Response time</div>
+                    <div class="our-service"><i class="fas fa-check"></i> &lt;30s to any location</div>
+                    <div class="competitor"><i class="fas fa-times"></i> Limited to tether range</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="feature-column">Weather resistance</div>
+                    <div class="our-service"><i class="fas fa-check"></i> Advanced weather monitoring</div>
+                    <div class="competitor"><i class="fas fa-times"></i> Grounded in high winds</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="feature-column">Cost efficiency</div>
+                    <div class="our-service"><i class="fas fa-check"></i> No infrastructure needed</div>
+                    <div class="competitor"><i class="fas fa-times"></i> Requires permanent installation</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="feature-column">AI & Autonomy</div>
+                    <div class="our-service"><i class="fas fa-check"></i> Full autonomous fleet management</div>
+                    <div class="competitor"><i class="fas fa-times"></i> Manual operation required</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="feature-column">Coverage continuity</div>
+                    <div class="our-service"><i class="fas fa-check"></i> Seamless battery rotation</div>
+                    <div class="competitor"><i class="fas fa-times"></i> Downtime during battery changes</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>1. Pre-Event Perimeter Plan</h3>
+                    <p>We survey your venue and create custom drone routes, launch points, and a communications plan tailored to your security team's workflow.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-satellite-dish"></i>
+                    </div>
+                    <h3>2. Live Overwatch + Alerts</h3>
+                    <p>During your event, our operators monitor drone feeds in real time. When we spot something, we verify and immediately hand off to your on-site security lead with exact location.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>3. Next-Day Safety Receipt</h3>
+                    <p>Within 24 hours, you receive a complete timeline, coverage maps, incident log, and recommendations—proof of protection for stakeholders and insurers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safety Receipt Preview Section -->
+    <section class="safety-receipt-preview" id="safety-receipt">
+        <div class="container">
+            <h2 class="section-title">Your Safety Receipt</h2>
+            <p class="section-subtitle">After every event, you get a professional deliverable that proves protection and informs future planning.</p>
+            <div class="receipt-preview-grid">
+                <div class="receipt-card">
+                    <div class="receipt-mockup">
+                        <div class="receipt-header-mock">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>SkyShield Safety Receipt</span>
+                        </div>
+                        <div class="receipt-content-mock">
+                            <div class="receipt-line"></div>
+                            <div class="receipt-line short"></div>
+                            <div class="receipt-map-mock">
+                                <i class="fas fa-route"></i>
+                            </div>
+                            <div class="receipt-line"></div>
+                            <div class="receipt-line short"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="receipt-features">
+                    <div class="receipt-feature">
+                        <i class="fas fa-map"></i>
+                        <div>
+                            <h4>Coverage Map + Patrol Paths</h4>
+                            <p>Visual proof of every area monitored, with timestamps and flight paths.</p>
+                        </div>
+                    </div>
+                    <div class="receipt-feature">
+                        <i class="fas fa-clipboard-list"></i>
+                        <div>
+                            <h4>Incident Log with Timestamps</h4>
+                            <p>Every alert, verification, and handoff documented with exact times.</p>
+                        </div>
+                    </div>
+                    <div class="receipt-feature">
+                        <i class="fas fa-lightbulb"></i>
+                        <div>
+                            <h4>Recommendations + Proof Package</h4>
+                            <p>Actionable insights for future events, plus documentation for insurers and stakeholders.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing">
+        <div class="container">
+            <h2 class="section-title">Pricing Packages</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Essential</h3>
+                    <div class="price">$6,000</div>
+                    <div class="price-note">per event</div>
+                    <p class="package-desc">Perfect for smaller events and venues</p>
+                    <ul class="pricing-features">
+                        <li>2-3 drones in rotation</li>
+                        <li>8-hour coverage</li>
+                        <li>Basic AI monitoring</li>
+                        <li>Safety Receipt</li>
+                        <li>1 security supervisor</li>
+                    </ul>
+                    <button class="cta-button secondary" onclick="requestQuote()">Get Quote</button>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="popular-badge">Most Popular</div>
+                    <h3>Professional</h3>
+                    <div class="price">$9,000</div>
+                    <div class="price-note">per event</div>
+                    <p class="package-desc">Comprehensive coverage for major events</p>
+                    <ul class="pricing-features">
+                        <li>4-6 drones in rotation</li>
+                        <li>12-hour coverage</li>
+                        <li>Advanced AI + thermal</li>
+                        <li>Real-time alerts</li>
+                        <li>2 security supervisors</li>
+                        <li>Mobile command center</li>
+                    </ul>
+                    <button class="cta-button primary" onclick="requestQuote()">Get Quote</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="price">$15,000</div>
+                    <div class="price-note">per event</div>
+                    <p class="package-desc">Full-scale protection for high-profile events</p>
+                    <ul class="pricing-features">
+                        <li>8+ drones in rotation</li>
+                        <li>24/7 coverage</li>
+                        <li>Full AI fleet management</li>
+                        <li>Custom integration</li>
+                        <li>Dedicated team</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <div class="extra-drone-note">
+                        <small>$250 per extra drone</small>
+                    </div>
+                    <button class="cta-button secondary" onclick="requestQuote()">Get Quote</button>
+                </div>
+            </div>
+            <div class="pricing-note">
+                <p><strong>All packages include:</strong> FAA Part 107 certified pilots, insurance coverage, setup/teardown, and next-day Safety Receipt. Custom packages available for multi-day events.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team">
+        <div class="container">
+            <h2 class="section-title">Leadership Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-photo">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Kavin Lingham</h3>
+                    <p class="member-title">Founder & Chief Pilot</p>
+                    <div class="member-credentials">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Credibility Section -->
+    <section class="credibility">
+        <div class="container">
+            <h2 class="section-title">Certified & Insured</h2>
+            <div class="credibility-list">
+                <div class="credibility-item">
+                    <i class="fas fa-certificate"></i>
+                    <span>FAA Part 107 Certified Pilots</span>
+                </div>
+                <div class="credibility-item">
+                    <i class="fas fa-eye"></i>
+                    <span>Visual Observers on-site</span>
+                </div>
+                <div class="credibility-item">
+                    <i class="fas fa-satellite"></i>
+                    <span>Remote ID Compliant</span>
+                </div>
+                <div class="credibility-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Fully Insured Operations</span>
+                </div>
+                <div class="credibility-item">
+                    <i class="fas fa-lock"></i>
+                    <span>End-to-End Encryption</span>
+                </div>
+                <div class="credibility-item">
+                    <i class="fas fa-backup"></i>
+                    <span>Redundant Communication Links</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Get Started</h2>
+            <form class="contact-form" id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="eventDate">Event Date *</label>
+                        <input type="date" id="eventDate" name="eventDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="guestCount">Guest Count</label>
+                        <input type="number" id="guestCount" name="guestCount" placeholder="e.g., 500">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="venueCity">Venue City *</label>
+                        <input type="text" id="venueCity" name="venueCity" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="securityLead">Security Lead</label>
+                        <input type="text" id="securityLead" name="securityLead" placeholder="Contact person">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="notes">Additional Notes</label>
+                    <textarea id="notes" name="notes" rows="4" placeholder="Tell us about your event security needs..."></textarea>
+                </div>
+                <button type="submit" class="cta-button primary">Get Your Custom Quote</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>Sky Shield LLC • Austin, TX • Not for emergency response. Operations comply with FAA Part 107.</p>
+                <div class="footer-links">
+                    <a href="info/pilot-application.html">Join Our Team</a>
+                    <a href="info/dashboard.html">Live Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

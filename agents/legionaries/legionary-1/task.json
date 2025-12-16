@@ -1,0 +1,56 @@
+{
+  "task_id": "task-001",
+  "high_level_goal": "Update homepage with compliance-safe copy, better UX, and client-first navigation",
+  "type": "feature",
+  "priority": "high",
+  "inputs": {
+    "description": "Multiple homepage improvements to make it more credible and client-focused. Complete ALL subtasks below.",
+    "subtasks": [
+      {
+        "id": "1a",
+        "title": "Fix naming inconsistency",
+        "details": "In the comparison table, change 'Scutum Caeli' to 'SkyShield' or 'Sky Shield' (match the rest of the site)"
+      },
+      {
+        "id": "1b", 
+        "title": "Clarify Intercept time KPI",
+        "details": "Change '≤120s intercept' to '≤120s handoff to security lead'. Add explanatory text: 'We detect, verify, and direct your on-site security to the exact location.'"
+      },
+      {
+        "id": "1c",
+        "title": "Update hero text",
+        "details": "Replace hero headline with: 'Perimeter-first drone security for outdoor events'. Update subhead to: 'We watch parking, rooftops, arrivals, and outer perimeter—then direct your security team in real time.' Keep the metrics but tie to outcomes: '<30s eyes-on = time to verify an alert' and '≤120s = time to notify and direct on-site security'"
+      },
+      {
+        "id": "1d",
+        "title": "Add 'How It Works' section",
+        "details": "Add a 3-step block ABOVE the pricing section with: 1) Pre-event perimeter plan (routes + launch points + comms plan), 2) Live overwatch + alerts (operator-to-security handoff), 3) Next-day Safety Receipt (timeline + maps + recommendations). Style it cleanly to match the site."
+      },
+      {
+        "id": "1e",
+        "title": "Add Safety Receipt preview",
+        "details": "Add a visual section showing what the Safety Receipt looks like. Include 3 bullets: Coverage map + patrol paths, Incident log with timestamps, Recommendations + proof package. Create a placeholder/mockup card that looks like a sample report preview."
+      },
+      {
+        "id": "1f",
+        "title": "Update navigation (client-first)",
+        "details": "Reorganize the nav to be client-focused. Remove 'Join Our Team' from top nav (move to footer). Add/reorganize to include: 'How It Works', 'Safety Receipt' (can anchor to section), 'FAQ', 'Request Site Walk'. Keep essential links like Technology, Live Demo, Our Fleet."
+      }
+    ],
+    "files": ["index.html", "styles.css"]
+  },
+  "context_instructions": {
+    "load_files": ["index.html", "styles.css", "agents/shared/rules.md"]
+  },
+  "expected_outputs": {
+    "deliverables": [
+      "Updated index.html with all 6 subtasks completed",
+      "Any necessary CSS additions in styles.css",
+      "Navigation should be consistent and client-focused"
+    ]
+  },
+  "notes_from_legate": "This is a credibility overhaul for sophisticated buyers. The goal is to make the homepage instantly understandable and trustworthy. Keep the existing visual style but improve the copy and add the new sections. The Safety Receipt preview is key - it's the fastest way to help executives 'get it'.",
+  "assigned_at": "2025-12-16T20:35:00Z",
+  "status": "assigned"
+}
+

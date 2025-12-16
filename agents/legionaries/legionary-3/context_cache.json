@@ -1,0 +1,14 @@
+{
+  "last_updated": "2025-12-16T20:37:00Z",
+  "loaded_directories": ["info/"],
+  "loaded_files": [
+    "index.html",
+    "styles.css",
+    "info/technology.html",
+    "info/live-demo.html",
+    "info/dashboard.html",
+    "info/our-fleet.html",
+    "info/pilot-application.html",
+    "agents/shared/rules.md"
+  ]
+}

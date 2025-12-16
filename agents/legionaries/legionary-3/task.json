@@ -1,0 +1,72 @@
+{
+  "task_id": "task-002",
+  "high_level_goal": "Fix compliance issues on sub-pages and create new audience-specific pages",
+  "type": "feature",
+  "priority": "high",
+  "inputs": {
+    "description": "Update info/ pages to remove compliance risks and privacy concerns, then create new dedicated pages for different audiences. Complete ALL subtasks below.",
+    "subtasks": [
+      {
+        "id": "2a",
+        "title": "Replace BVLOS claims with compliance-safe language",
+        "details": "In technology.html and live-demo.html, find and replace any 'autonomous/BVLOS' claims. Change 'Operating Range: 5 miles BVLOS' and 'BVLOS operations' to: 'Perimeter-first operations designed for Part 107 compliance (site-specific airspace approvals)' and 'Software-assisted patrol patterns and rapid handoffs'. Can add: 'BVLOS capability on roadmap, subject to FAA approvals' if keeping the vision."
+      },
+      {
+        "id": "2b",
+        "title": "Remove or qualify hard numbers on Live Demo",
+        "details": "On live-demo.html, remove or qualify numbers like 'Object Detection: 99.2% accuracy rate' and 'Person detection up to 2km'. Either remove them or add qualifiers like 'lab-tested under controlled conditions'. Sophisticated buyers will discount the whole site if numbers feel made up."
+      },
+      {
+        "id": "2c",
+        "title": "Fix privacy concerns on Live Dashboard",
+        "details": "On dashboard.html, change alarming phrases like '2,847 People Monitored' to: 'Perimeter activity events detected', 'Alerts generated', 'Zones covered'. Add a visible link: 'Privacy & Data Policy' (can link to # placeholder for now)."
+      },
+      {
+        "id": "2d",
+        "title": "Update navigation on all info/ pages",
+        "details": "Make navigation consistent with homepage changes. Remove 'Join Our Team' from top nav (move to footer). Ensure nav includes: Home, How It Works (link to homepage section), Technology, Live Demo, Our Fleet, Request Site Walk."
+      },
+      {
+        "id": "2e",
+        "title": "Create Event Hosts page",
+        "details": "Create info/event-hosts.html - Content: What you get, how the day runs, what we need from venue/security. Write clear, professional copy for event planners and venue managers."
+      },
+      {
+        "id": "2f",
+        "title": "Create Executives/Public Figures page",
+        "details": "Create info/executives.html - Content: Privacy-by-default approach, data handling, who can access footage, retention policy, opt-out blur options. Address security concerns for high-profile individuals."
+      },
+      {
+        "id": "2g",
+        "title": "Create Security Leads page",
+        "details": "Create info/security-leads.html - Content: SOP overview, comms plan, handoff protocol, constraints (no over-crowd flights), incident taxonomy. Technical content for professional security teams."
+      }
+    ],
+    "files": [
+      "info/technology.html",
+      "info/live-demo.html", 
+      "info/dashboard.html",
+      "info/our-fleet.html",
+      "info/pilot-application.html"
+    ]
+  },
+  "context_instructions": {
+    "load_directories": ["info/"],
+    "load_files": ["index.html", "styles.css", "agents/shared/rules.md"]
+  },
+  "expected_outputs": {
+    "deliverables": [
+      "Updated technology.html with compliance-safe language",
+      "Updated live-demo.html with qualified numbers",
+      "Updated dashboard.html with privacy-friendly metrics",
+      "All info/ pages with consistent navigation",
+      "New page: info/event-hosts.html",
+      "New page: info/executives.html", 
+      "New page: info/security-leads.html"
+    ]
+  },
+  "notes_from_legate": "Focus on credibility and reducing legal/compliance risk. The BVLOS claims are a 'credibility landmine' for sophisticated buyers. The privacy language on the dashboard could trigger concerns for public figures. The new pages should address specific audience concerns directly. Match the existing site style and structure.",
+  "assigned_at": "2025-12-16T20:35:00Z",
+  "status": "assigned"
+}
+
