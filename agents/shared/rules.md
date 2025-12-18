@@ -3,6 +3,8 @@
 ## Project Overview
 SkyShield is a static website for mobile drone security services. The site consists of HTML pages, CSS styling, and vanilla JavaScript.
 
+**Live Site:** https://skyshield.us
+
 ## AUTHORITATIVE PRICING (use everywhere)
 - **$7,500 base** per team
 - **2-3 drones on rotation** per team
