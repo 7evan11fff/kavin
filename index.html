@@ -28,6 +28,7 @@
                 <a href="info/live-demo.html" class="nav-link">Live Demo</a>
                 <a href="info/our-fleet.html" class="nav-link">Our Fleet</a>
                 <a href="#contact" class="nav-link">Request Site Walk</a>
+                <a href="#contact" class="nav-link nav-cta">Get Quote</a>
             </div>
             <div class="hamburger" id="hamburger">
                 <span class="bar"></span>
@@ -45,8 +46,8 @@
                 <div class="hero-logo-container">
                     <img src="skyshield-logo-clean.png" alt="SkyShield Logo" class="hero-logo">
                 </div>
-                <h1 class="hero-headline">Perimeter-first drone security for outdoor events</h1>
-                <p class="hero-subhead">We watch parking, rooftops, arrivals, and outer perimeter—then direct your security team in real time.</p>
+                <h1 class="hero-headline">Perimeter-first drone overwatch for outdoor events</h1>
+                <p class="hero-subhead">We watch parking, rooftops, arrivals, and the outer perimeter—then direct your on-site security in real time.</p>
                 <div class="hero-metrics">
                     <span class="hero-metric"><strong>&lt;30s</strong> eyes-on = time to verify an alert</span>
                     <span class="hero-metric"><strong>≤120s</strong> = time to notify and direct on-site security</span>
@@ -130,8 +131,8 @@
                     <div class="competitor"><i class="fas fa-times"></i> Requires permanent installation</div>
                 </div>
                 <div class="comparison-row">
-                    <div class="feature-column">AI & Autonomy</div>
-                    <div class="our-service"><i class="fas fa-check"></i> Full autonomous fleet management</div>
+                    <div class="feature-column">Manual Operations + AI Efficiency</div>
+                    <div class="our-service"><i class="fas fa-check"></i> Operator-led + AI-assisted alerting (human-in-the-loop)</div>
                     <div class="competitor"><i class="fas fa-times"></i> Manual operation required</div>
                 </div>
                 <div class="comparison-row">
@@ -274,53 +275,49 @@
     </section>
 
     <!-- Pricing Section -->
-    <section class="pricing-simple">
+    <section class="pricing-standard" id="pricing-section">
         <div class="container">
-            <h2 class="section-title">Simple, Transparent Pricing</h2>
-            <div class="pricing-layout">
-                <div class="pricing-main">
-                    <div class="price-display">
-                        <div class="price-amount">$750</div>
-                        <div class="price-unit">per hour, per truck</div>
+            <h2 class="section-title">Pricing</h2>
+            <div class="standard-package">
+                <div class="package-header">
+                    <h3>Standard Event Package</h3>
+                    <div class="package-price">
+                        <span class="price-amount">$7,500</span>
                     </div>
-                    <div class="truck-includes">
-                        <h4>Each truck includes:</h4>
-                        <div class="truck-team">
-                            <div class="team-item">
-                                <i class="fas fa-user-pilot"></i>
-                                <span><strong>3</strong> FAA-certified pilots</span>
+                    <div class="package-summary">2–3 drones on rotation • 8-hour coverage • next-day Safety Receipt</div>
+                </div>
+                <div class="package-details">
+                    <div class="included-section">
+                        <h4>What's Included</h4>
+                        <ul class="included-list">
+                            <li><i class="fas fa-check"></i> Pre-event perimeter plan + comms plan</li>
+                            <li><i class="fas fa-check"></i> Live overwatch + real-time alert verification</li>
+                            <li><i class="fas fa-check"></i> Direct handoff to security lead with exact location</li>
+                            <li><i class="fas fa-check"></i> Setup + teardown</li>
+                            <li><i class="fas fa-check"></i> Next-day Safety Receipt</li>
+                            <li><i class="fas fa-check"></i> FAA Part 107 pilots + insured operations + Remote ID compliant</li>
+                        </ul>
+                    </div>
+                    <div class="addons-section">
+                        <h4>Add-Ons</h4>
+                        <div class="addon-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>Additional hours:</strong> +$750/hour (after 8 hours)
                             </div>
-                            <div class="team-item">
-                                <i class="fas fa-user-tie"></i>
-                                <span><strong>1</strong> operations manager</span>
+                        </div>
+                        <div class="addon-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <div>
+                                <strong>Multi-day events:</strong> Custom quote (hours + teams)
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="pricing-examples">
-                    <h4>Example Scenarios</h4>
-                    <div class="example-cards">
-                        <div class="example-card">
-                            <div class="example-label">Small Event</div>
-                            <div class="example-calc">1 truck × 4 hours</div>
-                            <div class="example-total">$3,000</div>
-                        </div>
-                        <div class="example-card featured">
-                            <div class="example-label">Medium Event</div>
-                            <div class="example-calc">1 truck × 8 hours</div>
-                            <div class="example-total">$6,000</div>
-                        </div>
-                        <div class="example-card">
-                            <div class="example-label">Large Event</div>
-                            <div class="example-calc">2 trucks × 8 hours</div>
-                            <div class="example-total">$12,000</div>
-                        </div>
-                    </div>
+                <div class="package-cta">
+                    <button class="cta-button primary" onclick="openBooking()">Schedule Free Site Walk</button>
+                    <button class="cta-button secondary" onclick="requestQuote()">Request Quote</button>
                 </div>
-            </div>
-            <div class="pricing-cta">
-                <p>Need help estimating? We'll walk your venue for free and recommend the right coverage.</p>
-                <button class="cta-button primary" onclick="openBooking()">Schedule Free Site Walk</button>
             </div>
         </div>
     </section>
@@ -355,7 +352,7 @@
                 </div>
                 <div class="credibility-item">
                     <i class="fas fa-eye"></i>
-                    <span>Visual Observers on-site</span>
+                    <span>Visual observers as needed (mission-dependent)</span>
                 </div>
                 <div class="credibility-item">
                     <i class="fas fa-satellite"></i>

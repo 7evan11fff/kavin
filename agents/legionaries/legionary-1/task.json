@@ -1,78 +1,79 @@
 {
-  "task_id": "task-004",
-  "high_level_goal": "Homepage rewrite + Global search/replace for pricing and compliance language",
-  "type": "feature",
-  "priority": "critical",
+  "task_id": "task-007",
+  "high_level_goal": "Rework entire website color scheme with new primary and background colors",
+  "type": "refactor",
+  "priority": "high",
   "inputs": {
-    "description": "Complete homepage overhaul with new pricing model ($7,500 base) and global compliance fixes. This is the authoritative pricing and language update.",
+    "description": "Update the entire site color scheme. Replace the current purple gradient theme with a clean navy + white scheme.",
     
-    "NON_NEGOTIABLE_RULES": {
-      "pricing": "$7,500 base, 2-3 drones on rotation, 8 hours, scaling by teams + hours",
-      "extra_hours": "+$750/hour after 8 hours (was $600 in earlier task - USE $750)",
-      "language": "Replace ALL autonomy/AI language with 'manual operations + AI efficiency', 'operator-led, human-in-the-loop', 'AI-assisted alerting/triage/verification/reporting'",
-      "compliance": "NO BVLOS claims. Remove or label as 'not offered / future'",
-      "safety_wording": "Keep '<30s eyes-on' and '≤120s handoff' but NEVER say 'intercept' - say 'handoff to security lead'",
-      "terminology": "Use 'SkyShield' everywhere, remove 'Scutum Caeli'"
+    "NEW_COLOR_SCHEME": {
+      "primary": "#1A2744",
+      "primary_description": "Dark navy blue - use for headers, buttons, accents, nav",
+      "background": "#FFFFFF",
+      "background_description": "White - use for page backgrounds, cards, negative space"
     },
 
     "subtasks": [
       {
-        "id": "4a",
-        "title": "Global search/replace - Pricing",
-        "details": "Remove ALL old pricing: 'Pricing Packages', 'Essential', 'Professional', 'Enterprise', '$6,000', '$9,000', '$15,000', '$250 per extra drone', 'Starting at ~$5,000/event'. Also remove the $750/truck model from previous task."
+        "id": "7a",
+        "title": "Update CSS variables / base colors",
+        "details": "Find all instances of the old purple gradient (#667eea, #764ba2) and replace with the new primary #1A2744. Create CSS custom properties at the top of styles.css for easy theming: --primary: #1A2744; --background: #FFFFFF;"
       },
       {
-        "id": "4b",
-        "title": "Global search/replace - Autonomy language",
-        "details": "Replace: 'AI & Autonomy' → 'Manual Operations + AI Efficiency', 'Full autonomous fleet management' → 'Manual operations + AI-assisted alerting (human-in-the-loop)', 'autonomous' → 'operator-led'. Remove 'Autonomous Fleet Patrols'."
+        "id": "7b",
+        "title": "Update buttons",
+        "details": "Replace gradient buttons with solid #1A2744 background. Hover state can be slightly lighter or use opacity. Secondary buttons: white background with #1A2744 border and text."
       },
       {
-        "id": "4c",
-        "title": "Global search/replace - Misc",
-        "details": "'Visual Observers on-site' → 'Visual observers as needed (mission-dependent)', 'Scutum Caeli' → 'SkyShield'"
+        "id": "7c",
+        "title": "Update navbar",
+        "details": "Keep white/light navbar background. Update active link color and underline to #1A2744. Logo text color to #1A2744."
       },
       {
-        "id": "4d",
-        "title": "Hero section update",
-        "details": "H1: 'Perimeter-first drone overwatch for outdoor events'. Subhead: 'We watch parking, rooftops, arrivals, and the outer perimeter—then direct your on-site security in real time.' Keep metrics with updated language."
+        "id": "7d",
+        "title": "Update hero section",
+        "details": "Keep the background image overlay but adjust overlay color if needed. Ensure CTA button uses new primary. Metric highlights can use a gold/amber accent (#D4A84B or similar) for contrast against navy."
       },
       {
-        "id": "4e",
-        "title": "Comparison table fix",
-        "details": "Find 'AI & Autonomy' row. Change SkyShield column to: 'Manual operations + AI-assisted alerting (human-in-the-loop)'. Tethered column: 'Manual operation required'. Remove any 'Scutum Caeli' label."
+        "id": "7e",
+        "title": "Update section backgrounds",
+        "details": "Alternate between #FFFFFF and a very light gray (#F8F9FA or #F5F6F8) for section contrast. KPIs/pricing sections that were purple gradient should now use #1A2744 solid or a subtle navy gradient."
       },
       {
-        "id": "4f",
-        "title": "NEW Pricing section - Standard Event Package",
-        "details": "Replace entire pricing section with: Header 'Pricing', Primary card: 'Standard Event Package' - '$7,500' - '2–3 drones on rotation • 8-hour coverage • next-day Safety Receipt'. Included bullets: Pre-event perimeter plan + comms plan, Live overwatch + real-time alert verification, Direct handoff to security lead with exact location, Setup + teardown, Next-day Safety Receipt, FAA Part 107 pilots + insured operations + Remote ID compliant. Add-ons: 'Add hours: +$750/hour (after 8 hours)', 'Multi-day events: quoted (hours + teams)'. CTAs: 'Schedule Free Site Walk', 'Request Quote'"
+        "id": "7f",
+        "title": "Update icons and accents",
+        "details": "Tech icons, step icons, feature icons should use #1A2744 instead of purple/green gradients. Can keep gold (#D4A84B) as accent color for highlights."
       },
       {
-        "id": "4g",
-        "title": "Credibility section fix",
-        "details": "Change 'Visual Observers on-site' to 'Visual observers as needed (mission-dependent)'"
+        "id": "7g",
+        "title": "Update footer",
+        "details": "Footer background to #1A2744 (dark navy). Text white/light for contrast."
       },
       {
-        "id": "4h",
-        "title": "Add Get Quote nav item",
-        "details": "Add 'Get Quote' link to navigation pointing to '/quote' (or 'info/quote.html'). Make it visually distinct (button style or highlighted)."
+        "id": "7h",
+        "title": "Update info/ pages",
+        "details": "Apply same color scheme to all info/*.html pages. Hero sections on sub-pages should use #1A2744 instead of varied gradients."
+      },
+      {
+        "id": "7i",
+        "title": "Ensure readability",
+        "details": "Check all text contrast ratios. Dark text on white backgrounds, white text on navy backgrounds. Links should be clearly visible."
       }
     ],
-    "files": ["index.html", "styles.css", "script.js"]
+    "files": ["styles.css", "index.html", "info/technology.html", "info/live-demo.html", "info/our-fleet.html", "info/dashboard.html", "info/pilot-application.html", "info/event-hosts.html", "info/executives.html", "info/security-leads.html"]
   },
   "context_instructions": {
-    "load_files": ["index.html", "styles.css", "script.js", "agents/shared/rules.md"]
+    "load_files": ["styles.css", "index.html", "agents/shared/rules.md"]
   },
   "expected_outputs": {
     "deliverables": [
-      "Updated index.html with new $7,500 pricing model",
-      "All autonomy language replaced with operator-led language",
-      "Scutum Caeli → SkyShield everywhere",
-      "Get Quote nav item added",
-      "Comparison table fixed",
-      "Credibility section updated"
+      "Updated styles.css with new color scheme",
+      "CSS custom properties for easy theming",
+      "All pages using consistent navy (#1A2744) + white (#FFFFFF) scheme",
+      "Good contrast and readability throughout"
     ]
   },
-  "notes_from_legate": "THIS IS THE AUTHORITATIVE PRICING: $7,500 base for 8 hours with 2-3 drones. Extra hours +$750/hr. The previous truck-based pricing is DEPRECATED. Focus on compliance safety - sophisticated buyers will audit every claim. Remove anything that sounds like we're claiming autonomous/BVLOS capabilities we don't have.",
-  "assigned_at": "2025-12-16T21:00:00Z",
+  "notes_from_legate": "This is a visual rebrand. The old purple gradient (#667eea → #764ba2) is being replaced with a cleaner, more professional navy blue (#1A2744). Keep the layout and structure - just update colors. Consider using a gold/amber accent (#D4A84B) for highlights like metrics, badges, or call-to-action elements to add warmth against the navy. Make sure the site still looks premium and professional.",
+  "assigned_at": "2025-12-16T21:15:00Z",
   "status": "assigned"
 }

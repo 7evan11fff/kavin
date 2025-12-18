@@ -8,10 +8,10 @@
   },
   "active_tasks": [
     {
-      "task_id": "task-004",
+      "task_id": "task-007",
       "assigned_to": "legionary-1",
-      "description": "Homepage rewrite + Global search/replace - $7,500 pricing, operator-led language, SkyShield naming",
-      "assigned_at": "2025-12-16T21:00:00Z"
+      "description": "Color scheme rework - Primary #1A2744 (navy), Background #FFFFFF (white)",
+      "assigned_at": "2025-12-16T21:15:00Z"
     },
     {
       "task_id": "task-005",

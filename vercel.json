@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/quote",
+      "destination": "/info/quote.html"
+    },
+    {
       "source": "/info/technology",
       "destination": "/info/technology.html"
     },
@@ -19,6 +23,22 @@
     {
       "source": "/info/dashboard",
       "destination": "/info/dashboard.html"
+    },
+    {
+      "source": "/info/quote",
+      "destination": "/info/quote.html"
+    },
+    {
+      "source": "/info/event-hosts",
+      "destination": "/info/event-hosts.html"
+    },
+    {
+      "source": "/info/executives",
+      "destination": "/info/executives.html"
+    },
+    {
+      "source": "/info/security-leads",
+      "destination": "/info/security-leads.html"
     }
   ]
 }
