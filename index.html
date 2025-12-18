@@ -223,62 +223,104 @@
         </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section class="pricing">
+    <!-- What's Included Section -->
+    <section class="whats-included" id="pricing">
         <div class="container">
-            <h2 class="section-title">Pricing Packages</h2>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3>Essential</h3>
-                    <div class="price">$6,000</div>
-                    <div class="price-note">per event</div>
-                    <p class="package-desc">Perfect for smaller events and venues</p>
-                    <ul class="pricing-features">
-                        <li>2-3 drones in rotation</li>
-                        <li>8-hour coverage</li>
-                        <li>Basic AI monitoring</li>
-                        <li>Safety Receipt</li>
-                        <li>1 security supervisor</li>
-                    </ul>
-                    <button class="cta-button secondary" onclick="requestQuote()">Get Quote</button>
+            <h2 class="section-title">What's Included</h2>
+            <p class="section-subtitle">Every deployment includes full-service perimeter security—no hidden fees, no surprise add-ons.</p>
+            <div class="features-grid">
+                <div class="feature-item-card">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h4>Pre-Event Perimeter Plan</h4>
+                    <p>Flight routes coordinated with venue security</p>
                 </div>
-                <div class="pricing-card featured">
-                    <div class="popular-badge">Most Popular</div>
-                    <h3>Professional</h3>
-                    <div class="price">$9,000</div>
-                    <div class="price-note">per event</div>
-                    <p class="package-desc">Comprehensive coverage for major events</p>
-                    <ul class="pricing-features">
-                        <li>4-6 drones in rotation</li>
-                        <li>12-hour coverage</li>
-                        <li>Advanced AI + thermal</li>
-                        <li>Real-time alerts</li>
-                        <li>2 security supervisors</li>
-                        <li>Mobile command center</li>
-                    </ul>
-                    <button class="cta-button primary" onclick="requestQuote()">Get Quote</button>
+                <div class="feature-item-card">
+                    <i class="fas fa-drone"></i>
+                    <h4>On-Site Aerial Overwatch</h4>
+                    <p>Perimeter, entrances, parking, rooftops, and adjacent approaches</p>
                 </div>
-                <div class="pricing-card">
-                    <h3>Enterprise</h3>
-                    <div class="price">$15,000</div>
-                    <div class="price-note">per event</div>
-                    <p class="package-desc">Full-scale protection for high-profile events</p>
-                    <ul class="pricing-features">
-                        <li>8+ drones in rotation</li>
-                        <li>24/7 coverage</li>
-                        <li>Full AI fleet management</li>
-                        <li>Custom integration</li>
-                        <li>Dedicated team</li>
-                        <li>Priority support</li>
-                    </ul>
-                    <div class="extra-drone-note">
-                        <small>$250 per extra drone</small>
-                    </div>
-                    <button class="cta-button secondary" onclick="requestQuote()">Get Quote</button>
+                <div class="feature-item-card">
+                    <i class="fas fa-broadcast-tower"></i>
+                    <h4>Real-Time Alerting</h4>
+                    <p>Radio handoff to security lead with exact location callouts</p>
+                </div>
+                <div class="feature-item-card">
+                    <i class="fas fa-eye"></i>
+                    <h4>Visible Deterrence</h4>
+                    <p>Adaptive patrol patterns that show presence</p>
+                </div>
+                <div class="feature-item-card">
+                    <i class="fas fa-desktop"></i>
+                    <h4>Live Client Status View</h4>
+                    <p>Real-time visibility during your event</p>
+                </div>
+                <div class="feature-item-card">
+                    <i class="fas fa-file-alt"></i>
+                    <h4>Post-Event Safety Receipt</h4>
+                    <p>Coverage summary, incident timeline, and recommendations</p>
+                </div>
+                <div class="feature-item-card">
+                    <i class="fas fa-user-shield"></i>
+                    <h4>Privacy-First Handling</h4>
+                    <p>Faces and license plates blurred by default on deliverables</p>
+                </div>
+                <div class="feature-item-card">
+                    <i class="fas fa-lock"></i>
+                    <h4>Secure Evidence Handling</h4>
+                    <p>Tamper-evident logging and controlled access</p>
                 </div>
             </div>
-            <div class="pricing-note">
-                <p><strong>All packages include:</strong> FAA Part 107 certified pilots, insurance coverage, setup/teardown, and next-day Safety Receipt. Custom packages available for multi-day events.</p>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-simple">
+        <div class="container">
+            <h2 class="section-title">Simple, Transparent Pricing</h2>
+            <div class="pricing-layout">
+                <div class="pricing-main">
+                    <div class="price-display">
+                        <div class="price-amount">$750</div>
+                        <div class="price-unit">per hour, per truck</div>
+                    </div>
+                    <div class="truck-includes">
+                        <h4>Each truck includes:</h4>
+                        <div class="truck-team">
+                            <div class="team-item">
+                                <i class="fas fa-user-pilot"></i>
+                                <span><strong>3</strong> FAA-certified pilots</span>
+                            </div>
+                            <div class="team-item">
+                                <i class="fas fa-user-tie"></i>
+                                <span><strong>1</strong> operations manager</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pricing-examples">
+                    <h4>Example Scenarios</h4>
+                    <div class="example-cards">
+                        <div class="example-card">
+                            <div class="example-label">Small Event</div>
+                            <div class="example-calc">1 truck × 4 hours</div>
+                            <div class="example-total">$3,000</div>
+                        </div>
+                        <div class="example-card featured">
+                            <div class="example-label">Medium Event</div>
+                            <div class="example-calc">1 truck × 8 hours</div>
+                            <div class="example-total">$6,000</div>
+                        </div>
+                        <div class="example-card">
+                            <div class="example-label">Large Event</div>
+                            <div class="example-calc">2 trucks × 8 hours</div>
+                            <div class="example-total">$12,000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pricing-cta">
+                <p>Need help estimating? We'll walk your venue for free and recommend the right coverage.</p>
+                <button class="cta-button primary" onclick="openBooking()">Schedule Free Site Walk</button>
             </div>
         </div>
     </section>

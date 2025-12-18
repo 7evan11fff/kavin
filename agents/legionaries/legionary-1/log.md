@@ -53,4 +53,47 @@
 
 ---
 
+### Task-003: Pricing Model Overhaul
+**Assigned:** 2025-12-16T20:55:00Z
+**Completed:** 2025-12-16T21:00:00Z
+**Status:** ✅ Complete
+
+**Objective:** Replace tiered pricing with feature list and truck-based hourly pricing model
+
+**Changes Made:**
+
+1. **Removed old pricing tiers** ✅
+   - Deleted Essential ($6,000), Professional ($9,000), Enterprise ($15,000) cards
+
+2. **Added "What's Included" section** ✅
+   - 8-item feature grid showing everything included:
+     - Pre-Event Perimeter Plan
+     - On-Site Aerial Overwatch
+     - Real-Time Alerting
+     - Visible Deterrence
+     - Live Client Status View
+     - Post-Event Safety Receipt
+     - Privacy-First Handling
+     - Secure Evidence Handling
+
+3. **Added simple truck-based pricing** ✅
+   - Clear display: $750 per hour per truck
+   - Truck includes: 3 FAA-certified pilots + 1 operations manager
+   - Example scenarios:
+     - Small Event: 1 truck × 4 hours = $3,000
+     - Medium Event: 1 truck × 8 hours = $6,000
+     - Large Event: 2 trucks × 8 hours = $12,000
+
+4. **Added pricing CTA** ✅
+   - "Need help estimating? We'll walk your venue for free and recommend the right coverage."
+   - Button: "Schedule Free Site Walk"
+
+**Files Modified:**
+- `index.html` - Complete pricing section replacement
+- `styles.css` - New styles for features grid, truck-based pricing display, example cards
+
+---
+
 *Awaiting next assignment.*
+
+

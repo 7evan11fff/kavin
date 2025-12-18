@@ -1,56 +1,78 @@
 {
-  "task_id": "task-001",
-  "high_level_goal": "Update homepage with compliance-safe copy, better UX, and client-first navigation",
+  "task_id": "task-004",
+  "high_level_goal": "Homepage rewrite + Global search/replace for pricing and compliance language",
   "type": "feature",
-  "priority": "high",
+  "priority": "critical",
   "inputs": {
-    "description": "Multiple homepage improvements to make it more credible and client-focused. Complete ALL subtasks below.",
+    "description": "Complete homepage overhaul with new pricing model ($7,500 base) and global compliance fixes. This is the authoritative pricing and language update.",
+    
+    "NON_NEGOTIABLE_RULES": {
+      "pricing": "$7,500 base, 2-3 drones on rotation, 8 hours, scaling by teams + hours",
+      "extra_hours": "+$750/hour after 8 hours (was $600 in earlier task - USE $750)",
+      "language": "Replace ALL autonomy/AI language with 'manual operations + AI efficiency', 'operator-led, human-in-the-loop', 'AI-assisted alerting/triage/verification/reporting'",
+      "compliance": "NO BVLOS claims. Remove or label as 'not offered / future'",
+      "safety_wording": "Keep '<30s eyes-on' and '≤120s handoff' but NEVER say 'intercept' - say 'handoff to security lead'",
+      "terminology": "Use 'SkyShield' everywhere, remove 'Scutum Caeli'"
+    },
+
     "subtasks": [
       {
-        "id": "1a",
-        "title": "Fix naming inconsistency",
-        "details": "In the comparison table, change 'Scutum Caeli' to 'SkyShield' or 'Sky Shield' (match the rest of the site)"
+        "id": "4a",
+        "title": "Global search/replace - Pricing",
+        "details": "Remove ALL old pricing: 'Pricing Packages', 'Essential', 'Professional', 'Enterprise', '$6,000', '$9,000', '$15,000', '$250 per extra drone', 'Starting at ~$5,000/event'. Also remove the $750/truck model from previous task."
       },
       {
-        "id": "1b", 
-        "title": "Clarify Intercept time KPI",
-        "details": "Change '≤120s intercept' to '≤120s handoff to security lead'. Add explanatory text: 'We detect, verify, and direct your on-site security to the exact location.'"
+        "id": "4b",
+        "title": "Global search/replace - Autonomy language",
+        "details": "Replace: 'AI & Autonomy' → 'Manual Operations + AI Efficiency', 'Full autonomous fleet management' → 'Manual operations + AI-assisted alerting (human-in-the-loop)', 'autonomous' → 'operator-led'. Remove 'Autonomous Fleet Patrols'."
       },
       {
-        "id": "1c",
-        "title": "Update hero text",
-        "details": "Replace hero headline with: 'Perimeter-first drone security for outdoor events'. Update subhead to: 'We watch parking, rooftops, arrivals, and outer perimeter—then direct your security team in real time.' Keep the metrics but tie to outcomes: '<30s eyes-on = time to verify an alert' and '≤120s = time to notify and direct on-site security'"
+        "id": "4c",
+        "title": "Global search/replace - Misc",
+        "details": "'Visual Observers on-site' → 'Visual observers as needed (mission-dependent)', 'Scutum Caeli' → 'SkyShield'"
       },
       {
-        "id": "1d",
-        "title": "Add 'How It Works' section",
-        "details": "Add a 3-step block ABOVE the pricing section with: 1) Pre-event perimeter plan (routes + launch points + comms plan), 2) Live overwatch + alerts (operator-to-security handoff), 3) Next-day Safety Receipt (timeline + maps + recommendations). Style it cleanly to match the site."
+        "id": "4d",
+        "title": "Hero section update",
+        "details": "H1: 'Perimeter-first drone overwatch for outdoor events'. Subhead: 'We watch parking, rooftops, arrivals, and the outer perimeter—then direct your on-site security in real time.' Keep metrics with updated language."
       },
       {
-        "id": "1e",
-        "title": "Add Safety Receipt preview",
-        "details": "Add a visual section showing what the Safety Receipt looks like. Include 3 bullets: Coverage map + patrol paths, Incident log with timestamps, Recommendations + proof package. Create a placeholder/mockup card that looks like a sample report preview."
+        "id": "4e",
+        "title": "Comparison table fix",
+        "details": "Find 'AI & Autonomy' row. Change SkyShield column to: 'Manual operations + AI-assisted alerting (human-in-the-loop)'. Tethered column: 'Manual operation required'. Remove any 'Scutum Caeli' label."
       },
       {
-        "id": "1f",
-        "title": "Update navigation (client-first)",
-        "details": "Reorganize the nav to be client-focused. Remove 'Join Our Team' from top nav (move to footer). Add/reorganize to include: 'How It Works', 'Safety Receipt' (can anchor to section), 'FAQ', 'Request Site Walk'. Keep essential links like Technology, Live Demo, Our Fleet."
+        "id": "4f",
+        "title": "NEW Pricing section - Standard Event Package",
+        "details": "Replace entire pricing section with: Header 'Pricing', Primary card: 'Standard Event Package' - '$7,500' - '2–3 drones on rotation • 8-hour coverage • next-day Safety Receipt'. Included bullets: Pre-event perimeter plan + comms plan, Live overwatch + real-time alert verification, Direct handoff to security lead with exact location, Setup + teardown, Next-day Safety Receipt, FAA Part 107 pilots + insured operations + Remote ID compliant. Add-ons: 'Add hours: +$750/hour (after 8 hours)', 'Multi-day events: quoted (hours + teams)'. CTAs: 'Schedule Free Site Walk', 'Request Quote'"
+      },
+      {
+        "id": "4g",
+        "title": "Credibility section fix",
+        "details": "Change 'Visual Observers on-site' to 'Visual observers as needed (mission-dependent)'"
+      },
+      {
+        "id": "4h",
+        "title": "Add Get Quote nav item",
+        "details": "Add 'Get Quote' link to navigation pointing to '/quote' (or 'info/quote.html'). Make it visually distinct (button style or highlighted)."
       }
     ],
-    "files": ["index.html", "styles.css"]
+    "files": ["index.html", "styles.css", "script.js"]
   },
   "context_instructions": {
-    "load_files": ["index.html", "styles.css", "agents/shared/rules.md"]
+    "load_files": ["index.html", "styles.css", "script.js", "agents/shared/rules.md"]
   },
   "expected_outputs": {
     "deliverables": [
-      "Updated index.html with all 6 subtasks completed",
-      "Any necessary CSS additions in styles.css",
-      "Navigation should be consistent and client-focused"
+      "Updated index.html with new $7,500 pricing model",
+      "All autonomy language replaced with operator-led language",
+      "Scutum Caeli → SkyShield everywhere",
+      "Get Quote nav item added",
+      "Comparison table fixed",
+      "Credibility section updated"
     ]
   },
-  "notes_from_legate": "This is a credibility overhaul for sophisticated buyers. The goal is to make the homepage instantly understandable and trustworthy. Keep the existing visual style but improve the copy and add the new sections. The Safety Receipt preview is key - it's the fastest way to help executives 'get it'.",
-  "assigned_at": "2025-12-16T20:35:00Z",
+  "notes_from_legate": "THIS IS THE AUTHORITATIVE PRICING: $7,500 base for 8 hours with 2-3 drones. Extra hours +$750/hr. The previous truck-based pricing is DEPRECATED. Focus on compliance safety - sophisticated buyers will audit every claim. Remove anything that sounds like we're claiming autonomous/BVLOS capabilities we don't have.",
+  "assigned_at": "2025-12-16T21:00:00Z",
   "status": "assigned"
 }
-

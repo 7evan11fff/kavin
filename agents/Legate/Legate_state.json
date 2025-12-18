@@ -1,19 +1,51 @@
 {
   "project_name": "SkyShield Website",
+  "push_policy": {
+    "trigger": "all_legionaries_idle",
+    "remote": "origin",
+    "branch": "main",
+    "requires_token": true
+  },
   "active_tasks": [
     {
-      "task_id": "task-001",
+      "task_id": "task-004",
       "assigned_to": "legionary-1",
-      "description": "Homepage credibility overhaul - copy fixes, How It Works section, Safety Receipt preview, client-first nav",
-      "assigned_at": "2025-12-16T20:35:00Z"
+      "description": "Homepage rewrite + Global search/replace - $7,500 pricing, operator-led language, SkyShield naming",
+      "assigned_at": "2025-12-16T21:00:00Z"
     },
     {
-      "task_id": "task-002",
+      "task_id": "task-005",
+      "assigned_to": "legionary-2",
+      "description": "Technology + Live Demo + Our Fleet pages - Remove BVLOS/autonomy claims, add Matrice 4T",
+      "assigned_at": "2025-12-16T21:00:00Z"
+    },
+    {
+      "task_id": "task-006",
       "assigned_to": "legionary-3",
-      "description": "Sub-pages compliance fixes + new audience pages (Event Hosts, Executives, Security Leads)",
-      "assigned_at": "2025-12-16T20:35:00Z"
+      "description": "Create /quote page with instant estimator, Mapbox, calculator, lead capture",
+      "assigned_at": "2025-12-16T21:00:00Z"
     }
   ],
-  "completed_tasks": [],
-  "last_updated": "2025-12-16T20:35:00Z"
+  "completed_tasks": [
+    {
+      "task_id": "task-001",
+      "description": "Homepage credibility overhaul (superseded by task-004)"
+    },
+    {
+      "task_id": "task-002", 
+      "description": "Sub-pages compliance fixes (superseded by task-005)"
+    },
+    {
+      "task_id": "task-003",
+      "description": "Truck pricing model (superseded by task-004 - now $7,500 base)"
+    }
+  ],
+  "authoritative_pricing": {
+    "base_per_team": 7500,
+    "base_hours": 8,
+    "extra_hour_rate": 750,
+    "drones_per_team": "2-3",
+    "note": "Scaling by teams + hours, NOT trucks"
+  },
+  "last_updated": "2025-12-16T21:00:00Z"
 }

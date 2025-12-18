@@ -70,3 +70,5 @@ Updated info/ pages to remove compliance risks and privacy concerns, then create
 - Navigation consistent across all info/ pages
 - Compliance-safe language maintains credibility for sophisticated buyers
 - Privacy messaging addresses concerns for public figures
+
+

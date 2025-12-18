@@ -3,6 +3,20 @@
 ## Project Overview
 SkyShield is a static website for mobile drone security services. The site consists of HTML pages, CSS styling, and vanilla JavaScript.
 
+## AUTHORITATIVE PRICING (use everywhere)
+- **$7,500 base** per team
+- **2-3 drones on rotation** per team
+- **8 hours** included
+- **+$750/hour** after 8 hours
+- Scaling by **teams + hours** (NOT trucks)
+
+## NON-NEGOTIABLE LANGUAGE RULES
+- ❌ NO "autonomous" → ✅ "operator-led", "manual operations + AI efficiency"
+- ❌ NO "BVLOS" marketing claims → ✅ "Part 107 compliant" or "future capability"
+- ❌ NO "intercept" → ✅ "handoff to security lead"
+- ❌ NO "Scutum Caeli" → ✅ "SkyShield"
+- ✅ Keep "<30s eyes-on" and "≤120s handoff"
+
 ## File Structure
 ```
 kavin-main/
