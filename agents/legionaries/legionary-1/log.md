@@ -85,4 +85,45 @@
 
 ---
 
+### Task-008: Nav Cleanup + Fleet Specs + Hero Image
+**Assigned:** 2025-12-18T10:50:00Z
+**Completed:** 2025-12-18T10:55:00Z
+**Status:** ✅ Complete
+**Priority:** HIGH
+
+**Objective:** Remove Technology/Live Demo pages from nav, fix Matrice 4T specs, reorder nav, update hero image.
+
+**Subtasks Completed:**
+
+1. **8a - Remove Technology page from navigation** ✅
+   - Removed from index.html
+   - Removed from all info/*.html pages
+
+2. **8b - Remove Live Demo page from navigation** ✅
+   - Removed from index.html
+   - Removed from all info/*.html pages
+
+3. **8c - Move Our Fleet to end of nav** ✅
+   - Reordered nav on all pages: Home, How It Works, Safety Receipt, Get Quote, Request Site Walk, Our Fleet
+   - Updated: index.html, our-fleet.html, dashboard.html, pilot-application.html, event-hosts.html, executives.html, security-leads.html, quote.html
+
+4. **8d - Fix DJI Matrice 4T zoom spec** ✅
+   - Changed 56× zoom → 120× zoom in info/our-fleet.html (2 instances)
+
+5. **8e - Update hero background image** ✅
+   - Changed from festival-event.png to hero-drone-aerial.jpg in styles.css
+
+**Files Modified:**
+- `index.html` - Nav update
+- `styles.css` - Hero image change
+- `info/our-fleet.html` - Nav update + zoom spec fix
+- `info/dashboard.html` - Nav update
+- `info/pilot-application.html` - Nav update
+- `info/event-hosts.html` - Nav update
+- `info/executives.html` - Nav update
+- `info/security-leads.html` - Nav update
+- `info/quote.html` - Nav update
+
+---
+
 *Awaiting next assignment.*

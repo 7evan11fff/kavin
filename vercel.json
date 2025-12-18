@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/x7k9-brand",
+      "destination": "/info/brand-asset.html"
+    },
+    {
       "source": "/quote",
       "destination": "/info/quote.html"
     },
