@@ -1,7 +1,7 @@
 // SkyShield Booking Calculator - Pricing Configuration
-// Last updated: 2025-12-18
+// Last updated: 2025-01-06
 
-const SKYSHIELD_CONFIG = {
+const QUOTE_CONFIG = {
   // Base package
   base: {
     price: 7500,
@@ -10,34 +10,57 @@ const SKYSHIELD_CONFIG = {
   },
 
   // Extra time/team pricing
-  extra_hour_rate_per_team: 750,        // $/hour per team after base 8 hours
-  extra_team_rate_base_window: 6000,    // $ per additional team (for base 8-hour window)
+  extra_hour_price: 750,                // $/hour per team after base 8 hours
+  extra_team_price: 6000,               // $ per additional team (for base 8-hour window)
 
   // Travel from Austin, TX
   travel: {
-    included_miles_from_austin_one_way: 30,
-    per_mile_after_one_way: 2.50,
-    minimum_overage_fee: 150
+    included_miles: 30,                 // one-way from Austin
+    per_mile: 2.50,                     // per mile after included (one-way)
+    minimum: 150                        // minimum overage fee
   },
 
   // Night operations (after sunset)
-  night_ops_fee_per_event: 1500,
+  night_ops_fee: 1500,
 
   // Deposit
-  deposit_percent: 25,
-
-  // Team recommendation thresholds (acres per team)
-  team_thresholds: {
-    low_risk: 6,      // 1 team per 6 acres
-    medium_risk: 4,   // 1 team per 4 acres
-    high_risk: 3      // 1 team per 3 acres
+  deposit: {
+    enabled: true,
+    percent: 25
   },
 
-  // Team recommendation thresholds (perimeter miles per team)
-  team_thresholds_perimeter: {
-    low_risk: 1.5,    // 1 team per 1.5 miles
-    medium_risk: 1.0, // 1 team per 1 mile
-    high_risk: 0.75   // 1 team per 0.75 miles
+  // Limits
+  limits: {
+    min_hours: 4,
+    max_hours: 16
+  },
+
+  // Team recommendation thresholds (acres per team)
+  team_heuristic: {
+    by_acres: {
+      low: 6,       // 1 team per 6 acres
+      medium: 4,    // 1 team per 4 acres
+      high: 3       // 1 team per 3 acres
+    },
+    by_perimeter_miles: {
+      low: 1.5,     // 1 team per 1.5 miles
+      medium: 1.0,  // 1 team per 1 mile
+      high: 0.75    // 1 team per 0.75 miles
+    },
+    not_sure_default: 1
+  },
+
+  // Event type to risk mapping
+  event_types: {
+    corporate: { risk: 'low' },
+    wedding: { risk: 'low' },
+    private_party: { risk: 'medium' },
+    festival: { risk: 'high' },
+    concert: { risk: 'high' },
+    sporting: { risk: 'medium' },
+    political: { risk: 'high' },
+    vip: { risk: 'high' },
+    other: { risk: 'medium' }
   },
 
   // Fixed per-team resources
@@ -60,95 +83,19 @@ const SKYSHIELD_CONFIG = {
     "Incident Log",
     "Safety Receipt PDF within 24 hours",
     "Privacy: no biometric ID or ALPR by default"
-  ]
+  ],
+
+  // Disclaimers
+  disclaimers: {
+    final_quote: "Final quote depends on site layout, airspace approvals, and operational constraints (Part 107/VLOS/venue permissions).",
+    airspace_auth: "This location may require airspace authorization. We'll confirm before finalizing."
+  },
+
+  // Email for quote submissions
+  quote_email: "quotes@skyshield.us"
 };
-
-// Price calculation functions
-function calculateTeams(acres, riskLevel) {
-  const thresholds = SKYSHIELD_CONFIG.team_thresholds;
-  let threshold;
-  
-  switch(riskLevel) {
-    case 'high': threshold = thresholds.high_risk; break;
-    case 'medium': threshold = thresholds.medium_risk; break;
-    case 'low': 
-    default: threshold = thresholds.low_risk; break;
-  }
-  
-  return Math.max(1, Math.ceil(acres / threshold));
-}
-
-function calculateTeamsByPerimeter(perimeterMiles, riskLevel) {
-  const thresholds = SKYSHIELD_CONFIG.team_thresholds_perimeter;
-  let threshold;
-  
-  switch(riskLevel) {
-    case 'high': threshold = thresholds.high_risk; break;
-    case 'medium': threshold = thresholds.medium_risk; break;
-    case 'low': 
-    default: threshold = thresholds.low_risk; break;
-  }
-  
-  return Math.max(1, Math.ceil(perimeterMiles / threshold));
-}
-
-function calculateTravelFee(milesFromAustin) {
-  const travel = SKYSHIELD_CONFIG.travel;
-  const extraMiles = Math.max(0, milesFromAustin - travel.included_miles_from_austin_one_way);
-  
-  if (extraMiles === 0) return 0;
-  
-  const fee = extraMiles * travel.per_mile_after_one_way * 2; // Round trip
-  return Math.max(fee, travel.minimum_overage_fee);
-}
-
-function calculateTotal(options) {
-  const config = SKYSHIELD_CONFIG;
-  const {
-    hours = 8,
-    teams = 1,
-    days = 1,
-    nightOps = false,
-    milesFromAustin = 0
-  } = options;
-
-  // Base package
-  let total = config.base.price;
-  
-  // Extra hours (per team, per day)
-  const extraHours = Math.max(0, hours - config.base.hours);
-  total += extraHours * config.extra_hour_rate_per_team * teams;
-  
-  // Extra teams
-  const extraTeams = Math.max(0, teams - config.base.teams);
-  total += extraTeams * config.extra_team_rate_base_window;
-  
-  // Apply to multi-day
-  total *= days;
-  
-  // Night ops (per event, not per day)
-  if (nightOps) {
-    total += config.night_ops_fee_per_event;
-  }
-  
-  // Travel
-  total += calculateTravelFee(milesFromAustin);
-  
-  return {
-    total: total,
-    deposit: Math.round(total * (config.deposit_percent / 100)),
-    breakdown: {
-      base: config.base.price * days,
-      extraHours: extraHours * config.extra_hour_rate_per_team * teams * days,
-      extraTeams: extraTeams * config.extra_team_rate_base_window * days,
-      nightOps: nightOps ? config.night_ops_fee_per_event : 0,
-      travel: calculateTravelFee(milesFromAustin)
-    }
-  };
-}
 
 // Export for use
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { SKYSHIELD_CONFIG, calculateTeams, calculateTeamsByPerimeter, calculateTravelFee, calculateTotal };
+  module.exports = { QUOTE_CONFIG };
 }
-
