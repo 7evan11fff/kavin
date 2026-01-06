@@ -6,125 +6,103 @@
 
 ## Tasks
 
-### Task-001: Homepage Credibility Overhaul
-**Status:** ✅ Complete
-
-### Task-003: Pricing Model Overhaul  
-**Status:** ✅ Complete (SUPERSEDED by Task-004)
-
-### Task-004: Homepage Rewrite + Global Compliance Fixes
-**Status:** ✅ Complete
+### Task-001 through Task-008
+**Status:** ✅ Complete (see previous logs)
 
 ---
 
-### Task-007: Website Color Scheme Overhaul
-**Assigned:** 2025-12-16T21:15:00Z
-**Completed:** 2025-12-16T21:30:00Z
+### Task-009: Quote Calculator Complete Rebuild
+**Assigned:** 2025-12-18T12:00:00Z
+**Completed:** 2025-12-18T12:30:00Z
 **Status:** ✅ Complete
-**Priority:** HIGH
+**Priority:** CRITICAL
 
-**Objective:** Replace purple gradient theme with clean navy + white scheme.
-
-**New Color Scheme:**
-- Primary: #1A2744 (dark navy)
-- Background: #FFFFFF (white)
-- Background Alt: #F8F9FA (light gray)
-- Accent: #D4A84B (gold/amber)
+**Objective:** Rebuild /quote calculator with comprehensive inputs, pricing logic, team recommendation, and booking form.
 
 **Subtasks Completed:**
 
-1. **7a - CSS variables / base colors** ✅
-   - Added CSS custom properties at top of styles.css
-   - Created: --primary, --primary-light, --background, --background-alt, --accent
+1. **9a - Update quote-config.js** ✅
+   - Created proper config structure with:
+     - base: { price: 7500, hours: 8, teams: 1 }
+     - extra_hour_price, extra_team_price
+     - travel config (included_miles, per_mile, minimum)
+     - night_ops_fee
+     - deposit (enabled, percent)
+     - team_heuristic by acres/risk
+     - event_types with risk mappings
+     - fleet_per_team, staff_per_team
+     - always_included list
+     - disclaimers
 
-2. **7b - Buttons** ✅
-   - Primary buttons: solid #1A2744 background
-   - Secondary buttons: white with #1A2744 border
-   - Hover states updated
+2. **9b - Required Inputs section** ✅
+   - Event location (address + city + state)
+   - Event date
+   - Start time and end time (auto-calculates hours)
+   - Event type dropdown (corporate, wedding, festival, etc.)
+   - Estimated attendance
+   - Site size with 3 options: Acres, Perimeter, "Not sure"
 
-3. **7c - Navbar** ✅
-   - Logo text color: #1A2744
-   - Active link and underline: #1A2744
-   - Nav CTA button: solid #1A2744
+3. **9c - Optional Inputs section** ✅
+   - Risk level: Low/Medium/High/"Let SkyShield decide"
+   - Night ops toggle
+   - Airspace concern toggle (near airport/downtown)
+   - Multi-day selector
+   - Radio channel available toggle
+   - Travel distance from Austin
 
-4. **7d - Hero section** ✅
-   - Metric highlights use gold accent (#D4A84B)
-   - CTA button uses new primary
+4. **9d - Team recommendation logic** ✅
+   - Implemented heuristic:
+     - Low risk: 1 team per 6 acres
+     - Medium risk: 1 team per 4 acres
+     - High risk: 1 team per 3 acres
+   - Formula: recommended_teams = ceil(acres / threshold)
+   - "Not sure" defaults to 1 team with message
 
-5. **7e - Section backgrounds** ✅
-   - KPIs section: solid #1A2744
-   - Pricing section: solid #1A2744
-   - Alternating white/#F8F9FA for contrast
+5. **9e - Price computation** ✅
+   - Base = $7,500 (8 hours, 1 team)
+   - Extra hours = max(0, hours - 8) × $750 × teams
+   - Extra teams = max(0, teams - 1) × $5,000
+   - Travel fee if beyond 50 miles
+   - Night ops fee if enabled
+   - Multi-day multiplier
 
-6. **7f - Icons and accents** ✅
-   - Step icons: #1A2744
-   - Feature icons: #1A2744
-   - Tech icons: #1A2744
+6. **9f - Output display - Primary** ✅
+   - Estimated total price
+   - Recommended coverage (teams, hours)
+   - Fleet per team: "3× DJI Matrice 4T"
+   - Staff per team: "2 pilots + 1 ops mgr"
 
-7. **7g - Footer** ✅
-   - Background: #1A2744 (navy)
-   - Text: white for contrast
+7. **9g - Output display - Breakdown** ✅
+   - Base package line
+   - Additional hours (conditional)
+   - Additional teams (conditional)
+   - Travel/mobilization (conditional)
+   - Night ops (conditional)
+   - Deposit line
 
-8. **7h - Info pages** ✅
-   - All hero sections now use shared CSS variables
-   - Tech hero, demo hero, fleet hero: #1A2744
+8. **9h - Output display - Always Included** ✅
+   - Live overwatch + radio callouts
+   - Incident Log with timestamps
+   - Safety Receipt PDF within 24 hrs
+   - Privacy: no biometric ID or ALPR
 
-9. **7i - Readability** ✅
-   - Dark text on white backgrounds
-   - White text on navy backgrounds
-   - All contrast ratios maintained
+9. **9i - Disclaimers and banners** ✅
+   - Standard disclaimer about site layout/airspace
+   - Airspace warning for near airport/downtown
 
-**Files Modified:**
-- `styles.css` - Complete color scheme replacement with CSS variables
-
-**Color Replacements Made:**
-- `#667eea` → `var(--primary)` / `#1A2744`
-- `#764ba2` → removed (no gradient)
-- `linear-gradient(135deg, #667eea 0%, #764ba2 100%)` → `var(--primary)`
-- `#ffc107` (hero metrics) → `var(--accent)` / `#D4A84B`
-
----
-
-### Task-008: Nav Cleanup + Fleet Specs + Hero Image
-**Assigned:** 2025-12-18T10:50:00Z
-**Completed:** 2025-12-18T10:55:00Z
-**Status:** ✅ Complete
-**Priority:** HIGH
-
-**Objective:** Remove Technology/Live Demo pages from nav, fix Matrice 4T specs, reorder nav, update hero image.
-
-**Subtasks Completed:**
-
-1. **8a - Remove Technology page from navigation** ✅
-   - Removed from index.html
-   - Removed from all info/*.html pages
-
-2. **8b - Remove Live Demo page from navigation** ✅
-   - Removed from index.html
-   - Removed from all info/*.html pages
-
-3. **8c - Move Our Fleet to end of nav** ✅
-   - Reordered nav on all pages: Home, How It Works, Safety Receipt, Get Quote, Request Site Walk, Our Fleet
-   - Updated: index.html, our-fleet.html, dashboard.html, pilot-application.html, event-hosts.html, executives.html, security-leads.html, quote.html
-
-4. **8d - Fix DJI Matrice 4T zoom spec** ✅
-   - Changed 56× zoom → 120× zoom in info/our-fleet.html (2 instances)
-
-5. **8e - Update hero background image** ✅
-   - Changed from festival-event.png to hero-drone-aerial.jpg in styles.css
+10. **9j - Booking form payload** ✅
+    - Contact info (name, email, phone, org)
+    - Event details (date, time, type, attendance)
+    - Location (address, city, state)
+    - Scope (acres/perimeter, risk, night ops, days)
+    - Calculator result (teams, hours, price)
+    - Notes field
+    - Submits via mailto
 
 **Files Modified:**
-- `index.html` - Nav update
-- `styles.css` - Hero image change
-- `info/our-fleet.html` - Nav update + zoom spec fix
-- `info/dashboard.html` - Nav update
-- `info/pilot-application.html` - Nav update
-- `info/event-hosts.html` - Nav update
-- `info/executives.html` - Nav update
-- `info/security-leads.html` - Nav update
-- `info/quote.html` - Nav update
+- `info/quote-config.js` - Complete config structure
+- `info/quote.html` - Complete rebuild with new calculator
 
 ---
 
 *Awaiting next assignment.*
-

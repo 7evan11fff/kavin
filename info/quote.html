@@ -3,39 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get an Instant Estimate - Sky Shield</title>
+    <title>Get a Quote - Sky Shield</title>
     <link rel="icon" type="image/png" href="../skyshield-logo-clean.png">
     <link rel="stylesheet" href="../styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Mapbox GL JS -->
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
-    <!-- Mapbox GL Draw -->
-    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.3/mapbox-gl-draw.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.3/mapbox-gl-draw.css" rel="stylesheet">
-    <!-- Turf.js for geometry calculations -->
-    <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
-    <!-- Mapbox Geocoder -->
-    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" rel="stylesheet">
+    <script src="quote-config.js"></script>
     <style>
-        /* Quote Page Specific Styles */
+        /* Quote Page Styles */
         .quote-hero {
             padding: 120px 0 60px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--primary);
             color: white;
             text-align: center;
         }
         
         .quote-hero h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
             font-weight: 700;
         }
         
         .quote-hero p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             opacity: 0.9;
             max-width: 600px;
             margin: 0 auto;
@@ -43,215 +33,187 @@
         
         .quote-content {
             padding: 60px 0;
-            background: #f8f9fa;
+            background: var(--background-alt);
         }
         
-        .quote-grid {
+        .quote-layout {
             display: grid;
-            grid-template-columns: 1fr 400px;
+            grid-template-columns: 1fr 420px;
             gap: 3rem;
             max-width: 1200px;
             margin: 0 auto;
         }
         
-        .quote-inputs {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-        
-        .quote-step {
+        /* Input Sections */
+        .quote-section {
             background: white;
             border-radius: 12px;
             padding: 2rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        }
-        
-        .step-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
             margin-bottom: 1.5rem;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
         }
         
-        .step-number {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 50%;
+        .section-header {
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 1rem;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e9ecef;
         }
         
-        .step-header h3 {
+        .section-header i {
             font-size: 1.3rem;
-            color: #1a1a1a;
+            color: var(--primary);
+        }
+        
+        .section-header h3 {
+            font-size: 1.2rem;
+            color: var(--text-dark);
             margin: 0;
         }
         
-        /* Map Styles */
-        #map-container {
-            height: 350px;
-            border-radius: 8px;
-            overflow: hidden;
-            margin-bottom: 1rem;
-            border: 2px solid #e9ecef;
+        .section-header .badge {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: auto;
         }
         
-        #map {
-            width: 100%;
-            height: 100%;
+        .badge.required {
+            background: #fee2e2;
+            color: #dc2626;
         }
         
-        .map-fallback {
-            display: none;
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 8px;
-            border: 2px dashed #dee2e6;
+        .badge.optional {
+            background: #e0e7ff;
+            color: #4338ca;
         }
         
-        .map-fallback.active {
-            display: block;
-        }
-        
-        .map-chips {
-            display: flex;
+        /* Form Elements */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 1rem;
-            flex-wrap: wrap;
+        }
+        
+        .form-grid.three-col {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
+        }
+        
+        .form-group label .required-star {
+            color: #dc2626;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .form-group .helper-text {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.3rem;
+        }
+        
+        /* Site Size Options */
+        .size-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .size-option {
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        
+        .size-option:hover {
+            border-color: var(--primary);
+        }
+        
+        .size-option.active {
+            border-color: var(--primary);
+            background: rgba(26, 39, 68, 0.05);
+        }
+        
+        .size-option input {
+            display: none;
+        }
+        
+        .size-option .option-label {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+        
+        .size-input-wrapper {
+            display: none;
             margin-top: 1rem;
         }
         
-        .chip {
-            background: #e9ecef;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: #495057;
-        }
-        
-        .chip i {
-            margin-right: 0.5rem;
-            color: #667eea;
-        }
-        
-        .chip.highlight {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-        
-        .chip.highlight i {
-            color: white;
-        }
-        
-        .map-instructions {
-            font-size: 0.9rem;
-            color: #666;
-            margin-top: 0.5rem;
-        }
-        
-        /* Slider Styles */
-        .slider-container {
-            margin-bottom: 1.5rem;
-        }
-        
-        .slider-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-        }
-        
-        .slider-label span {
-            font-weight: 500;
-            color: #1a1a1a;
-        }
-        
-        .slider-value {
-            background: #667eea;
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 15px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-        
-        input[type="range"] {
-            width: 100%;
-            height: 8px;
-            border-radius: 4px;
-            background: #e9ecef;
-            outline: none;
-            -webkit-appearance: none;
-        }
-        
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            cursor: pointer;
-            box-shadow: 0 2px 6px rgba(102, 126, 234, 0.4);
-        }
-        
-        /* Select Styles */
-        .select-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .select-group label {
+        .size-input-wrapper.active {
             display: block;
-            font-weight: 500;
-            color: #1a1a1a;
-            margin-bottom: 0.5rem;
         }
         
-        .select-group select {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            font-size: 1rem;
-            background: white;
-            cursor: pointer;
-        }
-        
-        .select-group select:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-        
-        /* Toggle Styles */
-        .toggles-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
-        
-        .toggle-item {
+        /* Toggle Switches */
+        .toggle-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 1rem;
-            background: #f8f9fa;
-            border-radius: 8px;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f0f0f0;
         }
         
-        .toggle-item label {
-            font-weight: 500;
-            color: #1a1a1a;
+        .toggle-row:last-child {
+            border-bottom: none;
+        }
+        
+        .toggle-label {
             font-size: 0.9rem;
+            color: var(--text-dark);
         }
         
         .toggle-switch {
             position: relative;
-            width: 50px;
-            height: 26px;
+            width: 44px;
+            height: 24px;
         }
         
         .toggle-switch input {
@@ -268,15 +230,15 @@
             right: 0;
             bottom: 0;
             background: #ccc;
-            border-radius: 26px;
+            border-radius: 24px;
             transition: 0.3s;
         }
         
         .toggle-slider:before {
             position: absolute;
             content: "";
-            height: 20px;
-            width: 20px;
+            height: 18px;
+            width: 18px;
             left: 3px;
             bottom: 3px;
             background: white;
@@ -285,84 +247,14 @@
         }
         
         input:checked + .toggle-slider {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--primary);
         }
         
         input:checked + .toggle-slider:before {
-            transform: translateX(24px);
+            transform: translateX(20px);
         }
         
-        /* Addon Cards */
-        .addons-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
-        
-        .addon-card {
-            padding: 1.25rem;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .addon-card:hover {
-            border-color: #667eea;
-            transform: translateY(-2px);
-        }
-        
-        .addon-card.selected {
-            border-color: #667eea;
-            background: rgba(102, 126, 234, 0.05);
-        }
-        
-        .addon-card input {
-            position: absolute;
-            opacity: 0;
-        }
-        
-        .addon-card .addon-check {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 24px;
-            height: 24px;
-            border: 2px solid #dee2e6;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-        
-        .addon-card.selected .addon-check {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-color: #667eea;
-            color: white;
-        }
-        
-        .addon-title {
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 0.5rem;
-            padding-right: 30px;
-        }
-        
-        .addon-price {
-            color: #667eea;
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-        
-        .addon-price.quoted {
-            color: #666;
-            font-style: italic;
-            font-size: 0.95rem;
-        }
-        
-        /* Estimate Display */
+        /* Estimate Panel */
         .estimate-panel {
             position: sticky;
             top: 100px;
@@ -372,216 +264,260 @@
             background: white;
             border-radius: 16px;
             padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
         
         .estimate-header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             padding-bottom: 1.5rem;
             border-bottom: 2px solid #f0f0f0;
         }
         
-        .estimate-header h3 {
-            font-size: 1.1rem;
-            color: #666;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-        
-        .estimate-teams {
-            font-size: 1.5rem;
-            color: #1a1a1a;
-            font-weight: 600;
+        .estimate-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
             margin-bottom: 0.5rem;
         }
         
         .estimate-price {
-            font-size: 3rem;
+            font-size: 2.8rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--primary);
         }
         
-        .estimate-breakdown {
+        .estimate-starting {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+        
+        /* Coverage Package */
+        .coverage-package {
+            background: var(--background-alt);
+            border-radius: 10px;
+            padding: 1.25rem;
             margin-bottom: 1.5rem;
+        }
+        
+        .coverage-package h4 {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+        
+        .coverage-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+        
+        .coverage-row .label {
+            color: var(--text-muted);
+        }
+        
+        .coverage-row .value {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        /* Breakdown */
+        .breakdown-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .breakdown-section h4 {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.75rem;
         }
         
         .breakdown-item {
             display: flex;
             justify-content: space-between;
-            padding: 0.75rem 0;
+            padding: 0.6rem 0;
             border-bottom: 1px solid #f0f0f0;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
         
         .breakdown-item:last-child {
             border-bottom: none;
         }
         
-        .breakdown-label {
-            color: #666;
+        .breakdown-item .label {
+            color: var(--text-muted);
         }
         
-        .breakdown-value {
-            font-weight: 600;
-            color: #1a1a1a;
+        .breakdown-item .value {
+            font-weight: 500;
+            color: var(--text-dark);
         }
         
-        .included-list {
-            background: #f8f9fa;
-            padding: 1.25rem;
+        .breakdown-item.total {
+            border-top: 2px solid var(--primary);
+            padding-top: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        .breakdown-item.total .label,
+        .breakdown-item.total .value {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        /* Included List */
+        .included-section {
+            background: #f0fdf4;
             border-radius: 10px;
+            padding: 1.25rem;
             margin-bottom: 1.5rem;
         }
         
-        .included-list h4 {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 1rem;
+        .included-section h4 {
+            font-size: 0.85rem;
+            color: #166534;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            margin-bottom: 0.75rem;
         }
         
-        .included-list ul {
+        .included-section ul {
             list-style: none;
             padding: 0;
             margin: 0;
         }
         
-        .included-list li {
-            padding: 0.4rem 0;
-            font-size: 0.9rem;
-            color: #495057;
+        .included-section li {
+            font-size: 0.85rem;
+            color: #15803d;
+            padding: 0.35rem 0;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 0.5rem;
         }
         
-        .included-list li i {
-            color: #28a745;
-            font-size: 0.8rem;
+        .included-section li i {
+            margin-top: 0.15rem;
         }
         
-        .estimate-disclaimer {
-            font-size: 0.8rem;
-            color: #999;
-            text-align: center;
-            font-style: italic;
-            margin-bottom: 1.5rem;
+        /* Disclaimers */
+        .disclaimer-box {
+            background: #fffbeb;
+            border-left: 3px solid #f59e0b;
+            border-radius: 6px;
             padding: 1rem;
-            background: #fff9e6;
-            border-radius: 8px;
-            border-left: 3px solid #ffc107;
+            margin-bottom: 1rem;
+            font-size: 0.8rem;
+            color: #92400e;
         }
         
-        /* Lead Form */
-        .lead-form-section {
-            padding: 60px 0;
+        .disclaimer-box.airspace {
+            background: #fef2f2;
+            border-color: #ef4444;
+            color: #991b1b;
+        }
+        
+        /* CTA Button */
+        .estimate-cta {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1rem;
+        }
+        
+        /* Scope Message */
+        .scope-message {
+            background: #eff6ff;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #1e40af;
+            display: none;
+        }
+        
+        .scope-message.active {
+            display: block;
+        }
+        
+        /* Booking Form Section */
+        .booking-section {
+            padding: 80px 0;
             background: white;
         }
         
-        .lead-form-container {
-            max-width: 700px;
+        .booking-container {
+            max-width: 800px;
             margin: 0 auto;
         }
         
-        .lead-form-header {
+        .booking-header {
             text-align: center;
             margin-bottom: 2rem;
         }
         
-        .lead-form-header h2 {
+        .booking-header h2 {
             font-size: 2rem;
-            color: #1a1a1a;
+            color: var(--text-dark);
             margin-bottom: 0.5rem;
         }
         
-        .lead-form-header p {
-            color: #666;
+        .booking-header p {
+            color: var(--text-muted);
         }
         
-        .lead-form {
-            background: #f8f9fa;
+        .booking-form {
+            background: var(--background-alt);
             padding: 2.5rem;
             border-radius: 16px;
         }
         
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            color: #1a1a1a;
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            font-size: 1rem;
-        }
-        
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-        
-        .estimate-summary {
+        .booking-summary {
             background: white;
             padding: 1.5rem;
             border-radius: 10px;
             margin-bottom: 2rem;
-            border-left: 4px solid #667eea;
+            border-left: 4px solid var(--primary);
         }
         
-        .estimate-summary h4 {
-            font-size: 1rem;
-            color: #666;
+        .booking-summary h4 {
+            font-size: 0.9rem;
+            color: var(--text-muted);
             margin-bottom: 0.5rem;
         }
         
-        .estimate-summary .summary-price {
-            font-size: 1.5rem;
+        .booking-summary .summary-price {
+            font-size: 1.8rem;
             font-weight: 700;
-            color: #667eea;
+            color: var(--primary);
+        }
+        
+        .booking-summary .summary-details {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
         }
         
         .form-buttons {
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
+            margin-top: 1.5rem;
         }
         
         .form-buttons .cta-button {
             flex: 1;
             min-width: 200px;
-        }
-        
-        .form-buttons .cta-button.secondary {
-            background: white;
-            color: #667eea;
-            border: 2px solid #667eea;
+            text-align: center;
         }
         
         /* Responsive */
         @media (max-width: 1024px) {
-            .quote-grid {
+            .quote-layout {
                 grid-template-columns: 1fr;
             }
             
@@ -592,23 +528,17 @@
         
         @media (max-width: 768px) {
             .quote-hero h1 {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
             
-            .addons-grid,
-            .toggles-grid {
+            .form-grid,
+            .size-options {
                 grid-template-columns: 1fr;
             }
             
-            .form-row {
+            .form-grid.three-col {
                 grid-template-columns: 1fr;
             }
-        }
-        
-        /* Mapbox geocoder override */
-        .mapboxgl-ctrl-geocoder {
-            min-width: 100%;
-            margin-bottom: 1rem;
         }
     </style>
 </head>
@@ -636,200 +566,288 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="quote-hero">
         <div class="container">
-            <h1>Get an Instant Estimate</h1>
-            <p>Draw your venue perimeter, pick coverage hours, and see teams + pricing in seconds.</p>
+            <h1>Get Your Quote</h1>
+            <p>Tell us about your event and we'll recommend the right coverage package.</p>
         </div>
     </section>
 
     <!-- Quote Calculator -->
     <section class="quote-content">
         <div class="container">
-            <div class="quote-grid">
+            <div class="quote-layout">
                 <!-- Left: Inputs -->
                 <div class="quote-inputs">
-                    <!-- Step 1: Map -->
-                    <div class="quote-step">
-                        <div class="step-header">
-                            <div class="step-number">1</div>
-                            <h3>Draw Your Venue Perimeter</h3>
-                        </div>
-                        
-                        <div id="geocoder-container"></div>
-                        
-                        <div id="map-container">
-                            <div id="map"></div>
-                        </div>
-                        
-                        <!-- Fallback for no Mapbox -->
-                        <div class="map-fallback" id="map-fallback">
-                            <p style="margin-bottom: 1rem; color: #666;"><i class="fas fa-info-circle"></i> Map unavailable. Enter your venue details manually:</p>
-                            <div class="form-row" style="margin-bottom: 0;">
-                                <div class="form-group" style="margin-bottom: 0;">
-                                    <label for="manual-area">Approximate Area (acres)</label>
-                                    <input type="number" id="manual-area" min="0.5" max="500" step="0.5" value="5" placeholder="e.g., 5">
-                                </div>
-                                <div class="form-group" style="margin-bottom: 0;">
-                                    <label for="manual-perimeter">Approximate Perimeter (feet)</label>
-                                    <input type="number" id="manual-perimeter" min="500" max="50000" step="100" value="3000" placeholder="e.g., 3000">
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="map-chips" id="map-chips">
-                            <div class="chip" id="chip-area"><i class="fas fa-vector-square"></i> <span>0</span> acres</div>
-                            <div class="chip" id="chip-perimeter"><i class="fas fa-ruler"></i> <span>0</span> ft perimeter</div>
-                        </div>
-                        <p class="map-instructions" id="map-instructions">Search for your venue, then click the polygon tool (top-right) to draw your perimeter.</p>
-                    </div>
                     
-                    <!-- Step 2: Coverage Inputs -->
-                    <div class="quote-step">
-                        <div class="step-header">
-                            <div class="step-number">2</div>
-                            <h3>Coverage Details</h3>
+                    <!-- REQUIRED: Event Details -->
+                    <div class="quote-section">
+                        <div class="section-header">
+                            <i class="fas fa-calendar-alt"></i>
+                            <h3>Event Details</h3>
+                            <span class="badge required">Required</span>
                         </div>
                         
-                        <div class="slider-container">
-                            <div class="slider-label">
-                                <span>Coverage Hours</span>
-                                <span class="slider-value" id="hours-value">8 hours</span>
+                        <div class="form-group full-width">
+                            <label for="event-address">Event Location <span class="required-star">*</span></label>
+                            <input type="text" id="event-address" placeholder="Venue address" required>
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="event-city">City <span class="required-star">*</span></label>
+                                <input type="text" id="event-city" required>
                             </div>
-                            <input type="range" id="hours-slider" min="4" max="16" value="8" step="1">
+                            <div class="form-group">
+                                <label for="event-state">State <span class="required-star">*</span></label>
+                                <select id="event-state" required>
+                                    <option value="">Select state</option>
+                                    <option value="TX">Texas</option>
+                                    <option value="CA">California</option>
+                                    <option value="NY">New York</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
                         </div>
                         
-                        <div class="select-group">
+                        <div class="form-grid three-col">
+                            <div class="form-group">
+                                <label for="event-date">Event Date <span class="required-star">*</span></label>
+                                <input type="date" id="event-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="start-time">Start Time <span class="required-star">*</span></label>
+                                <input type="time" id="start-time" value="10:00" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="end-time">End Time <span class="required-star">*</span></label>
+                                <input type="time" id="end-time" value="18:00" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="event-type">Event Type <span class="required-star">*</span></label>
+                                <select id="event-type" required>
+                                    <option value="corporate">Corporate Event</option>
+                                    <option value="wedding">Wedding / Private Party</option>
+                                    <option value="festival">Festival / Concert</option>
+                                    <option value="sporting">Sporting Event</option>
+                                    <option value="political">Political / Rally</option>
+                                    <option value="vip">VIP / Executive Event</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="attendance">Estimated Attendance</label>
+                                <input type="number" id="attendance" placeholder="e.g., 500" min="10" max="100000">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- REQUIRED: Site Size -->
+                    <div class="quote-section">
+                        <div class="section-header">
+                            <i class="fas fa-ruler-combined"></i>
+                            <h3>Site Size</h3>
+                            <span class="badge required">Required</span>
+                        </div>
+                        
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+                            How would you like to describe your venue size?
+                        </p>
+                        
+                        <div class="size-options">
+                            <label class="size-option active" data-type="acres">
+                                <input type="radio" name="size-type" value="acres" checked>
+                                <div class="option-label">Acres</div>
+                            </label>
+                            <label class="size-option" data-type="perimeter">
+                                <input type="radio" name="size-type" value="perimeter">
+                                <div class="option-label">Perimeter</div>
+                            </label>
+                            <label class="size-option" data-type="notsure">
+                                <input type="radio" name="size-type" value="notsure">
+                                <div class="option-label">Not Sure</div>
+                            </label>
+                        </div>
+                        
+                        <div class="size-input-wrapper active" id="acres-input">
+                            <div class="form-group">
+                                <label for="site-acres">Venue Size (acres)</label>
+                                <input type="number" id="site-acres" value="5" min="0.5" max="500" step="0.5">
+                                <p class="helper-text">Approximate total area to be covered</p>
+                            </div>
+                        </div>
+                        
+                        <div class="size-input-wrapper" id="perimeter-input">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="site-perimeter">Perimeter Length</label>
+                                    <input type="number" id="site-perimeter" value="2640" min="100">
+                                </div>
+                                <div class="form-group">
+                                    <label for="perimeter-unit">Unit</label>
+                                    <select id="perimeter-unit">
+                                        <option value="feet">Feet</option>
+                                        <option value="meters">Meters</option>
+                                        <option value="miles" selected>Miles</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="scope-message" id="notsure-message">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>No problem!</strong> We'll recommend 1 team to start. During our 10-minute call, we'll confirm the exact scope and adjust if needed.
+                        </div>
+                    </div>
+
+                    <!-- OPTIONAL: Additional Options -->
+                    <div class="quote-section">
+                        <div class="section-header">
+                            <i class="fas fa-sliders-h"></i>
+                            <h3>Additional Options</h3>
+                            <span class="badge optional">Optional</span>
+                        </div>
+                        
+                        <div class="form-group">
                             <label for="risk-level">Risk Level</label>
                             <select id="risk-level">
-                                <option value="standard">Standard Event</option>
-                                <option value="elevated">Elevated Profile (VIPs, media)</option>
-                                <option value="high">High-Profile (executives, public figures)</option>
+                                <option value="auto">Let SkyShield decide (based on event type)</option>
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
                             </select>
                         </div>
                         
-                        <label style="display: block; font-weight: 500; color: #1a1a1a; margin-bottom: 1rem;">Site Complexity</label>
-                        <div class="toggles-grid">
-                            <div class="toggle-item">
-                                <label>Multiple Entrances (4+)</label>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="toggle-entrances">
-                                    <span class="toggle-slider"></span>
-                                </label>
-                            </div>
-                            <div class="toggle-item">
-                                <label>Multi-Lot Parking</label>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="toggle-parking">
-                                    <span class="toggle-slider"></span>
-                                </label>
-                            </div>
-                            <div class="toggle-item">
-                                <label>Adjacent Rooftops</label>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="toggle-rooftops">
-                                    <span class="toggle-slider"></span>
-                                </label>
-                            </div>
-                            <div class="toggle-item">
-                                <label>Night Event</label>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" id="toggle-night">
-                                    <span class="toggle-slider"></span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Step 3: Add-ons -->
-                    <div class="quote-step">
-                        <div class="step-header">
-                            <div class="step-number">3</div>
-                            <h3>Optional Add-ons</h3>
+                        <div class="toggle-row">
+                            <span class="toggle-label">Night operations (after sunset)</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="night-ops">
+                                <span class="toggle-slider"></span>
+                            </label>
                         </div>
                         
-                        <div class="addons-grid">
-                            <label class="addon-card" id="addon-recap">
-                                <input type="checkbox" data-price="1500" data-name="Cinematic Recap Reel">
-                                <div class="addon-check"><i class="fas fa-check"></i></div>
-                                <div class="addon-title">Cinematic Recap Reel</div>
-                                <div class="addon-price">+$1,500</div>
+                        <div class="toggle-row">
+                            <span class="toggle-label">Near airport or downtown area</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="airspace-concern">
+                                <span class="toggle-slider"></span>
                             </label>
-                            
-                            <label class="addon-card" id="addon-content">
-                                <input type="checkbox" data-price="2500" data-name="Full Content Capture">
-                                <div class="addon-check"><i class="fas fa-check"></i></div>
-                                <div class="addon-title">Full Content Capture (raw clips)</div>
-                                <div class="addon-price">+$2,500</div>
+                        </div>
+                        
+                        <div class="toggle-row">
+                            <span class="toggle-label">Client radio channel available</span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="radio-available" checked>
+                                <span class="toggle-slider"></span>
                             </label>
-                            
-                            <label class="addon-card" id="addon-mapping">
-                                <input type="checkbox" data-price="1000" data-name="Site Mapping + Zone Overlay">
-                                <div class="addon-check"><i class="fas fa-check"></i></div>
-                                <div class="addon-title">Site Mapping + Zone Overlay</div>
-                                <div class="addon-price">+$1,000</div>
-                            </label>
-                            
-                            <label class="addon-card" id="addon-expedited">
-                                <input type="checkbox" data-price="1000" data-name="Expedited Safety Receipt">
-                                <div class="addon-check"><i class="fas fa-check"></i></div>
-                                <div class="addon-title">Expedited Safety Receipt (same night)</div>
-                                <div class="addon-price">+$1,000</div>
-                            </label>
-                            
-                            <label class="addon-card" id="addon-lidar">
-                                <input type="checkbox" data-price="0" data-name="Advanced Site Scan (LiDAR/3D)">
-                                <div class="addon-check"><i class="fas fa-check"></i></div>
-                                <div class="addon-title">Advanced Site Scan (LiDAR/3D)</div>
-                                <div class="addon-price quoted">Custom quote</div>
-                            </label>
+                        </div>
+                        
+                        <div class="form-grid" style="margin-top: 1rem;">
+                            <div class="form-group">
+                                <label for="num-days">Number of Days</label>
+                                <select id="num-days">
+                                    <option value="1">1 day</option>
+                                    <option value="2">2 days</option>
+                                    <option value="3">3 days</option>
+                                    <option value="4">4+ days (custom)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="travel-miles">Distance from Austin (miles)</label>
+                                <input type="number" id="travel-miles" placeholder="e.g., 30" min="0" max="500">
+                                <p class="helper-text">Leave blank if in Austin area</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Right: Estimate Display -->
                 <div class="estimate-panel">
                     <div class="estimate-card">
                         <div class="estimate-header">
-                            <h3>Your Estimate</h3>
-                            <div class="estimate-teams" id="estimate-teams">1 team recommended</div>
+                            <div class="estimate-label">Your Estimate</div>
                             <div class="estimate-price" id="estimate-price">$7,500</div>
+                            <div class="estimate-starting" id="estimate-starting">Starting at</div>
                         </div>
                         
-                        <div class="estimate-breakdown">
+                        <!-- Coverage Package -->
+                        <div class="coverage-package">
+                            <h4>Recommended Coverage</h4>
+                            <div class="coverage-row">
+                                <span class="label">Teams</span>
+                                <span class="value" id="display-teams">1 team</span>
+                            </div>
+                            <div class="coverage-row">
+                                <span class="label">Hours</span>
+                                <span class="value" id="display-hours">8 hours</span>
+                            </div>
+                            <div class="coverage-row">
+                                <span class="label">Fleet per team</span>
+                                <span class="value">3× DJI Matrice 4T</span>
+                            </div>
+                            <div class="coverage-row">
+                                <span class="label">Staff per team</span>
+                                <span class="value">2 pilots + 1 ops mgr</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Breakdown -->
+                        <div class="breakdown-section">
+                            <h4>Price Breakdown</h4>
                             <div class="breakdown-item">
-                                <span class="breakdown-label">Base package</span>
-                                <span class="breakdown-value" id="breakdown-base">$7,500</span>
+                                <span class="label">Base package (8 hrs, 1 team)</span>
+                                <span class="value">$7,500</span>
                             </div>
-                            <div class="breakdown-item" id="breakdown-hours-row" style="display: none;">
-                                <span class="breakdown-label">Extra hours</span>
-                                <span class="breakdown-value" id="breakdown-hours">$0</span>
+                            <div class="breakdown-item" id="row-extra-hours" style="display: none;">
+                                <span class="label" id="label-extra-hours">Additional hours</span>
+                                <span class="value" id="value-extra-hours">+$0</span>
                             </div>
-                            <div class="breakdown-item" id="breakdown-addons-row" style="display: none;">
-                                <span class="breakdown-label">Add-ons</span>
-                                <span class="breakdown-value" id="breakdown-addons">$0</span>
+                            <div class="breakdown-item" id="row-extra-teams" style="display: none;">
+                                <span class="label" id="label-extra-teams">Additional teams</span>
+                                <span class="value" id="value-extra-teams">+$0</span>
+                            </div>
+                            <div class="breakdown-item" id="row-travel" style="display: none;">
+                                <span class="label">Travel / mobilization</span>
+                                <span class="value" id="value-travel">+$0</span>
+                            </div>
+                            <div class="breakdown-item" id="row-night" style="display: none;">
+                                <span class="label">Night operations</span>
+                                <span class="value" id="value-night">+$0</span>
+                            </div>
+                            <div class="breakdown-item" id="row-deposit" style="display: none;">
+                                <span class="label">Deposit (50%)</span>
+                                <span class="value" id="value-deposit">$3,750</span>
                             </div>
                         </div>
                         
-                        <div class="included-list">
-                            <h4>What's Included</h4>
-                            <ul>
-                                <li><i class="fas fa-check"></i> 2-3 drones per team</li>
-                                <li><i class="fas fa-check"></i> Manual operations + AI-assisted alerting</li>
-                                <li><i class="fas fa-check"></i> Real-time handoff to security lead</li>
-                                <li><i class="fas fa-check"></i> Next-day Safety Receipt</li>
-                                <li><i class="fas fa-check"></i> Part 107 compliant operations</li>
-                                <li><i class="fas fa-check"></i> Full liability insurance</li>
+                        <!-- Included -->
+                        <div class="included-section">
+                            <h4>Always Included</h4>
+                            <ul id="included-list">
+                                <li><i class="fas fa-check"></i> Live overwatch + radio callouts</li>
+                                <li><i class="fas fa-check"></i> Incident Log with timestamps</li>
+                                <li><i class="fas fa-check"></i> Safety Receipt PDF within 24 hrs</li>
+                                <li><i class="fas fa-check"></i> Privacy: no biometric ID or ALPR</li>
                             </ul>
                         </div>
                         
-                        <div class="estimate-disclaimer">
-                            <strong>Estimate only.</strong> Final quote after confirmation call/site walk and airspace check.
+                        <!-- Disclaimers -->
+                        <div class="disclaimer-box" id="disclaimer-standard">
+                            Final quote depends on site layout, airspace approvals, and operational constraints (Part 107/VLOS/venue permissions).
                         </div>
                         
-                        <a href="#lead-form" class="cta-button primary" style="width: 100%; text-align: center;">
-                            Request Final Quote
+                        <div class="disclaimer-box airspace" id="disclaimer-airspace" style="display: none;">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            This location may require airspace authorization. We'll confirm feasibility before finalizing.
+                        </div>
+                        
+                        <a href="#booking-form" class="cta-button primary estimate-cta">
+                            Request Booking
                         </a>
                     </div>
                 </div>
@@ -837,74 +855,63 @@
         </div>
     </section>
 
-    <!-- Lead Capture Form -->
-    <section class="lead-form-section" id="lead-form">
+    <!-- Booking Form -->
+    <section class="booking-section" id="booking-form">
         <div class="container">
-            <div class="lead-form-container">
-                <div class="lead-form-header">
-                    <h2>Request Your Final Quote</h2>
-                    <p>We'll confirm details, check airspace, and send a firm quote within 24 hours.</p>
+            <div class="booking-container">
+                <div class="booking-header">
+                    <h2>Request Your Booking</h2>
+                    <p>We'll confirm details and airspace, then send a final quote within 24 hours.</p>
                 </div>
                 
-                <form class="lead-form" id="quoteForm">
-                    <div class="estimate-summary">
+                <form class="booking-form" id="bookingForm">
+                    <div class="booking-summary">
                         <h4>Your Estimate Summary</h4>
-                        <div class="summary-price" id="form-estimate-price">$7,500</div>
-                        <div id="form-estimate-details" style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">1 team, 8 hours</div>
+                        <div class="summary-price" id="form-price">Starting at $7,500</div>
+                        <div class="summary-details" id="form-details">1 team, 8 hours</div>
                     </div>
                     
-                    <div class="form-row">
+                    <div class="form-grid">
                         <div class="form-group">
-                            <label for="lead-name">Name *</label>
-                            <input type="text" id="lead-name" name="name" required>
+                            <label for="contact-name">Your Name <span class="required-star">*</span></label>
+                            <input type="text" id="contact-name" required>
                         </div>
                         <div class="form-group">
-                            <label for="lead-email">Email *</label>
-                            <input type="email" id="lead-email" name="email" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="lead-phone">Phone *</label>
-                            <input type="tel" id="lead-phone" name="phone" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="lead-org">Organization</label>
-                            <input type="text" id="lead-org" name="organization">
+                            <label for="contact-email">Email <span class="required-star">*</span></label>
+                            <input type="email" id="contact-email" required>
                         </div>
                     </div>
                     
-                    <div class="form-row">
+                    <div class="form-grid">
                         <div class="form-group">
-                            <label for="lead-date">Event Date *</label>
-                            <input type="date" id="lead-date" name="eventDate" required>
+                            <label for="contact-phone">Phone <span class="required-star">*</span></label>
+                            <input type="tel" id="contact-phone" required>
                         </div>
                         <div class="form-group">
-                            <label for="lead-time">Event Time</label>
-                            <input type="time" id="lead-time" name="eventTime">
+                            <label for="contact-org">Organization</label>
+                            <input type="text" id="contact-org">
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="lead-notes">Additional Notes</label>
-                        <textarea id="lead-notes" name="notes" rows="3" placeholder="Venue name, special requirements, questions..."></textarea>
+                        <label for="contact-notes">Additional Notes</label>
+                        <textarea id="contact-notes" rows="3" placeholder="Venue name, special requirements, questions..."></textarea>
                     </div>
                     
-                    <!-- Hidden fields for estimate data -->
-                    <input type="hidden" id="hidden-estimate" name="estimate">
-                    <input type="hidden" id="hidden-teams" name="teams">
-                    <input type="hidden" id="hidden-hours" name="hours">
-                    <input type="hidden" id="hidden-addons" name="addons">
-                    <input type="hidden" id="hidden-area" name="area">
-                    <input type="hidden" id="hidden-perimeter" name="perimeter">
+                    <!-- Hidden fields for payload -->
+                    <input type="hidden" id="payload-estimate" name="estimate">
+                    <input type="hidden" id="payload-teams" name="teams">
+                    <input type="hidden" id="payload-hours" name="hours">
+                    <input type="hidden" id="payload-location" name="location">
+                    <input type="hidden" id="payload-date" name="date">
+                    <input type="hidden" id="payload-breakdown" name="breakdown">
                     
                     <div class="form-buttons">
                         <button type="submit" class="cta-button primary">
-                            <i class="fas fa-paper-plane"></i> Request Final Quote
+                            <i class="fas fa-paper-plane"></i> Submit Booking Request
                         </button>
                         <a href="https://calendly.com" target="_blank" class="cta-button secondary">
-                            <i class="fas fa-calendar"></i> Book 10-min Call
+                            <i class="fas fa-phone"></i> Book 10-min Call
                         </a>
                     </div>
                 </form>
@@ -915,386 +922,389 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>Sky Shield LLC • Austin, TX • Not for emergency response. Operations comply with FAA Part 107.</p>
-            <p style="margin-top: 0.5rem;"><a href="pilot-application.html" style="color: rgba(255,255,255,0.7);">Join Our Team</a> | <a href="#" style="color: rgba(255,255,255,0.7);">Privacy Policy</a></p>
+            <div class="footer-content">
+                <p>Sky Shield LLC • Austin, TX • Not for emergency response. Operations comply with FAA Part 107.</p>
+                <div class="footer-links">
+                    <a href="pilot-application.html">Join Our Team</a>
+                </div>
+            </div>
         </div>
     </footer>
 
     <script src="../script.js"></script>
     <script>
         // ============================================
-        // QUOTE CALCULATOR CONFIG
+        // QUOTE CALCULATOR LOGIC
         // ============================================
-        const CONFIG = {
-            // Base pricing
-            BASE_PER_TEAM: 7500,
-            BASE_HOURS: 8,
-            EXTRA_HOUR_RATE: 750,
-            
-            // Load calculation divisors
-            AREA_DIVISOR: 15,        // acres
-            PERIMETER_DIVISOR: 5000, // feet
-            
-            // Complexity multipliers
-            RISK_MULTIPLIER: {
-                standard: 0,
-                elevated: 0.25,
-                high: 0.5
-            },
-            ENTRANCES_MULTIPLIER: 0.2,
-            PARKING_MULTIPLIER: 0.2,
-            ROOFTOPS_MULTIPLIER: 0.15,
-            NIGHT_MULTIPLIER: 0.1,
-            
-            // Add-on prices
-            ADDONS: {
-                recap: 1500,
-                content: 2500,
-                mapping: 1000,
-                expedited: 1000,
-                lidar: 0  // quoted separately
-            },
-            
-            // Mapbox token (replace with your token)
-            MAPBOX_TOKEN: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'
-        };
-
-        // ============================================
-        // STATE
-        // ============================================
+        
+        const CONFIG = QUOTE_CONFIG;
+        
+        // State
         let state = {
-            area: 5,          // acres
-            perimeter: 3000,  // feet
+            sizeType: 'acres',
+            acres: 5,
+            perimeter: 0.5, // miles
             hours: 8,
-            risk: 'standard',
-            entrances: false,
-            parking: false,
-            rooftops: false,
-            night: false,
-            addons: [],
-            polygon: null,
-            mapLoaded: false
+            teams: 1,
+            riskLevel: 'auto',
+            eventType: 'corporate',
+            nightOps: false,
+            airspaceConcern: false,
+            days: 1,
+            travelMiles: 0
         };
 
         // ============================================
-        // MAP INITIALIZATION
-        // ============================================
-        let map, draw;
-        
-        function initMap() {
-            try {
-                mapboxgl.accessToken = CONFIG.MAPBOX_TOKEN;
-                
-                map = new mapboxgl.Map({
-                    container: 'map',
-                    style: 'mapbox://styles/mapbox/satellite-streets-v12',
-                    center: [-97.7431, 30.2672], // Austin, TX
-                    zoom: 15
-                });
-                
-                // Add geocoder (search)
-                const geocoder = new MapboxGeocoder({
-                    accessToken: mapboxgl.accessToken,
-                    mapboxgl: mapboxgl,
-                    placeholder: 'Search for your venue...',
-                    countries: 'us'
-                });
-                
-                document.getElementById('geocoder-container').appendChild(geocoder.onAdd(map));
-                
-                // Add draw controls
-                draw = new MapboxDraw({
-                    displayControlsDefault: false,
-                    controls: {
-                        polygon: true,
-                        trash: true
-                    },
-                    defaultMode: 'simple_select'
-                });
-                
-                map.addControl(draw);
-                map.addControl(new mapboxgl.NavigationControl(), 'top-right');
-                
-                // Listen for draw events
-                map.on('draw.create', updateArea);
-                map.on('draw.delete', updateArea);
-                map.on('draw.update', updateArea);
-                
-                map.on('load', () => {
-                    state.mapLoaded = true;
-                });
-                
-            } catch (e) {
-                console.error('Map failed to load:', e);
-                showMapFallback();
-            }
-        }
-        
-        function showMapFallback() {
-            document.getElementById('map-container').style.display = 'none';
-            document.getElementById('map-fallback').classList.add('active');
-            document.getElementById('map-instructions').textContent = 'Enter your venue area and perimeter above.';
-            document.getElementById('geocoder-container').style.display = 'none';
-            
-            // Update chips with manual values
-            updateChips(state.area, state.perimeter);
-        }
-        
-        function updateArea() {
-            const data = draw.getAll();
-            if (data.features.length > 0) {
-                const polygon = data.features[0];
-                state.polygon = polygon;
-                
-                // Calculate area in acres
-                const areaM2 = turf.area(polygon);
-                const areaAcres = areaM2 / 4046.86;
-                state.area = Math.round(areaAcres * 10) / 10;
-                
-                // Calculate perimeter in feet
-                const perimeterKm = turf.length(turf.polygonToLine(polygon));
-                const perimeterFt = perimeterKm * 3280.84;
-                state.perimeter = Math.round(perimeterFt);
-                
-                updateChips(state.area, state.perimeter);
-                calculateEstimate();
-            } else {
-                state.area = 0;
-                state.perimeter = 0;
-                state.polygon = null;
-                updateChips(0, 0);
-                calculateEstimate();
-            }
-        }
-        
-        function updateChips(area, perimeter) {
-            document.querySelector('#chip-area span').textContent = area.toFixed(1);
-            document.querySelector('#chip-perimeter span').textContent = perimeter.toLocaleString();
-            
-            // Highlight if values present
-            if (area > 0) {
-                document.getElementById('chip-area').classList.add('highlight');
-                document.getElementById('chip-perimeter').classList.add('highlight');
-            } else {
-                document.getElementById('chip-area').classList.remove('highlight');
-                document.getElementById('chip-perimeter').classList.remove('highlight');
-            }
-        }
-
-        // ============================================
-        // CALCULATOR LOGIC
-        // ============================================
-        function calculateEstimate() {
-            // Get current values
-            const area = state.area || parseFloat(document.getElementById('manual-area')?.value) || 5;
-            const perimeter = state.perimeter || parseFloat(document.getElementById('manual-perimeter')?.value) || 3000;
-            const hours = state.hours;
-            const risk = state.risk;
-            
-            // Calculate load factors
-            const areaFactor = area / CONFIG.AREA_DIVISOR;
-            const perimeterFactor = perimeter / CONFIG.PERIMETER_DIVISOR;
-            
-            // Calculate complexity multiplier
-            let complexity = 1;
-            complexity += CONFIG.RISK_MULTIPLIER[risk] || 0;
-            complexity += state.entrances ? CONFIG.ENTRANCES_MULTIPLIER : 0;
-            complexity += state.parking ? CONFIG.PARKING_MULTIPLIER : 0;
-            complexity += state.rooftops ? CONFIG.ROOFTOPS_MULTIPLIER : 0;
-            complexity += state.night ? CONFIG.NIGHT_MULTIPLIER : 0;
-            
-            // Calculate load and teams
-            const load = (areaFactor + perimeterFactor) * complexity;
-            const teams = Math.max(1, Math.ceil(load));
-            
-            // Calculate pricing
-            const basePrice = teams * CONFIG.BASE_PER_TEAM;
-            const extraHours = Math.max(0, hours - CONFIG.BASE_HOURS);
-            const extraHoursPrice = extraHours * CONFIG.EXTRA_HOUR_RATE * teams;
-            
-            // Calculate add-ons
-            let addonsTotal = 0;
-            state.addons.forEach(addon => {
-                addonsTotal += addon.price;
-            });
-            
-            const totalPrice = basePrice + extraHoursPrice + addonsTotal;
-            
-            // Update display
-            updateEstimateDisplay(teams, totalPrice, basePrice, extraHoursPrice, addonsTotal, hours);
-            
-            // Update hidden form fields
-            document.getElementById('hidden-estimate').value = totalPrice;
-            document.getElementById('hidden-teams').value = teams;
-            document.getElementById('hidden-hours').value = hours;
-            document.getElementById('hidden-addons').value = state.addons.map(a => a.name).join(', ');
-            document.getElementById('hidden-area').value = area;
-            document.getElementById('hidden-perimeter').value = perimeter;
-            
-            return { teams, totalPrice, basePrice, extraHoursPrice, addonsTotal };
-        }
-        
-        function updateEstimateDisplay(teams, total, base, extraHours, addons, hours) {
-            // Update main estimate
-            document.getElementById('estimate-teams').textContent = 
-                teams === 1 ? '1 team recommended' : `${teams} teams recommended`;
-            document.getElementById('estimate-price').textContent = '$' + total.toLocaleString();
-            
-            // Update breakdown
-            document.getElementById('breakdown-base').textContent = '$' + base.toLocaleString();
-            
-            // Extra hours row
-            const hoursRow = document.getElementById('breakdown-hours-row');
-            if (extraHours > 0) {
-                hoursRow.style.display = 'flex';
-                document.getElementById('breakdown-hours').textContent = '+$' + extraHours.toLocaleString();
-            } else {
-                hoursRow.style.display = 'none';
-            }
-            
-            // Add-ons row
-            const addonsRow = document.getElementById('breakdown-addons-row');
-            if (addons > 0) {
-                addonsRow.style.display = 'flex';
-                document.getElementById('breakdown-addons').textContent = '+$' + addons.toLocaleString();
-            } else {
-                addonsRow.style.display = 'none';
-            }
-            
-            // Update form summary
-            document.getElementById('form-estimate-price').textContent = '$' + total.toLocaleString();
-            document.getElementById('form-estimate-details').textContent = 
-                `${teams} team${teams > 1 ? 's' : ''}, ${hours} hours${state.addons.length > 0 ? ', + add-ons' : ''}`;
-        }
-
-        // ============================================
-        // EVENT LISTENERS
+        // INITIALIZATION
         // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize map
-            initMap();
+            initSizeOptions();
+            initTimeCalculation();
+            initEventListeners();
+            calculateEstimate();
+        });
+
+        function initSizeOptions() {
+            document.querySelectorAll('.size-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const type = this.dataset.type;
+                    
+                    // Update active state
+                    document.querySelectorAll('.size-option').forEach(o => o.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show/hide input wrappers
+                    document.querySelectorAll('.size-input-wrapper').forEach(w => w.classList.remove('active'));
+                    document.getElementById('notsure-message').classList.remove('active');
+                    
+                    if (type === 'acres') {
+                        document.getElementById('acres-input').classList.add('active');
+                    } else if (type === 'perimeter') {
+                        document.getElementById('perimeter-input').classList.add('active');
+                    } else if (type === 'notsure') {
+                        document.getElementById('notsure-message').classList.add('active');
+                    }
+                    
+                    state.sizeType = type;
+                    calculateEstimate();
+                });
+            });
+        }
+
+        function initTimeCalculation() {
+            const startTime = document.getElementById('start-time');
+            const endTime = document.getElementById('end-time');
             
-            // Hours slider
-            const hoursSlider = document.getElementById('hours-slider');
-            const hoursValue = document.getElementById('hours-value');
+            function updateHours() {
+                const start = startTime.value.split(':').map(Number);
+                const end = endTime.value.split(':').map(Number);
+                
+                let hours = (end[0] + end[1]/60) - (start[0] + start[1]/60);
+                if (hours < 0) hours += 24; // Overnight event
+                
+                state.hours = Math.max(CONFIG.limits.min_hours, Math.round(hours));
+                calculateEstimate();
+            }
             
-            hoursSlider.addEventListener('input', function() {
-                state.hours = parseInt(this.value);
-                hoursValue.textContent = this.value + ' hours';
+            startTime.addEventListener('change', updateHours);
+            endTime.addEventListener('change', updateHours);
+        }
+
+        function initEventListeners() {
+            // Acres input
+            document.getElementById('site-acres').addEventListener('input', function() {
+                state.acres = parseFloat(this.value) || 0;
+                calculateEstimate();
+            });
+            
+            // Perimeter input
+            document.getElementById('site-perimeter').addEventListener('input', function() {
+                updatePerimeterMiles();
+                calculateEstimate();
+            });
+            
+            document.getElementById('perimeter-unit').addEventListener('change', function() {
+                updatePerimeterMiles();
+                calculateEstimate();
+            });
+            
+            // Event type
+            document.getElementById('event-type').addEventListener('change', function() {
+                state.eventType = this.value;
                 calculateEstimate();
             });
             
             // Risk level
             document.getElementById('risk-level').addEventListener('change', function() {
-                state.risk = this.value;
+                state.riskLevel = this.value;
                 calculateEstimate();
             });
             
-            // Toggles
-            document.getElementById('toggle-entrances').addEventListener('change', function() {
-                state.entrances = this.checked;
+            // Night ops
+            document.getElementById('night-ops').addEventListener('change', function() {
+                state.nightOps = this.checked;
                 calculateEstimate();
             });
             
-            document.getElementById('toggle-parking').addEventListener('change', function() {
-                state.parking = this.checked;
+            // Airspace concern
+            document.getElementById('airspace-concern').addEventListener('change', function() {
+                state.airspaceConcern = this.checked;
+                document.getElementById('disclaimer-airspace').style.display = this.checked ? 'block' : 'none';
+            });
+            
+            // Days
+            document.getElementById('num-days').addEventListener('change', function() {
+                state.days = parseInt(this.value) || 1;
                 calculateEstimate();
             });
             
-            document.getElementById('toggle-rooftops').addEventListener('change', function() {
-                state.rooftops = this.checked;
+            // Travel
+            document.getElementById('travel-miles').addEventListener('input', function() {
+                state.travelMiles = parseFloat(this.value) || 0;
                 calculateEstimate();
             });
-            
-            document.getElementById('toggle-night').addEventListener('change', function() {
-                state.night = this.checked;
-                calculateEstimate();
-            });
-            
-            // Add-on cards
-            document.querySelectorAll('.addon-card input').forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    const card = this.closest('.addon-card');
-                    const price = parseInt(this.dataset.price) || 0;
-                    const name = this.dataset.name;
-                    
-                    if (this.checked) {
-                        card.classList.add('selected');
-                        state.addons.push({ name, price });
-                    } else {
-                        card.classList.remove('selected');
-                        state.addons = state.addons.filter(a => a.name !== name);
-                    }
-                    
-                    calculateEstimate();
-                });
-            });
-            
-            // Manual input fallback
-            const manualArea = document.getElementById('manual-area');
-            const manualPerimeter = document.getElementById('manual-perimeter');
-            
-            if (manualArea) {
-                manualArea.addEventListener('input', function() {
-                    state.area = parseFloat(this.value) || 0;
-                    updateChips(state.area, state.perimeter);
-                    calculateEstimate();
-                });
-            }
-            
-            if (manualPerimeter) {
-                manualPerimeter.addEventListener('input', function() {
-                    state.perimeter = parseFloat(this.value) || 0;
-                    updateChips(state.area, state.perimeter);
-                    calculateEstimate();
-                });
-            }
             
             // Form submission
-            document.getElementById('quoteForm').addEventListener('submit', function(e) {
-                e.preventDefault();
+            document.getElementById('bookingForm').addEventListener('submit', handleFormSubmit);
+        }
+
+        function updatePerimeterMiles() {
+            const value = parseFloat(document.getElementById('site-perimeter').value) || 0;
+            const unit = document.getElementById('perimeter-unit').value;
+            
+            // Convert to miles
+            if (unit === 'feet') {
+                state.perimeter = value / 5280;
+            } else if (unit === 'meters') {
+                state.perimeter = value / 1609.34;
+            } else {
+                state.perimeter = value;
+            }
+        }
+
+        // ============================================
+        // TEAM RECOMMENDATION LOGIC
+        // ============================================
+        function calculateTeams() {
+            // If "not sure", default to 1 team
+            if (state.sizeType === 'notsure') {
+                return CONFIG.team_heuristic.not_sure_default;
+            }
+            
+            // Determine risk level
+            let risk = state.riskLevel;
+            if (risk === 'auto') {
+                risk = CONFIG.event_types[state.eventType]?.risk || 'medium';
+            }
+            
+            let teams = 1;
+            
+            if (state.sizeType === 'acres' && state.acres > 0) {
+                const threshold = CONFIG.team_heuristic.by_acres[risk] || 4;
+                teams = Math.ceil(state.acres / threshold);
+            } else if (state.sizeType === 'perimeter' && state.perimeter > 0) {
+                const threshold = CONFIG.team_heuristic.by_perimeter_miles[risk] || 1.0;
+                teams = Math.ceil(state.perimeter / threshold);
+            }
+            
+            return Math.max(1, teams);
+        }
+
+        // ============================================
+        // PRICE COMPUTATION
+        // ============================================
+        function calculateEstimate() {
+            const teams = calculateTeams();
+            state.teams = teams;
+            
+            const hours = state.hours;
+            const days = state.days;
+            
+            // Base calculation
+            const basePrice = CONFIG.base.price;
+            const extraHours = Math.max(0, hours - CONFIG.base.hours);
+            const extraTeams = Math.max(0, teams - CONFIG.base.teams);
+            
+            // Calculate line items
+            const extraHoursPrice = extraHours * CONFIG.extra_hour_price * teams;
+            const extraTeamsPrice = extraTeams * CONFIG.extra_team_price;
+            
+            // Travel fee
+            let travelFee = 0;
+            if (state.travelMiles > CONFIG.travel.included_miles) {
+                const extraMiles = state.travelMiles - CONFIG.travel.included_miles;
+                travelFee = Math.max(CONFIG.travel.minimum, extraMiles * CONFIG.travel.per_mile);
+            }
+            
+            // Night ops fee
+            const nightFee = state.nightOps ? CONFIG.night_ops_fee : 0;
+            
+            // Total
+            let total = basePrice + extraHoursPrice + extraTeamsPrice + travelFee + nightFee;
+            total = total * days;
+            
+            // Update display
+            updateDisplay(teams, hours, total, {
+                base: basePrice,
+                extraHours: extraHoursPrice,
+                extraTeams: extraTeamsPrice,
+                travel: travelFee,
+                night: nightFee,
+                days: days
+            });
+            
+            return total;
+        }
+
+        function updateDisplay(teams, hours, total, breakdown) {
+            // Main estimate
+            document.getElementById('estimate-price').textContent = '$' + total.toLocaleString();
+            
+            // Coverage
+            document.getElementById('display-teams').textContent = teams === 1 ? '1 team' : teams + ' teams';
+            document.getElementById('display-hours').textContent = hours + ' hours';
+            
+            // Breakdown rows
+            const rowExtraHours = document.getElementById('row-extra-hours');
+            if (breakdown.extraHours > 0) {
+                rowExtraHours.style.display = 'flex';
+                document.getElementById('label-extra-hours').textContent = 
+                    `+${hours - CONFIG.base.hours} hours × ${teams} team${teams > 1 ? 's' : ''}`;
+                document.getElementById('value-extra-hours').textContent = '+$' + breakdown.extraHours.toLocaleString();
+            } else {
+                rowExtraHours.style.display = 'none';
+            }
+            
+            const rowExtraTeams = document.getElementById('row-extra-teams');
+            if (breakdown.extraTeams > 0) {
+                rowExtraTeams.style.display = 'flex';
+                document.getElementById('label-extra-teams').textContent = 
+                    `+${teams - CONFIG.base.teams} additional team${teams - CONFIG.base.teams > 1 ? 's' : ''}`;
+                document.getElementById('value-extra-teams').textContent = '+$' + breakdown.extraTeams.toLocaleString();
+            } else {
+                rowExtraTeams.style.display = 'none';
+            }
+            
+            const rowTravel = document.getElementById('row-travel');
+            if (breakdown.travel > 0) {
+                rowTravel.style.display = 'flex';
+                document.getElementById('value-travel').textContent = '+$' + breakdown.travel.toLocaleString();
+            } else {
+                rowTravel.style.display = 'none';
+            }
+            
+            const rowNight = document.getElementById('row-night');
+            if (breakdown.night > 0) {
+                rowNight.style.display = 'flex';
+                document.getElementById('value-night').textContent = '+$' + breakdown.night.toLocaleString();
+            } else {
+                rowNight.style.display = 'none';
+            }
+            
+            // Deposit row
+            if (CONFIG.deposit.enabled) {
+                const deposit = total * (CONFIG.deposit.percent / 100);
+                document.getElementById('row-deposit').style.display = 'flex';
+                document.getElementById('value-deposit').textContent = '$' + deposit.toLocaleString();
+            }
+            
+            // Form summary
+            document.getElementById('form-price').textContent = 'Starting at $' + total.toLocaleString();
+            document.getElementById('form-details').textContent = 
+                `${teams} team${teams > 1 ? 's' : ''}, ${hours} hours` + 
+                (breakdown.days > 1 ? ` × ${breakdown.days} days` : '');
+            
+            // Update hidden fields
+            document.getElementById('payload-estimate').value = total;
+            document.getElementById('payload-teams').value = teams;
+            document.getElementById('payload-hours').value = hours;
+        }
+
+        // ============================================
+        // FORM SUBMISSION
+        // ============================================
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            // Gather all data
+            const formData = {
+                // Contact
+                name: document.getElementById('contact-name').value,
+                email: document.getElementById('contact-email').value,
+                phone: document.getElementById('contact-phone').value,
+                org: document.getElementById('contact-org').value,
                 
-                const formData = new FormData(this);
-                const data = Object.fromEntries(formData);
+                // Event
+                date: document.getElementById('event-date').value,
+                startTime: document.getElementById('start-time').value,
+                endTime: document.getElementById('end-time').value,
+                eventType: document.getElementById('event-type').value,
+                attendance: document.getElementById('attendance').value,
                 
-                // Create email
-                const subject = `Quote Request - ${data.name} - $${data.estimate}`;
-                const body = `NEW QUOTE REQUEST
+                // Location
+                address: document.getElementById('event-address').value,
+                city: document.getElementById('event-city').value,
+                state: document.getElementById('event-state').value,
+                
+                // Scope
+                sizeType: state.sizeType,
+                acres: state.acres,
+                perimeter: state.perimeter,
+                riskLevel: state.riskLevel,
+                nightOps: state.nightOps,
+                days: state.days,
+                
+                // Calculator result
+                teams: state.teams,
+                hours: state.hours,
+                estimate: document.getElementById('estimate-price').textContent,
+                
+                // Notes
+                notes: document.getElementById('contact-notes').value
+            };
+            
+            // Build email
+            const subject = `Booking Request - ${formData.name} - ${formData.estimate}`;
+            const body = `NEW BOOKING REQUEST
 
-Contact Information:
-Name: ${data.name}
-Email: ${data.email}
-Phone: ${data.phone}
-Organization: ${data.organization || 'Not specified'}
+CONTACT
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Organization: ${formData.org || 'Not specified'}
 
-Event Details:
-Date: ${data.eventDate}
-Time: ${data.eventTime || 'Not specified'}
+EVENT DETAILS
+Date: ${formData.date}
+Time: ${formData.startTime} - ${formData.endTime}
+Type: ${formData.eventType}
+Attendance: ${formData.attendance || 'Not specified'}
 
-Estimate Details:
-Estimated Price: $${parseInt(data.estimate).toLocaleString()}
-Teams Required: ${data.teams}
-Coverage Hours: ${data.hours}
-Area: ${data.area} acres
-Perimeter: ${parseInt(data.perimeter).toLocaleString()} ft
-Add-ons: ${data.addons || 'None'}
+LOCATION
+Address: ${formData.address}
+City/State: ${formData.city}, ${formData.state}
 
-Additional Notes:
-${data.notes || 'None'}
+SCOPE
+Site Size: ${formData.sizeType === 'acres' ? formData.acres + ' acres' : formData.sizeType === 'perimeter' ? formData.perimeter.toFixed(2) + ' miles perimeter' : 'Not sure (confirm on call)'}
+Risk Level: ${formData.riskLevel}
+Night Ops: ${formData.nightOps ? 'Yes' : 'No'}
+Days: ${formData.days}
+
+ESTIMATE
+Teams: ${formData.teams}
+Hours: ${formData.hours}
+Price: ${formData.estimate}
+
+NOTES
+${formData.notes || 'None'}
 
 ---
 Submitted via Sky Shield Quote Calculator`;
-                
-                const mailtoLink = `mailto:kavin.lingham@alpha.school?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                window.open(mailtoLink);
-                
-                alert('Thank you! Your email client should open with your quote request. Please send the email to complete your request.');
-            });
+
+            const mailtoLink = `mailto:${CONFIG.quote_email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.open(mailtoLink);
             
-            // Initial calculation
-            calculateEstimate();
-        });
+            alert('Thank you! Your email client should open with your booking request. Please send the email to complete your submission.');
+        }
     </script>
 </body>
 </html>
-
