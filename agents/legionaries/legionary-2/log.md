@@ -45,3 +45,4 @@ Updated three sub-pages to remove autonomy/BVLOS claims and make content defensi
 
 #### Notes
 All autonomy claims removed. BVLOS not marketed. Specs made conservative and defensible. Matrice 4T prominently featured as primary platform per founder's direction.
+

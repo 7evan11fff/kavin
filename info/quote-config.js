@@ -1,155 +1,154 @@
-/**
- * Sky Shield Quote Calculator Configuration
- * 
- * Edit these values to adjust pricing and calculator behavior.
- * All prices in USD.
- */
+// SkyShield Booking Calculator - Pricing Configuration
+// Last updated: 2025-12-18
 
-const QUOTE_CONFIG = {
-    // ============================================
-    // BASE PRICING
-    // ============================================
-    
-    // Price per team for base coverage (8 hours)
-    BASE_PER_TEAM: 7500,
-    
-    // Number of hours included in base package
-    BASE_HOURS: 8,
-    
-    // Price per extra hour (per team)
-    EXTRA_HOUR_RATE: 750,
-    
-    // Drones per team (for display purposes)
-    DRONES_PER_TEAM: '2-3',
-    
-    
-    // ============================================
-    // LOAD CALCULATION
-    // ============================================
-    // Teams = ceil((area/AREA_DIVISOR + perimeter/PERIMETER_DIVISOR) * complexity)
-    
-    // Acres - higher = fewer teams for same area
-    AREA_DIVISOR: 15,
-    
-    // Feet - higher = fewer teams for same perimeter
-    PERIMETER_DIVISOR: 5000,
-    
-    
-    // ============================================
-    // COMPLEXITY MULTIPLIERS
-    // ============================================
-    // These add to the base complexity of 1.0
-    
-    RISK_MULTIPLIER: {
-        standard: 0,      // No additional complexity
-        elevated: 0.25,   // VIPs, media presence
-        high: 0.5         // Executives, public figures
-    },
-    
-    // Site complexity toggles
-    ENTRANCES_MULTIPLIER: 0.2,    // 4+ entrances
-    PARKING_MULTIPLIER: 0.2,      // Multi-lot parking
-    ROOFTOPS_MULTIPLIER: 0.15,    // Adjacent rooftops to monitor
-    NIGHT_MULTIPLIER: 0.1,        // Night event (thermal needed)
-    
-    
-    // ============================================
-    // ADD-ON PRICING
-    // ============================================
-    
-    ADDONS: {
-        // Cinematic recap reel for marketing/social
-        recap: {
-            name: 'Cinematic Recap Reel',
-            price: 1500,
-            description: 'Professional edited highlight video'
-        },
-        
-        // Full raw content for client use
-        content: {
-            name: 'Full Content Capture',
-            price: 2500,
-            description: 'All raw footage and clips delivered'
-        },
-        
-        // Pre-event site mapping with zone overlay
-        mapping: {
-            name: 'Site Mapping + Zone Overlay',
-            price: 1000,
-            description: 'Detailed venue map with security zones'
-        },
-        
-        // Same-night safety receipt delivery
-        expedited: {
-            name: 'Expedited Safety Receipt',
-            price: 1000,
-            description: 'Report delivered same night instead of next day'
-        },
-        
-        // LiDAR/3D scan - custom quoted
-        lidar: {
-            name: 'Advanced Site Scan (LiDAR/3D)',
-            price: 0,  // Custom quote
-            description: 'High-resolution 3D scan of venue',
-            customQuote: true
-        }
-    },
-    
-    
-    // ============================================
-    // MAPBOX CONFIGURATION
-    // ============================================
-    
-    // Replace with your Mapbox public token
-    // Get one at https://account.mapbox.com/
-    MAPBOX_TOKEN: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw',
-    
-    // Default map center (Austin, TX)
-    DEFAULT_CENTER: [-97.7431, 30.2672],
-    DEFAULT_ZOOM: 15,
-    
-    // Map style
-    MAP_STYLE: 'mapbox://styles/mapbox/satellite-streets-v12',
-    
-    
-    // ============================================
-    // FORM CONFIGURATION
-    // ============================================
-    
-    // Email recipient for quote requests
-    QUOTE_EMAIL: 'kavin.lingham@alpha.school',
-    
-    // Calendly link for booking calls
-    CALENDLY_URL: 'https://calendly.com',
-    
-    
-    // ============================================
-    // DEFAULTS
-    // ============================================
-    
-    // Default values for manual input fallback
-    DEFAULT_AREA: 5,        // acres
-    DEFAULT_PERIMETER: 3000, // feet
-    DEFAULT_HOURS: 8,
-    
-    // Hour slider range
-    MIN_HOURS: 4,
-    MAX_HOURS: 16,
-    
-    
-    // ============================================
-    // VALIDATION
-    // ============================================
-    
-    // Minimum teams (never show 0)
-    MIN_TEAMS: 1,
-    
-    // Maximum reasonable values for manual input
-    MAX_AREA: 500,         // acres
-    MAX_PERIMETER: 50000,  // feet
+const SKYSHIELD_CONFIG = {
+  // Base package
+  base: {
+    price: 7500,
+    hours: 8,
+    teams: 1
+  },
+
+  // Extra time/team pricing
+  extra_hour_rate_per_team: 750,        // $/hour per team after base 8 hours
+  extra_team_rate_base_window: 6000,    // $ per additional team (for base 8-hour window)
+
+  // Travel from Austin, TX
+  travel: {
+    included_miles_from_austin_one_way: 30,
+    per_mile_after_one_way: 2.50,
+    minimum_overage_fee: 150
+  },
+
+  // Night operations (after sunset)
+  night_ops_fee_per_event: 1500,
+
+  // Deposit
+  deposit_percent: 25,
+
+  // Team recommendation thresholds (acres per team)
+  team_thresholds: {
+    low_risk: 6,      // 1 team per 6 acres
+    medium_risk: 4,   // 1 team per 4 acres
+    high_risk: 3      // 1 team per 3 acres
+  },
+
+  // Team recommendation thresholds (perimeter miles per team)
+  team_thresholds_perimeter: {
+    low_risk: 1.5,    // 1 team per 1.5 miles
+    medium_risk: 1.0, // 1 team per 1 mile
+    high_risk: 0.75   // 1 team per 0.75 miles
+  },
+
+  // Fixed per-team resources
+  fleet_per_team: {
+    total_drones: 3,
+    airborne: 2,
+    hot_spare: 1,
+    model: "DJI Matrice 4T"
+  },
+
+  staff_per_team: {
+    pilots: 2,
+    ops_manager: 1,
+    pilot_certification: "FAA Part 107"
+  },
+
+  // What's always included
+  included: [
+    "Live overwatch + radio callouts",
+    "Incident Log",
+    "Safety Receipt PDF within 24 hours",
+    "Privacy: no biometric ID or ALPR by default"
+  ]
 };
 
-// Export for use in quote calculator
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = QUOTE_CONFIG;
+// Price calculation functions
+function calculateTeams(acres, riskLevel) {
+  const thresholds = SKYSHIELD_CONFIG.team_thresholds;
+  let threshold;
+  
+  switch(riskLevel) {
+    case 'high': threshold = thresholds.high_risk; break;
+    case 'medium': threshold = thresholds.medium_risk; break;
+    case 'low': 
+    default: threshold = thresholds.low_risk; break;
+  }
+  
+  return Math.max(1, Math.ceil(acres / threshold));
 }
+
+function calculateTeamsByPerimeter(perimeterMiles, riskLevel) {
+  const thresholds = SKYSHIELD_CONFIG.team_thresholds_perimeter;
+  let threshold;
+  
+  switch(riskLevel) {
+    case 'high': threshold = thresholds.high_risk; break;
+    case 'medium': threshold = thresholds.medium_risk; break;
+    case 'low': 
+    default: threshold = thresholds.low_risk; break;
+  }
+  
+  return Math.max(1, Math.ceil(perimeterMiles / threshold));
+}
+
+function calculateTravelFee(milesFromAustin) {
+  const travel = SKYSHIELD_CONFIG.travel;
+  const extraMiles = Math.max(0, milesFromAustin - travel.included_miles_from_austin_one_way);
+  
+  if (extraMiles === 0) return 0;
+  
+  const fee = extraMiles * travel.per_mile_after_one_way * 2; // Round trip
+  return Math.max(fee, travel.minimum_overage_fee);
+}
+
+function calculateTotal(options) {
+  const config = SKYSHIELD_CONFIG;
+  const {
+    hours = 8,
+    teams = 1,
+    days = 1,
+    nightOps = false,
+    milesFromAustin = 0
+  } = options;
+
+  // Base package
+  let total = config.base.price;
+  
+  // Extra hours (per team, per day)
+  const extraHours = Math.max(0, hours - config.base.hours);
+  total += extraHours * config.extra_hour_rate_per_team * teams;
+  
+  // Extra teams
+  const extraTeams = Math.max(0, teams - config.base.teams);
+  total += extraTeams * config.extra_team_rate_base_window;
+  
+  // Apply to multi-day
+  total *= days;
+  
+  // Night ops (per event, not per day)
+  if (nightOps) {
+    total += config.night_ops_fee_per_event;
+  }
+  
+  // Travel
+  total += calculateTravelFee(milesFromAustin);
+  
+  return {
+    total: total,
+    deposit: Math.round(total * (config.deposit_percent / 100)),
+    breakdown: {
+      base: config.base.price * days,
+      extraHours: extraHours * config.extra_hour_rate_per_team * teams * days,
+      extraTeams: extraTeams * config.extra_team_rate_base_window * days,
+      nightOps: nightOps ? config.night_ops_fee_per_event : 0,
+      travel: calculateTravelFee(milesFromAustin)
+    }
+  };
+}
+
+// Export for use
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { SKYSHIELD_CONFIG, calculateTeams, calculateTeamsByPerimeter, calculateTravelFee, calculateTotal };
+}
+

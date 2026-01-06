@@ -1,4 +1,4 @@
-# SkyShield Project - Coding Standards
+r# SkyShield Project - Coding Standards
 
 ## Project Overview
 SkyShield is a static website for mobile drone security services. The site consists of HTML pages, CSS styling, and vanilla JavaScript.
@@ -6,11 +6,16 @@ SkyShield is a static website for mobile drone security services. The site consi
 **Live Site:** https://skyshield.us
 
 ## AUTHORITATIVE PRICING (use everywhere)
-- **$7,500 base** per team
-- **2-3 drones on rotation** per team
-- **8 hours** included
-- **+$750/hour** after 8 hours
-- Scaling by **teams + hours** (NOT trucks)
+- **$7,500 base** (8 hours, 1 team)
+- **+$750/hour** per team after 8 hours
+- **+$6,000** per additional team (base 8-hour window)
+- **Night ops**: +$1,500/event
+- **Travel**: 30 miles from Austin included, then $2.50/mile one-way ($150 min overage)
+- **Deposit**: 25%
+
+### Per Team Resources
+- **Fleet**: 3× DJI Matrice 4T (2 airborne + 1 hot spare)
+- **Staff**: 2 FAA Part 107 pilots + 1 Ops Manager
 
 ## NON-NEGOTIABLE LANGUAGE RULES
 - ❌ NO "autonomous" → ✅ "operator-led", "manual operations + AI efficiency"
